@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.7.4
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 19 Okt 2019 pada 00.08
--- Versi Server: 10.1.16-MariaDB
--- PHP Version: 5.6.24
+-- Generation Time: Oct 20, 2019 at 11:35 AM
+-- Server version: 10.1.28-MariaDB
+-- PHP Version: 5.6.32
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -23,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `mbahan`
+-- Table structure for table `mbahan`
 --
 
 CREATE TABLE `mbahan` (
@@ -32,7 +34,7 @@ CREATE TABLE `mbahan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `mbahan`
+-- Dumping data for table `mbahan`
 --
 
 INSERT INTO `mbahan` (`kd_bahan`, `nm_bahan`) VALUES
@@ -44,12 +46,15 @@ INSERT INTO `mbahan` (`kd_bahan`, `nm_bahan`) VALUES
 ('BN-0006', 'Kayu Sengon'),
 ('BN-0007', 'Paku'),
 ('BN-0008', 'Gergaji'),
-('BN-0009', 'Palu');
+('BN-0009', 'Palu'),
+('BN-0010', 'Kayu 2x2'),
+('BN-0011', 'Kayu 2 x 2'),
+('BN-0012', 'Kayu 4 x 4');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `mpelanggan`
+-- Table structure for table `mpelanggan`
 --
 
 CREATE TABLE `mpelanggan` (
@@ -60,7 +65,7 @@ CREATE TABLE `mpelanggan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `mpelanggan`
+-- Dumping data for table `mpelanggan`
 --
 
 INSERT INTO `mpelanggan` (`id_pelanggan`, `nama_p`, `alamat_p`, `telp_p`) VALUES
@@ -70,7 +75,7 @@ INSERT INTO `mpelanggan` (`id_pelanggan`, `nama_p`, `alamat_p`, `telp_p`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `mtukang`
+-- Table structure for table `mtukang`
 --
 
 CREATE TABLE `mtukang` (
@@ -81,17 +86,18 @@ CREATE TABLE `mtukang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `mtukang`
+-- Dumping data for table `mtukang`
 --
 
 INSERT INTO `mtukang` (`id_tukang`, `nama`, `alamat`, `telp`) VALUES
 ('TK-0001', 'Uji coba sistem mebel', 'Jln.Kemuning Raya No.389', '089822326786'),
-('TK-0002', 'Muhammad Abdillah', 'Jln.Kemanapun Saja, Asal Kamu dan Aku Bersama', '081928877789');
+('TK-0002', 'Muhammad Abdillah', 'Jln.Kemanapun Saja, Asal Kamu dan Aku Bersama', '081928877789'),
+('TK-0003', 'asd', 'asd', '99');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbelibahan`
+-- Table structure for table `tbelibahan`
 --
 
 CREATE TABLE `tbelibahan` (
@@ -104,19 +110,20 @@ CREATE TABLE `tbelibahan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbelibahan`
+-- Dumping data for table `tbelibahan`
 --
 
 INSERT INTO `tbelibahan` (`no_beli`, `no_bahan`, `hbeli`, `jumbeli`, `tgl_beli`, `total`) VALUES
 ('BL-201910080001', '20191006-DB0002', 12000, 20, '2019-10-09', 240000),
 ('BL-201910080002', '20191006-DB0001', 120000, 50, '2019-10-09', 6000000),
 ('BL-201910080003', '20191006-DB0002', 20000, 100, '2019-10-10', 2000000),
+('BL-201910200003', '20191006-DB0001', 1, 10, '2019-10-22', 10),
 ('PS-201910090002', 'PL-0002', 1000000, 3, '2019-10-09', 3000000);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_login`
+-- Table structure for table `tb_login`
 --
 
 CREATE TABLE `tb_login` (
@@ -125,7 +132,7 @@ CREATE TABLE `tb_login` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_login`
+-- Dumping data for table `tb_login`
 --
 
 INSERT INTO `tb_login` (`nm_user`, `sandi`) VALUES
@@ -134,7 +141,7 @@ INSERT INTO `tb_login` (`nm_user`, `sandi`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tdetailbahan`
+-- Table structure for table `tdetailbahan`
 --
 
 CREATE TABLE `tdetailbahan` (
@@ -145,39 +152,17 @@ CREATE TABLE `tdetailbahan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tdetailbahan`
+-- Dumping data for table `tdetailbahan`
 --
 
 INSERT INTO `tdetailbahan` (`no_bahan`, `kd_bahan`, `harga_satuan`, `stok`) VALUES
-('20191006-DB0001', 'BN-0002', 800000, 150),
+('20191006-DB0001', 'BN-0002', 800000, 160),
 ('20191006-DB0002', 'BN-0003', 200000, 130);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tkirim`
---
-
-CREATE TABLE `tkirim` (
-  `no_kirim` varchar(16) NOT NULL,
-  `no_produksi` varchar(16) NOT NULL,
-  `tujuan` varchar(55) NOT NULL,
-  `tanggal` date NOT NULL,
-  `ongkir` int(11) NOT NULL,
-  `ket` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `tkirim`
---
-
-INSERT INTO `tkirim` (`no_kirim`, `no_produksi`, `tujuan`, `tanggal`, `ongkir`, `ket`) VALUES
-('KR-201910180001', 'PR-201910170001', 'Banjarmasin', '2019-10-18', 35000, 'Kirim via Expedisi');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `tpemesanan`
+-- Table structure for table `tpemesanan`
 --
 
 CREATE TABLE `tpemesanan` (
@@ -193,78 +178,12 @@ CREATE TABLE `tpemesanan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tpemesanan`
+-- Dumping data for table `tpemesanan`
 --
 
 INSERT INTO `tpemesanan` (`no_pesanan`, `id_pelanggan`, `jenis`, `namabarang`, `tanggal`, `biaya`, `jhitung`, `jpesanan`, `total`) VALUES
 ('PS-201910090001', 'PL-0001', 'Kayu', 'Meja', '2019-10-09', 200000, 'meter', 2, 400000),
 ('PS-201910090002', 'PL-0002', 'Kayu', 'Lemari Dua Pintu', '2019-10-09', 1240000, 'Meter Persegi', 2, 2480000);
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `tproduksi`
---
-
-CREATE TABLE `tproduksi` (
-  `no_produksi` varchar(16) NOT NULL,
-  `no_pesanan` varchar(16) NOT NULL,
-  `id_tukang` varchar(10) NOT NULL,
-  `tanggalprod` date NOT NULL,
-  `ket` text NOT NULL,
-  `bprod` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `tproduksi`
---
-
-INSERT INTO `tproduksi` (`no_produksi`, `no_pesanan`, `id_tukang`, `tanggalprod`, `ket`, `bprod`) VALUES
-('PR-201910170001', 'PS-201910090001', 'TK-0001', '2019-10-18', 'Oke', 200000);
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `trusak`
---
-
-CREATE TABLE `trusak` (
-  `no_kerusakan` varchar(16) NOT NULL,
-  `no_produksi` varchar(16) NOT NULL,
-  `tgl_data` date NOT NULL,
-  `tgl_produksi` date NOT NULL,
-  `jumlah` int(11) NOT NULL,
-  `ket` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `trusak`
---
-
-INSERT INTO `trusak` (`no_kerusakan`, `no_produksi`, `tgl_data`, `tgl_produksi`, `jumlah`, `ket`) VALUES
-('RS-201910180001', 'PR-201910170001', '2019-10-18', '2019-10-17', 120000, 'Rusak Berat');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `tupah`
---
-
-CREATE TABLE `tupah` (
-  `no_upah` varchar(16) NOT NULL,
-  `no_produksi` varchar(16) NOT NULL,
-  `id_tukang` varchar(10) NOT NULL,
-  `upah` int(11) NOT NULL,
-  `tanggal` date NOT NULL,
-  `ket` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `tupah`
---
-
-INSERT INTO `tupah` (`no_upah`, `no_produksi`, `id_tukang`, `upah`, `tanggal`, `ket`) VALUES
-('UP-201910180001', 'PR-201910170001', 'TK-0001', 100000, '2019-10-18', 'Upah via transfer');
 
 --
 -- Indexes for dumped tables
@@ -307,34 +226,11 @@ ALTER TABLE `tdetailbahan`
   ADD PRIMARY KEY (`no_bahan`);
 
 --
--- Indexes for table `tkirim`
---
-ALTER TABLE `tkirim`
-  ADD PRIMARY KEY (`no_kirim`);
-
---
 -- Indexes for table `tpemesanan`
 --
 ALTER TABLE `tpemesanan`
   ADD PRIMARY KEY (`no_pesanan`);
-
---
--- Indexes for table `tproduksi`
---
-ALTER TABLE `tproduksi`
-  ADD PRIMARY KEY (`no_produksi`);
-
---
--- Indexes for table `trusak`
---
-ALTER TABLE `trusak`
-  ADD PRIMARY KEY (`no_kerusakan`);
-
---
--- Indexes for table `tupah`
---
-ALTER TABLE `tupah`
-  ADD PRIMARY KEY (`no_upah`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
