@@ -1,6 +1,6 @@
 <?php
 $srvr="localhost";
-$db="db_mebel";
+$db="db_mebel11";
 $usr="root";
 $pwd="";
 
