@@ -1,0 +1,11 @@
+// query no_pesanan
+SELECT no_pesanan, (jpesanan - IFNULL((select sum(jumlah) from tproduksi where tproduksi.no_pesanan = tpemesanan.no_pesanan GROUP by no_pesanan), 0)) as jumlah FROM tpemesanan WHERE (no_pesanan, jpesanan) NOT IN (SELECT no_pesanan, sum(jumlah) FROM tproduksi GROUP BY tproduksi.no_pesanan)
+
+// query stock
+SELECT no_bahan, (select mbahan.nm_bahan FROM mbahan WHERE tbelibahan.no_bahan = mbahan.kd_bahan) nm_bahan, (sum(jumbeli) - IFNULL((SELECT sum(jumlah) FROM tdetail_produksi WHERE tdetail_produksi.kd_bahan = tbelibahan.no_bahan GROUP BY tdetail_produksi.kd_bahan),0)) stok FROM tbelibahan GROUP BY no_bahan
+
+// query stock with harga salah
+SELECT no_bahan, hbeli, (select mbahan.nm_bahan FROM mbahan WHERE tbelibahan.no_bahan = mbahan.kd_bahan) nm_bahan, (sum(jumbeli) - IFNULL((SELECT sum(jumlah) FROM tdetail_produksi WHERE tdetail_produksi.kd_bahan = tbelibahan.no_bahan GROUP BY tdetail_produksi.kd_bahan),0)) stok FROM tbelibahan WHERE (no_beli, no_bahan) in (select max(no_beli), no_bahan from tbelibahan group by no_bahan)
+
+// query stock salah with harga
+SELECT no_bahan, hbeli, (select mbahan.nm_bahan FROM mbahan WHERE tbelibahan.no_bahan = mbahan.kd_bahan) nm_bahan, (sum(jumbeli) - IFNULL((SELECT sum(jumlah) FROM tdetail_produksi WHERE tdetail_produksi.kd_bahan = tbelibahan.no_bahan GROUP BY tdetail_produksi.kd_bahan),0)) stok FROM tbelibahan WHERE (no_beli, no_bahan) in (select max(no_beli), no_bahan from tbelibahan group by no_bahan) GROUP BY no_bahan

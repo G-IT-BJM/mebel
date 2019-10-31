@@ -24,7 +24,7 @@
                         <ul class="collapse">
                             <li><a href="pembelian-bahan.php">Pembelian Bahan</a></li>
                             <li><a href="pemesanan.php">Pemesanan</a></li>
-                            <li><a href="#">Produksi</a></li>
+                            <li><a href="produksi.php">Produksi</a></li>
                             <li><a href="upah-tukang.php">Upah Tukang</a></li>
                             <li><a href="#">Pengiriman</a></li>
                             <li><a href="#">Kerusakan</a></li>
