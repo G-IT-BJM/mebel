@@ -1,6 +1,6 @@
 <?php include "header.php"; ?>
 <?php include "sidebar.php"; ?>
-
+        
 <!-- main content area start -->
 <div class="main-content">
     <?php include "header-turunan.php"; ?>
@@ -11,13 +11,13 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="header-title">
-                            <h4>MASTER TUKANG</h4>
+                            <h4>UPAH TUKANG</h4>
                             <hr>
                         </div>
                         <div class="header-title">
                             <div class="form-row">
                                 <div class="col-sm-3">
-                                    <a href="t-data-tukang.php"><button class="btn btn-primary">Tambah Data <span class="fa fa-user-plus"></span></button></a>
+                                    <a href="t-upah-tukang.php"><button class="btn btn-primary">Tambah Data <span class="fa fa-money"></span></button></a>
                                 </div>
                                 <div class="col-sm-3"></div>
                                 <div class="col-sm-3"></div>
@@ -38,16 +38,16 @@
                                         <tr>
                                             <th scope="col">No.</th>
                                             <th scope="col">Aksi</th>
-                                            <th scope="col">Kode Tukang</th>
-                                            <th scope="col">Nama Tukang</th>
-                                            <th scope="col">Telp.</th>
-                                            <th scope="col">Alamat</th>
+                                            <th scope="col">Tanggal</th>
+                                            <th scope="col">No. Upah</th>
+                                            <th scope="col">Tukang</th>
+                                            <th scope="col">Jumlah Diambil</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php 
                                             $no = 1;
-                                            $sql = mysqli_query($conn, "SELECT * FROM mtukang");
+                                            $sql = mysqli_query($conn, "SELECT * FROM tupah ORDER BY no_upah DESC");
 
                                             while($data = mysqli_fetch_array($sql)) {
                                         ?>
@@ -55,17 +55,18 @@
                                                 <td><?= $no ?></td>
                                                 <td>
                                                     <ul class="d-flex justify-content">
-                                                        <li class="mr-3"><a href="u-data-tukang.php?idtukang=<?= $data['id_tukang'] ?>" class="text-secondary"><i class="fa fa-edit"></i></a></li>
-                                                        <li><a href="proses.php?hapus=datatukang&idtukang=<?=$data['id_tukang'] ?>" onclick="return confirm('Apakah anda ingin menghapus data ini?')" class="text-danger"><i class="ti-trash"></i></a></li>
+                                                        <!-- <li class="mr-3"><a href="u-upah-tukang.php?noupahtukang=<?php //echo $data//['no_upah'] ?>" class="text-secondary"><i class="fa fa-edit"></i></a></li> -->
+                                                        <li><a href="proses.php?hapus=dataupahtukang&noupahtukang=<?= $data['no_upah'] ?>" onclick="return confirm('Apakah anda ingin menghapus data ini?')" class="text-danger"><i class="ti-trash"></i></a></li>
                                                     </ul>
                                                 </td>
-                                                <td><?= $data["id_tukang"] ?></td>
-                                                <td><?= $data["nama"] ?></td>
-                                                <td><?= $data["telp"] ?></td>
-                                                <td><?= $data["alamat"] ?></td>
+                                                <td><?= date("d-m-Y", strtotime($data["tanggal"])) ?></td>
+                                                <td><?= $data["no_upah"] ?></td>
+                                                <?php $join = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM mtukang WHERE id_tukang = '$data[id_tukang]'")); ?>
+                                                <td><?= $join["nama"] ?></td>
+                                                <td class="uang"><?= $data["upah"] ?></td>
                                             </tr>
                                         <?php
-                                                $no++;    
+                                                $no++;
                                             }
                                         ?>
                                     </tbody>

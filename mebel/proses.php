@@ -186,9 +186,9 @@
         $no_beli    = $_POST['no_beli'];
         $nm_bahan   = $_POST['nm_bahan'];
         $tgl_beli   = $_POST['tgl_beli'];
-        $harga_beli = $_POST['harga_beli'];
+        $harga_beli = preg_replace("([.])", "", $_POST['harga_beli']);
         $jml_beli   = $_POST['jml_beli'];
-        $total      = $_POST['total'];
+        $total      = preg_replace("([.])", "", $_POST['total']);
         
         $simpan = mysqli_query($conn, "INSERT INTO tbelibahan VALUES('$no_beli','$nm_bahan','$harga_beli','$jml_beli','$tgl_beli','$total')");
 
@@ -207,9 +207,9 @@
         $no_beli    = $_POST['no_beli'];
         $nm_bahan   = $_POST['nm_bahan'];
         $tgl_beli   = $_POST['tgl_beli'];
-        $harga_beli = $_POST['harga_beli'];
+        $harga_beli = preg_replace("([.])", "", $_POST['harga_beli']);
         $jml_beli   = $_POST['jml_beli'];
-        $total      = $_POST['total'];
+        $total      = preg_replace("([.])", "", $_POST['total']);
 
         $ubah = mysqli_query($conn,"UPDATE tbelibahan SET no_bahan = '$nm_bahan', hbeli = '$harga_beli', jumbeli = '$jml_beli', tgl_beli = '$tgl_beli', total = '$total' WHERE no_beli = '$no_beli'");
 
@@ -302,6 +302,66 @@
                 <script>
                     alert('Gagal Di Hapus!');
                     window.location = 'pemesanan.php';
+                </script>
+            ";
+        } 
+    }
+
+    /** 
+     * @Author: G_IT_BJM 
+     * @Date: 2019-10-31 17:32:53 
+     * @Desc: SALDO UPAH TUKANG
+     */    
+    elseif (isset($_GET['id_tukang']))
+    {
+        $idtukang = $_GET['id_tukang'];
+
+        $sum_saldo  = mysqli_fetch_array(mysqli_query($conn, "SELECT SUM(upah_tukang) AS saldo FROM tproduksi WHERE id_tukang = '$idtukang'"));
+        $min_saldo  = mysqli_fetch_array(mysqli_query($conn, "SELECT SUM(upah) AS sisa FROM tupah WHERE id_tukang = '$idtukang'"));
+
+        $saldo      = $sum_saldo["saldo"] - $min_saldo["sisa"];
+        $data = array('saldo'   	=>  $saldo,);
+
+        echo json_encode($data);
+    }
+
+    /** 
+     * @Author: G_IT_BJM 
+     * @Date: 2019-10-31 19:26:30 
+     * @Desc: UPAH TUKANG 
+     */    
+    elseif (isset($_POST['simpan_peng_upah'])) {
+        $kd_upah    = $_POST['kd_upah'];
+        $tgl        = $_POST['tgl'];
+        $kd_tukang  = $_POST['kd_tukang'];
+        // $saldo      = preg_replace("([.])", "", $_POST['saldo']);
+        $peng_upah  = preg_replace("([.])", "", $_POST['peng_upah']);
+        
+        $simpan = mysqli_query($conn, "INSERT INTO tupah VALUES('$kd_upah','','$kd_tukang','$peng_upah','$tgl','')");
+
+        if($simpan) {
+            header("location: upah-tukang.php");
+        } else {
+            echo "
+                <script>
+                    alert('Data Gagal Di Simpan . . . ');
+                    window.location = 't-upah-tukang.php';
+                </script>
+            ";
+        }
+    }
+    elseif (isset($_GET['hapus']) && $_GET['hapus'] == 'dataupahtukang') {
+        $no_upah = $_GET['noupahtukang'];
+        
+        $hapus = mysqli_query($conn, "DELETE FROM tupah WHERE no_upah = '$no_upah'");
+
+        if ($hapus) {
+            header('location:upah-tukang.php');
+        } else {
+            echo "
+                <script>
+                    alert('Gagal Di Hapus!');
+                    window.location = 'upah-tukang.php';
                 </script>
             ";
         } 
