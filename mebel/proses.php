@@ -366,4 +366,68 @@
             ";
         } 
     }
+
+    /** 
+     * @Author: G_IT_BJM 
+     * @Date: 2019-11-03 18:49:13 
+     * @Desc: AJAX KDOE PEMESANAN [MENU PENGIRIMAN] 
+     */    
+    elseif (isset($_GET['no_pesanan']))
+    {
+        $nopesan = $_GET['no_pesanan'];
+
+        $sql2 = mysqli_fetch_array(mysqli_query($conn, "SELECT *, SUM(jumlah) AS jml FROM tproduksi AS x INNER JOIN tpemesanan AS y ON x.no_pesanan=y.no_pesanan WHERE y.no_pesanan = '$nopesan'"));
+
+        $data = array('jumlah' => $sql2["jml"],
+                        'nm_brg' => $sql2["namabarang"],
+                        'id_pel' => $sql2["id_pelanggan"],);
+        echo json_encode($data);
+    }
+
+    /** 
+     * @Author: G_IT_BJM 
+     * @Date: 2019-11-03 20:42:29 
+     * @Desc:  PENGIRIMAN
+     */    
+    elseif (isset($_POST['simpan_pengiriman'])) {
+        $kd_kirim   = $_POST['kd_kirim'];
+        $no_pesan   = $_POST['no_pesan'];
+        $id_pel     = $_POST['id_pel'];
+        $nm_brg     = ucwords($_POST['nm_brg']);
+        $jumlah     = $_POST['jumlah'];
+        $tujuan     = ucwords($_POST['tujuan']);
+        $tgl        = $_POST['tgl'];
+        $biaya      = preg_replace("([.])", "", $_POST['biaya']);
+        
+        $cek1 = mysqli_query($conn, "SELECT * FROM tkirim WHERE id_pelanggan = '$id_pel' AND no_pesanan = '$no_pesan'");
+        if(mysqli_num_rows($cek1) > 0) {
+            echo "
+                <script>
+                    alert('Data Sudah Ada . . . ');
+                    window.location = 'pengiriman.php';
+                </script>
+            ";
+        } else {
+            $simpan = mysqli_query($conn, "INSERT INTO tkirim VALUES('$kd_kirim','$no_pesan','$id_pel','$nm_brg','$jumlah','$tujuan','$tgl','$biaya','')");
+            $count =  mysqli_fetch_array(mysqli_query($conn, "SELECT *, 
+                            (SELECT count(id_pelanggan) FROM tkirim t1 WHERE t1.id_pelanggan='$id_pel') Count1, 
+                            (SELECT count(id_pelanggan) FROM tpemesanan t2 WHERE t2.id_pelanggan='$id_pel') Count2 
+                        FROM tpemesanan"));
+
+            if($simpan) {
+                if($count["Count1"] == $count["Count2"]) {
+                    header('location:pengiriman.php');
+                } else {
+                    header('location:t-pengiriman.php');
+                }
+            } else {
+                echo "
+                    <script>
+                        alert('Data Gagal Di Simpan . . . ');
+                        window.location = 't-pengiriman.php';
+                    </script>
+                ";
+            }
+        }
+    }
 ?>

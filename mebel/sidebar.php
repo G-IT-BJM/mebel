@@ -14,9 +14,9 @@
                     <li>
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-dashboard"></i><span>MASTER</span></a>
                         <ul class="collapse">
-                            <li><a href="m-tukang.php">Master Tukang</a></li>
-                            <li><a href="m-pelanggan.php">Master Pelanggan</a></li>
-                            <li><a href="m-bahan-baku.php">Master Bahan Baku</a></li>
+                            <li><a href="m-tukang.php">Tukang</a></li>
+                            <li><a href="m-pelanggan.php">Pelanggan</a></li>
+                            <li><a href="m-bahan-baku.php">Bahan Baku</a></li>
                         </ul>
                     </li>
                     <li>
@@ -26,7 +26,7 @@
                             <li><a href="pemesanan.php">Pemesanan</a></li>
                             <li><a href="produksi.php">Produksi</a></li>
                             <li><a href="upah-tukang.php">Upah Tukang</a></li>
-                            <li><a href="#">Pengiriman</a></li>
+                            <li><a href="pengiriman.php">Pengiriman</a></li>
                             <li><a href="#">Kerusakan</a></li>
                         </ul>
                     </li>

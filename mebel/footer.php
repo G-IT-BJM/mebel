@@ -79,6 +79,20 @@
                 $('#saldo').val(rupiah(obj.saldo));
             });
         }
+
+        function datakirim_(){
+            var nopesan = $("#no_pesan").val();
+            $.ajax({
+                url: 'proses.php',
+                data:"no_pesanan="+nopesan ,
+            }).success(function (data) {
+                var json = data,
+                obj = JSON.parse(json);
+                $('#jumlah').val(obj.jumlah);
+                $('#nm_brg').val(obj.nm_brg);
+                $('#id_pel').val(obj.id_pel);
+            });
+        }
     </script>
 </body>
 
