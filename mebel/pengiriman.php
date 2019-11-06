@@ -56,7 +56,7 @@
                                                 <td>
                                                     <ul class="d-flex justify-content">
                                                         <!-- <li class="mr-3"><a href="u-upah-tukang.php?noupahtukang=<?php //echo $data//['no_upah'] ?>" class="text-secondary"><i class="fa fa-edit"></i></a></li> -->
-                                                        <li><a href="proses.php?hapus=dataupahtukang&noupahtukang=<?= $data['no_upah'] ?>" onclick="return confirm('Apakah anda ingin menghapus data ini?')" class="text-danger"><i class="ti-trash"></i></a></li>
+                                                        <li><a href="proses.php?hapus=datapengiriman&nopengiriman=<?= $data['no_kirim'] ?>" onclick="return confirm('Apakah anda ingin menghapus data ini?')" class="text-danger"><i class="ti-trash"></i></a></li>
                                                     </ul>
                                                 </td>
                                                 <td><?= date("d-m-Y", strtotime($data["tanggal"])) ?></td>

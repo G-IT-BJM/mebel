@@ -33,10 +33,10 @@
                     <li>
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-pie-chart"></i><span>LAPORAN</span></a>
                         <ul class="collapse">
-                            <li><a href="#">Pembelian Bahan</a></li>
-                            <li><a href="#">Pemesanan</a></li>
+                            <li><a href="laporan-pembelian-bahan.php">Pembelian Bahan</a></li>
+                            <li><a href="laporan-pemesanan.php">Pemesanan</a></li>
                             <li><a href="#">Produksi</a></li>
-                            <li><a href="#">Upah Tukang</a></li>
+                            <li><a href="laporan-upah-tukang.php">Upah Tukang</a></li>
                             <li><a href="#">Pengiriman</a></li>
                             <li><a href="#">Kerusakan</a></li>
                             <li><a href="#">Laba & Rugi</a></li>

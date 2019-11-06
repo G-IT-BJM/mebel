@@ -430,4 +430,20 @@
             }
         }
     }
+    elseif (isset($_GET['hapus']) && $_GET['hapus'] == 'datapengiriman') {
+        $no_kirim = $_GET['nopengiriman'];
+        
+        $hapus = mysqli_query($conn, "DELETE FROM tkirim WHERE no_kirim = '$no_kirim'");
+
+        if ($hapus) {
+            header('location:pengiriman.php');
+        } else {
+            echo "
+                <script>
+                    alert('Gagal Di Hapus!');
+                    window.location = 'pengiriman.php';
+                </script>
+            ";
+        } 
+    }
 ?>
