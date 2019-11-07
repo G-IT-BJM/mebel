@@ -35,10 +35,10 @@
                         <ul class="collapse">
                             <li><a href="laporan-pembelian-bahan.php">Pembelian Bahan</a></li>
                             <li><a href="laporan-pemesanan.php">Pemesanan</a></li>
-                            <li><a href="#">Produksi</a></li>
+                            <li><a href="laporan-produksi.php">Produksi</a></li>
                             <li><a href="laporan-upah-tukang.php">Upah Tukang</a></li>
                             <li><a href="laporan-pengiriman.php">Pengiriman</a></li>
-                            <li><a href="#">Kerusakan</a></li>
+                            <li><a href="laporan-kerusakan.php">Kerusakan</a></li>
                             <li><a href="laporan-laba.php">Laba & Rugi</a></li>
                         </ul>
                     </li>
