@@ -8,7 +8,7 @@ $no_pesanan = @$_GET['no_pesanan'];
 $q = mysqli_query($conn,"SELECT no_pesanan,jhitung, namabarang,(jpesanan - IFNULL((select sum(jumlah) from tproduksi where tproduksi.no_pesanan = tpemesanan.no_pesanan GROUP by no_pesanan), 0)) as jumlah FROM tpemesanan WHERE (no_pesanan, jpesanan) NOT IN (SELECT no_pesanan, sum(jumlah) FROM tproduksi GROUP BY tproduksi.no_pesanan) AND tpemesanan.no_pesanan = '$no_pesanan'");
 $r = mysqli_fetch_array($q);
 
-$jumlah_pesanan = @$r['jumlah'];
+$jumlah_pesanan = @$r['jumlah'] == '' ? 0 : $r['jumlah'];
 $nama_barang = @$r['namabarang'];
 $jumlah = @$_GET['jumlah'];
 $id_tukang = @$_GET['id_tukang'];
@@ -30,13 +30,18 @@ $ukuran = @$r['jhitung'];
     <link rel="stylesheet" href="assets/css/metisMenu.css">
     <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
     <link rel="stylesheet" href="assets/css/slicknav.min.css">
-    
     <link rel="stylesheet" href="assets/css/typography.css">
     <link rel="stylesheet" href="assets/css/default-css.css">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
     <!-- modernizr css -->
     <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
+
+    <style>
+        .hidden {
+            display:none;
+        }
+    </style>
 </head>
 
 <body>
@@ -107,7 +112,7 @@ $ukuran = @$r['jhitung'];
                                             <div class="form-group">
                                                 <label class="col-form-label">No. Pemesanan</label>
                                                 <select class="custom-select" id="no_pesanan" name="no_pesanan" required>
-                                                    <option value="" selected disabled>Pilih No Pemesanan . . .</option>
+                                                    <option value="">Pilih No Pemesanan . . .</option>
                                                     <?php 
                                                         $sql = mysqli_query($conn, "SELECT no_pesanan, (jpesanan - IFNULL((select sum(jumlah) from tproduksi where tproduksi.no_pesanan = tpemesanan.no_pesanan GROUP by no_pesanan), 0)) as jumlah FROM tpemesanan WHERE (no_pesanan, jpesanan) NOT IN (SELECT no_pesanan, sum(jumlah) FROM tproduksi GROUP BY tproduksi.no_pesanan)");
 
@@ -129,7 +134,8 @@ $ukuran = @$r['jhitung'];
                                         <div class="col-2">
                                             <div class="form-group">
                                                 <label for="jumlah" class="col-form-label">Jumlah</label>
-                                                <input class="form-control" type="number" id="jumlah" name="jumlah" min="1" value="1" required>
+                                                <input class="form-control" type="number" id="jumlah" name="jumlah" value="<?=$jumlah?>" required>
+                                                <p id="warning" class="hidden" style="font-size:12px;color:red;">Jumlah tidak sesuai</p>
                                             </div>
                                         </div>
                                     </div>
@@ -156,7 +162,7 @@ $ukuran = @$r['jhitung'];
                                             <div class="form-group">
                                                 <label class="col-form-label">Nama Tukang</label>
                                                 <select class="custom-select" id="id_tukang" name="id_tukang" required>
-                                                    <option selected disabled>Pilih Tukang . . .</option>
+                                                    <option value="">Pilih Tukang . . .</option>
                                                     <?php 
                                                         $sql = mysqli_query($conn, "SELECT * FROM mtukang ORDER BY id_tukang DESC");
 
@@ -179,7 +185,7 @@ $ukuran = @$r['jhitung'];
                                             <div class="form-group">
                                                 <label for="jumlah" class="col-form-label">Bahan Baku</label>
                                                 <select class="custom-select" id="kd_bahan" name="kd_bahan" required <?=($no_pesanan == '' OR $id_tukang == '') ? 'disabled' : '' ?>>
-                                                    <option value="" selected disabled>Pilih Bahan Baku . . .</option>
+                                                    <option value="">Pilih Bahan Baku . . .</option>
                                                     <?php 
                                                         $sql = mysqli_query($conn, "SELECT no_bahan, (select mbahan.nm_bahan FROM mbahan WHERE tbelibahan.no_bahan = mbahan.kd_bahan) nm_bahan, (sum(jumbeli) - IFNULL((SELECT sum(jumlah) FROM tdetail_produksi WHERE tdetail_produksi.kd_bahan = tbelibahan.no_bahan GROUP BY tdetail_produksi.kd_bahan),0)) stok FROM tbelibahan GROUP BY no_bahan");
 
@@ -271,7 +277,7 @@ $ukuran = @$r['jhitung'];
 
                                             $u = explode('x',$ukuran);
                                             $ukurannya = @$u['0'] * @$u['1'];
-                                            $upah_tukang = $ukurannya * $upah;
+                                            $upah_tukang = $ukurannya * $upah * $jumlah;
 
                                             ?>
                                             <form id="hargaForm">
@@ -329,19 +335,6 @@ $ukuran = @$r['jhitung'];
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdn.rawgit.com/igorescobar/jQuery-Mask-Plugin/1ef022ab/dist/jquery.mask.min.js"></script>
     <script>
-        $(document).ready(function(){
-            // Format mata uang.
-            $( '.uang' ).mask('0.000.000.000', {reverse: true});
-
-            // Format nomor HP.
-            $( '.no_hp' ).mask('0000−0000−0000');
-            
-            //angka
-            $( '.angka' ).mask('0');
-
-            // Format tahun pelajaran.
-            $( '.tapel' ).mask('0000/0000');
-        });
 
         $("#headerForm .form-control, #headerForm .custom-select").click(function() {
             var id = this.id;            
@@ -353,6 +346,10 @@ $ukuran = @$r['jhitung'];
 
         $("#headerForm .custom-select").change(function() {
             var id = this.id;            
+            $("#headerForm").submit();            
+        });
+
+        $("#jumlah").change(function() {            
             $("#headerForm").submit();            
         });
 
@@ -395,19 +392,39 @@ $ukuran = @$r['jhitung'];
             }            
         }
 
+        $(document).on('keyup', 'input[name=jumlah]', function () {
+            var _this = $(this);
+            var min = parseInt(_this.attr('min')) || 1;
+            var max = parseInt(_this.attr('max')) || <?=$jumlah_pesanan ?>;
+            var val = parseInt(_this.val()) || (min - 1);
+            if(val < min)
+                _this.val( min );
+            if(val > max)
+                _this.val( max );
+        });
+
         $("#simpan_produksi").click(function() {
-            var datax = 'simpan_produksi=true&'+$("#hargaForm").serialize()+'&'+$("#headerForm").serialize();            
-            $.ajax({ 
-                type: 'POST', 
-                url: 'proses_produksi.php', 
-                data: datax, 
-                success: function (data) {                     
-                    location.href = 'produksi.php';
-                }
-            });     
+            
+            var jumlah = $("#jumlah").val();
+
+            if (jumlah > <?=$jumlah_pesanan?>) {
+                $('#warning').removeClass('hidden');
+                $('#jumlah').focus;
+            } else {
+                var datax = 'simpan_produksi=true&'+$("#hargaForm").serialize()+'&'+$("#headerForm").serialize();            
+                $.ajax({ 
+                    type: 'POST', 
+                    url: 'proses_produksi.php', 
+                    data: datax, 
+                    success: function (data) {                     
+                        location.href = 'produksi.php';
+                    }
+                });
+            }     
         }); 
 
     </script>
+
 </body>
 
 </html>

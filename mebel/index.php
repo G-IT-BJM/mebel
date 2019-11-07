@@ -1,3 +1,4 @@
+<?php include 'koneksi.php' ?>
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -67,7 +68,8 @@
                         <div class="col-md-6">
                             <div class="single-report mb-xs-30">
                                 <div class="s-report-inner pr--20">
-                                    <div class="icon" style="background-color:#007BFF;">1</div>
+                                    <?php $q = mysqli_fetch_array(mysqli_query($conn, "SELECT COUNT(*) AS JUMLAH FROM tproduksi WHERE (no_pesanan) NOT IN (SELECT no_pesanan FROM tkirim GROUP BY tkirim.no_pesanan) GROUP BY tproduksi.no_pesanan")) ?>
+                                    <div class="icon" style="background-color:#007BFF;"><?= $q['JUMLAH']?></div>
                                     <div class="s-report-title d-flex justify-content-between">
                                         <h4 class="header-title"> </h4>
                                         <h2 class="header-title"><span class="fa fa-book" style="font-size:60px;color:black;"></span></h2>
@@ -81,7 +83,8 @@
                         <div class="col-md-6">
                             <div class="single-report mb-xs-30">
                                 <div class="s-report-inner pr--20">
-                                    <div class="icon" style="background-color:#007BFF;">2</div>
+                                    <?php $q = mysqli_fetch_array(mysqli_query($conn, "SELECT COUNT(*) AS JUMLAH FROM tproduksi WHERE (no_pesanan) NOT IN (SELECT no_pesanan FROM tkirim GROUP BY tkirim.no_pesanan) GROUP BY tproduksi.no_pesanan")) ?>
+                                    <div class="icon" style="background-color:#007BFF;"><?= $q['JUMLAH']?></div>
                                     <div class="s-report-title d-flex justify-content-between">
                                         <h4 class="header-title"> </h4>
                                         <h2 class="header-title"><span class="fa fa-cogs" style="font-size:60px;color:black;"></span></h2>

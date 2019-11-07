@@ -134,7 +134,7 @@ $ukuran = @$r['jhitung'];
                                         <div class="col-2">
                                             <div class="form-group">
                                                 <label for="jumlah" class="col-form-label">Jumlah</label>
-                                                <input class="form-control" type="number" id="jumlah" name="jumlah" min="1" value="1" required readonly>
+                                                <input class="form-control" type="number" id="jumlah" name="jumlah" value="<?=$jumlah?>" required readonly>
                                             </div>
                                         </div>
                                     </div>

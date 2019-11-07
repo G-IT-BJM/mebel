@@ -27,7 +27,7 @@
                             <li><a href="produksi.php">Produksi</a></li>
                             <li><a href="upah-tukang.php">Upah Tukang</a></li>
                             <li><a href="pengiriman.php">Pengiriman</a></li>
-                            <li><a href="#">Kerusakan</a></li>
+                            <li><a href="rusak.php">Kerusakan</a></li>
                         </ul>
                     </li>
                     <li>
