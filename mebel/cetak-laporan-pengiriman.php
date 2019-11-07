@@ -1,10 +1,10 @@
 <?php 
     include "koneksi.php";
 
-    // $id  = $_GET["id_pelanggan"];
-    // $tgl = $_GET["tanggal"];
+    $id     = $_GET["id_pelanggan"];
+    $tgl    = $_GET["tanggal"];
 
-    // $sql = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM tkirim WHERE id_pelanggan = '$id' AND tanggal = '$tgl' "));
+    $sql    = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM tkirim AS a INNER JOIN mpelanggan AS b ON a.id_pelanggan = b.id_pelanggan WHERE a.id_pelanggan = '$id' AND a.tanggal = '$tgl' "));
 ?>
 
 <!doctype html>
@@ -27,7 +27,7 @@
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-lg-12 mt-5">
                 <div class="card">
@@ -50,17 +50,17 @@
                                 <div class="col-md-6">
                                     <div class="invoice-address">
                                         <h5>Tanda Terima Barang</h5>
-                                        <hr>
+                                        <br>
                                         <table class="table">
                                             <tr>
                                                 <td style="width:30%;"><p>Nama Pelanggan</p></td>
-                                                <td>:</td>
-                                                <td><h5>MIKO ANDRIANTO</h5></td>
+                                                <td style="width:5%;">:</td>
+                                                <td><h5><?= strtoupper($sql["nama_p"]) ?></h5></td>
                                             </tr>
                                             <tr>
                                                 <td><p>Telepon</p></td>
-                                                <td>:</td>
-                                                <td><h5>081339674916</h5></td>
+                                                <td style="width:5%;">:</td>
+                                                <td><h5><?= $sql["telp_p"] ?></h5></td>
                                             </tr>
                                         </table>
                                     </div>
@@ -76,11 +76,39 @@
                                     <div class="table-responsive">
                                         <table class="table table-bordered text-right">
                                            <tr>
-                                               <td>
-
+                                               <td style="width: 50%">
+                                                    <table>
+                                                        <tr>
+                                                            <td style="width: 30%" class="text-left">Kode Pengiriman</td>
+                                                            <td style="width: 5%">:</td>
+                                                            <td class="text-left"><?= $sql["no_kirim"] ?></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width: 30%" class="text-left">Nama Barang</td>
+                                                            <td style="width: 5%">:</td>
+                                                            <td class="text-left"><?= $sql["namabarang"] ?></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width: 30%" class="text-left">Tujuan</td>
+                                                            <td style="width: 5%">:</td>
+                                                            <td class="text-justify">
+                                                                <?= $sql["tujuan"] ?>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width: 30%" class="text-left">Biaya Kirim</td>
+                                                            <td style="width: 5%">:</td>
+                                                            <td class="text-left"><?= $sql["ongkir"] ?></td>
+                                                        </tr>
+                                                    </table>
                                                </td>
                                                <td>
-
+                                                    <h5 class="text-center">CATATAN : </h5>
+                                                    <br>
+                                                    <p class="text-center">Dengan mendatangani di bawah ini,</p>
+                                                    <p class="text-justify">Berarti barang sudah diterima 
+                                                        oleh pelanggan dan apabila terjadi kerusakan / cacat / barang tidak sesuai, 
+                                                        segera tanyakan kepada pengirim dan konfirmasikan kepada pemilik Mebel CV. Sumber Bahagia.</p>
                                                </td>
                                            </tr>
                                         </table>
@@ -89,7 +117,12 @@
                             </div>
                             <br>
                             <div class="col-2 pull-right">
-                                <h6 class="text-center">Tanda Tangan</h6>
+                                <h6 class="text-center">Hormat Kami</h6>
+                                <br><br>
+                                <hr style="color:black; background-color:black;">
+                            </div>
+                            <div class="col-2 pull-right">
+                                <h6 class="text-center">Tanda Terima</h6>
                                 <br><br>
                                 <hr style="color:black; background-color:black;">
                             </div>
@@ -109,7 +142,7 @@
     <!-- others plugins -->
     <script src="assets/js/plugins.js"></script>
     <script src="assets/js/scripts.js"></script>
-    <!-- <script>window.print()</script> -->
+    <script>window.print()</script>
 </body>
 
 </html>
