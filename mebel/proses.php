@@ -446,4 +446,33 @@
             ";
         } 
     }
+
+    /** 
+     * @Author: G_IT_BJM 
+     * @Date: 2019-11-07 18:13:44 
+     * @Desc:  LAPORAN PENGIRIMAN TABEL AJAX
+     */    
+    elseif(isset($_POST['bulan']))
+    {
+        $bulan   = $_POST['bulan'];
+        $tahun   = $_POST['tahun'];
+        $sql     = mysqli_query($conn, "SELECT * FROM tkirim WHERE month(tanggal) = '$bulan' AND year(tanggal) = '$tahun' ");
+        $no      = 1;
+        
+        while ($data = mysqli_fetch_array($sql)) { 
+            $join = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM mpelanggan WHERE id_pelanggan = '".$data["id_pelanggan"]."'"));
+            echo '
+                <tr>
+                    <td class="text-center">'.$no.'</td>
+                    <td class="text-left">
+                        <a href="cetak-laporan-pengiriman.php?id_pelanggan='.$data["id_pelanggan"].'&tanggal='.$data["tanggal"].'" style="color:black;"><span class="fa fa-print" style="color:red;"></span> Cetak</a> 
+                    </td>
+                    <td class="text-left">'.$data["tanggal"].'</td>
+                    <td class="text-left">'.$join["nama_p"].'</td>
+                    <td class="text-left">'.$data["tujuan"].'</td>
+                </tr>
+            ';
+        $no++; 
+        } 
+    }
 ?>
