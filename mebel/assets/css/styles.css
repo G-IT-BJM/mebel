@@ -2314,7 +2314,7 @@ table.dataTable thead td {
 
 .login-form-head {
     text-align: center;
-    background: #8655FC;
+    background: #8a693d;
     padding: 50px;
 }
 
@@ -2411,7 +2411,7 @@ table.dataTable thead td {
 }
 
 .submit-btn-area button:hover {
-    background: #2c71da;
+    background: #8a693d;
     color: #ffffff;
 }
 

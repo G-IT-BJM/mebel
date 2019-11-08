@@ -1,4 +1,6 @@
 <?php 
+    session_start();
+    
     include "koneksi.php";
 
     /** 
@@ -6,7 +8,38 @@
      * @Date: 2019-10-29 17:07:02 
      * @Desc: MASTER TUKANG 
      */    
-    if (isset($_POST['simpan_tukang'])) {
+    if (isset($_POST['login'])) 
+    {
+        $nm        = $_POST['username'];
+        $sandi     = md5($_POST['password']);
+        // $stts      = 1;
+
+        $q = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM tb_login"));
+
+        if($q["nm_user"] == $nm && $q["sandi"] == $sandi) {
+
+            // mysqli_query($conn, "UPDATE tb_admin SET status = '$stts' WHERE nama_pengguna = '$nm' AND kata_sandi = '$sandi'");
+            $_SESSION['user'] = $q["nm_user"];
+
+            echo "
+                <script>
+                    alert('Berhasil Masuk . . . ');
+                    window.location = 'beranda.php';
+                </script>
+            ";
+
+        } else {
+
+            echo "
+                <script>
+                    alert('Gagal Masuk . . . ');
+                    window.location = 'index.php';
+                </script>
+            ";
+
+        }
+    } 
+    elseif (isset($_POST['simpan_tukang'])) {
         $kd_tukang   = $_POST['kd_tukang'];
         $nm_tukang   = ucwords($_POST['nm_tukang']);
         $alamat      = ucwords($_POST['alamat']);
