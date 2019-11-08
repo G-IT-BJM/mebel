@@ -1,18 +1,18 @@
 <!-- sidebar menu area start -->
 <div class="sidebar-menu">
     <div class="sidebar-header">
-        <!-- <div class="logo">
-            <a href="index.html"><img src="assets/images/icon/logo.png" alt="logo"></a>
-        </div> -->
-        <h5 style="color:white; text-align:center;">LOGO</h5>
+        <div class="logo">
+            <img src="img/logo.png" alt="logo" style="border-radius:30%;width:60%;">
+        </div>
+        <!-- <h5 style="color:white; text-align:center;">LOGO</h5> -->
     </div>
     <div class="main-menu">
         <div class="menu-inner">
             <nav>
                 <ul class="metismenu" id="menu">
-                    <li><a href="#"><i class="ti-map-alt"></i> <span>BERANDA</span></a></li>
+                    <li><a href="#"><i class="ti-dashboard"></i> <span>BERANDA</span></a></li>
                     <li>
-                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-dashboard"></i><span>MASTER</span></a>
+                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-menu-alt"></i><span>MASTER</span></a>
                         <ul class="collapse">
                             <li><a href="m-tukang.php">Tukang</a></li>
                             <li><a href="m-pelanggan.php">Pelanggan</a></li>
@@ -20,7 +20,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>TRANSAKSI </span></a>
+                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-menu-alt"></i><span>TRANSAKSI </span></a>
                         <ul class="collapse">
                             <li><a href="pembelian-bahan.php">Pembelian Bahan</a></li>
                             <li><a href="pemesanan.php">Pemesanan</a></li>
@@ -31,7 +31,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-pie-chart"></i><span>LAPORAN</span></a>
+                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-book"></i><span>LAPORAN</span></a>
                         <ul class="collapse">
                             <li><a href="laporan-pembelian-bahan.php">Pembelian Bahan</a></li>
                             <li><a href="laporan-pemesanan.php">Pemesanan</a></li>
@@ -43,7 +43,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-palette"></i><span>PENGATURAN</span></a>
+                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-settings"></i><span>PENGATURAN</span></a>
                         <ul class="collapse">
                             <li><a href="#">Ubah Sandi</a></li>
                             <li><a href="#">Salin Data</a></li>

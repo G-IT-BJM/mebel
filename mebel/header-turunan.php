@@ -2,13 +2,13 @@
 <div class="page-title-area">
     <div class="row align-items-center">
         <div class="col-sm-8">
-            <div class="nav-btn pull-left">
+            <div class="nav-btn pull-left pb--10">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
-            <div class="breadcrumbs-area clearfix">
-                <h5 class="page-title pull-left">CV. SUMBER BAHAGIA</h5>
+            <div class="breadcrumbs-area clearfix pt--10">
+                <h5 class="page-title pull-left" style="color: #ae8d75"><b>CV. SUMBER BAHAGIA</b></h5>
             </div>
         </div>
         <div class="col-sm-4 clearfix">
