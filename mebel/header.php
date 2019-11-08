@@ -1,4 +1,4 @@
-<?php session_start() if(!isset($_SESSION['user'])) { header('location: index.php'); } else { include "koneksi.php"; } ?>
+<?php session_start(); if(!isset($_SESSION['user'])) { header('location: index.php'); } else { include "koneksi.php"; } ?>
 <!doctype html>
 <html class="no-js" lang="en">
 

@@ -58,29 +58,7 @@ $ukuran = @$r['jhitung'];
         <!-- main content area start -->
         <div class="main-content">
             <!-- page title area start -->
-            <div class="page-title-area">
-                <div class="row align-items-center">
-                    <div class="col-sm-8">
-                        <div class="nav-btn pull-left">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                        <div class="breadcrumbs-area clearfix">
-                            <h5 class="page-title pull-left">CV. SUMBER BAHAGIA</h5>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 clearfix">
-                        <div class="user-profile pull-right">
-                            <img class="avatar user-thumb" src="assets/images/author/avatar.png" alt="avatar">
-                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">&nbsp;&nbsp; Admin <i class="fa fa-angle-down"></i></h4>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Keluar</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php include 'header-turunan.php'; ?>
             <!-- page title area end -->
             <div class="main-content-inner">
                 <div class="row">
@@ -314,27 +292,8 @@ $ukuran = @$r['jhitung'];
         <!-- main content area end -->
         <!-- footer area start-->
         <?php include "footer.php"; ?>
-        <!-- footer area end-->
-    </div>
-    <!-- page container area end -->
-    
-    <script src="assets/js/vendor/jquery-2.2.4.min.js"></script>
-    <!-- bootstrap 4 js -->
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/owl.carousel.min.js"></script>
-    <script src="assets/js/metisMenu.min.js"></script>
-    <script src="assets/js/jquery.slimscroll.min.js"></script>
-    <script src="assets/js/jquery.slicknav.min.js"></script>
-
-    <!-- others plugins -->
-    <script src="assets/js/plugins.js"></script>
-    <script src="assets/js/scripts.js"></script>
-
-    <!-- Include jquery.js and jquery.mask.js -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdn.rawgit.com/igorescobar/jQuery-Mask-Plugin/1ef022ab/dist/jquery.mask.min.js"></script>
-    <script>
+        
+        <script>
 
         $("#headerForm .form-control, #headerForm .custom-select").click(function() {
             var id = this.id;            
@@ -424,7 +383,3 @@ $ukuran = @$r['jhitung'];
         }); 
 
     </script>
-
-</body>
-
-</html>
