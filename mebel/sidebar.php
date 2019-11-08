@@ -10,7 +10,7 @@
         <div class="menu-inner">
             <nav>
                 <ul class="metismenu" id="menu">
-                    <li><a href="#"><i class="ti-dashboard"></i> <span>BERANDA</span></a></li>
+                    <li><a href="beranda.php"><i class="ti-dashboard"></i> <span>BERANDA</span></a></li>
                     <li>
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-menu-alt"></i><span>MASTER</span></a>
                         <ul class="collapse">
@@ -46,7 +46,7 @@
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-settings"></i><span>PENGATURAN</span></a>
                         <ul class="collapse">
                             <li><a href="#">Ubah Sandi</a></li>
-                            <li><a href="#">Salin Data</a></li>
+                            <li><a href="backup-restore.php">Salin Data</a></li>
                         </ul>
                     </li>
                 </ul>
