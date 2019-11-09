@@ -45,7 +45,7 @@
                     <li>
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-settings"></i><span>PENGATURAN</span></a>
                         <ul class="collapse">
-                            <li><a href="#">Ubah Sandi</a></li>
+                            <li><a href="ubah-sandi.php">Ubah Sandi</a></li>
                             <li><a href="backup-restore.php">Salin Data</a></li>
                         </ul>
                     </li>

@@ -1186,6 +1186,7 @@ table.dbkit-table tr td {
 .footer-area p {
     color: #676666;
     margin-bottom: 0;
+    margin-left: 15px;
 }
 
 /*-------------------- END Letest Post ------------------- */
@@ -2352,7 +2353,7 @@ table.dataTable thead td {
 
 .form-gp.focused label {
     top: -15px;
-    color: #7e74ff;
+    color: #ae8d75;
 }
 
 .form-gp input {
@@ -2382,7 +2383,7 @@ table.dataTable thead td {
     position: absolute;
     right: 5px;
     bottom: 15px;
-    color: #7e74ff;
+    color: #ae8d75;
     font-size: 16px;
 }
 

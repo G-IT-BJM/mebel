@@ -508,4 +508,66 @@
         $no++; 
         } 
     }
+
+    /** 
+     * @Author: G_IT_BJM 
+     * @Date: 2019-11-09 11:56:56 
+     * @Desc: UBAH KATA SANDI 
+     */    
+    elseif (isset($_POST['ubah_sandi'])) 
+    {
+        $nm        = $_POST['nama'];
+        $p_lama    = md5($_POST['pswd']);
+        $p_baru    = md5($_POST['pswd_1']);
+        $k_p_baru  = md5($_POST['pswd_2']);
+
+        $cek = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM tb_login WHERE nm_user = '$nm'"));
+
+        if($cek["sandi"] == $p_lama) {
+
+            if($p_baru == $k_p_baru) {
+
+                $ubah = mysqli_query($conn, "UPDATE tb_login SET sandi = '$p_baru' WHERE nm_user = '$nm'");
+                if($ubah) {
+
+                    echo "
+                        <script>
+                            alert('Berhasil Merubah Password . . . ');
+                            window.location = 'beranda.php';
+                        </script>
+                    ";
+
+                } else {
+
+                    echo "
+                        <script>
+                            alert('Data Gagal Di Ubah . . . ');
+                            window.location = 'ubah-sandi.php';
+                        </script>
+                    ";
+
+                }
+
+            } else {
+
+                echo "
+                    <script>
+                        alert('Konfirmasi Password Salah . . . ');
+                        window.location = 'ubah-sandi.php';
+                    </script>
+                ";
+
+            }
+
+        } else {
+
+            echo "
+                <script>
+                    alert(' Password Lama Salah . . . ');
+                    window.location = 'ubah-sandi.php';
+                </script>
+            ";
+            
+        }
+    }
 ?>
