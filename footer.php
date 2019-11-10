@@ -44,7 +44,7 @@
             $( '.uang' ).mask('0.000.000.000', {reverse: true}); // Format mata uang.
             // $( '.no_hp' ).mask('0000−0000−0000'); // Format nomor HP.
             $( '.nohp' ).mask('000000000000'); // Format nomor HP.
-            $( '.angka' ).mask('0'); //angka
+            $( '.angka' ).mask('0000000'); //angka
             $( '.tapel' ).mask('0000/0000'); // Format tahun pelajaran.
         });
     </script>
