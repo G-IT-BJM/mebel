@@ -10,7 +10,7 @@
                         <div class="col-md-6">
                             <div class="single-report mb-xs-30">
                                 <div class="s-report-inner pr--20">
-                                    <?php $q = mysqli_fetch_array(mysqli_query($conn, "SELECT COUNT(*) AS JUMLAH FROM tproduksi WHERE (no_pesanan) NOT IN (SELECT no_pesanan FROM tkirim GROUP BY tkirim.no_pesanan) GROUP BY tproduksi.no_pesanan")) ?>
+                                    <?php $q = mysqli_fetch_array(mysqli_query($conn, "SELECT COUNT(*) AS JUMLAH FROM tpemesanan WHERE (no_pesanan) NOT IN (SELECT no_pesanan FROM tproduksi GROUP BY tproduksi.no_pesanan)")) ?>
                                     <div class="icon" style="background-color:#007BFF;"><?= $q['JUMLAH']?></div>
                                     <div class="s-report-title d-flex justify-content-between">
                                         <h4 class="header-title"> </h4>
