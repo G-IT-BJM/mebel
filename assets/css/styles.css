@@ -90,7 +90,7 @@
 
 .main-content {
     width: 100%;
-    background: #F3F8FB;
+    background: #808080;
 }
 
 .main-content-inner {
@@ -134,14 +134,14 @@
 }
 
 .slimScrollBar {
-    background: #fff!important;
-    opacity: 0.1!important;
+    background: #ae8d75!important;
+    opacity: 0.5!important;
 }
 
 .sidebar-header {
     padding: 19px 32px 20px;
     background: #303641;
-    border-bottom: 1px solid #343e50;
+    border-bottom: 1px solid #ae8d75;
 }
 .sidebar-menu .logo{
     text-align: center;
@@ -151,13 +151,23 @@
     max-width: 120px;
 }
 
+.logo label {
+    color: #ae8d75;
+    font-size: xx-large;
+    margin-left: 50px;
+
+    letter-spacing: 20px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
 .metismenu >li >a {
     padding-left: 32px!important;
 }
 .metismenu li a {
     position: relative;
     display: block;
-    color: #8d97ad;
+    color: #c4c9d4;
     font-size: 15px;
     text-transform: capitalize;
     padding: 15px 15px;
@@ -166,7 +176,7 @@
 }
 
 .metismenu li a i {
-    color: #6a56a5;
+    color: #ae8d75;
     -webkit-transition: all 0.3s ease 0s;
     transition: all 0.3s ease 0s;
 }
@@ -657,7 +667,7 @@
     top: 50%;
     width: 4px;
     height: 36px;
-    background: var(--primary-color);
+    background: #ae8d75;
     -webkit-transform: translateY(-50%);
             transform: translateY(-50%);
 }
@@ -713,8 +723,8 @@ ul.breadcrumbs {
             align-items: center;
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
-    background: -webkit-linear-gradient(left, #8914fe 0%, #8063f5 100%);
-    background: linear-gradient(to right, #8914fe 0%, #8063f5 100%);
+    background: -webkit-linear-gradient(left, white 0%, #ae8d75 100%);
+    background: linear-gradient(to right, white 0%, #ae8d75 100%);
     padding: 17px 38px;
     position: relative;
 }
@@ -757,7 +767,7 @@ ul.breadcrumbs {
 
 .notification-area .dropdown-menu,
 .user-profile .dropdown-menu {
-    background: #fff;
+    background: #ae8d75;
     border: none;
     -webkit-transform: none!important;
             transform: none!important;
@@ -786,16 +796,16 @@ ul.breadcrumbs {
 
 .user-profile .dropdown-menu a {
     font-size: 14px;
-    color: #8a8a8a;
+    color: white;
     letter-spacing: 0;
     font-weight: 500;
-    padding: 4px 120px;
-    padding-left: 25px;
+    /* padding: 4px 120px;
+    padding-left: 25px; */
 }
 
 .user-profile .dropdown-menu a:hover {
     background: #f8f9fa;
-    color: #2942fa;
+    color: red;
 }
 
 /*-------------------- END Page Title Area -------------------*/
@@ -1186,6 +1196,7 @@ table.dbkit-table tr td {
 .footer-area p {
     color: #676666;
     margin-bottom: 0;
+    margin-left: 15px;
 }
 
 /*-------------------- END Letest Post ------------------- */
@@ -2310,11 +2321,12 @@ table.dataTable thead td {
     max-width: 100%;
     background: #fff;
     border-radius: 3px;
+    border: 1px solid black;
 }
 
 .login-form-head {
     text-align: center;
-    background: #8655FC;
+    background: #8a693d;
     padding: 50px;
 }
 
@@ -2352,7 +2364,7 @@ table.dataTable thead td {
 
 .form-gp.focused label {
     top: -15px;
-    color: #7e74ff;
+    color: #ae8d75;
 }
 
 .form-gp input {
@@ -2382,7 +2394,7 @@ table.dataTable thead td {
     position: absolute;
     right: 5px;
     bottom: 15px;
-    color: #7e74ff;
+    color: #ae8d75;
     font-size: 16px;
 }
 
@@ -2411,7 +2423,7 @@ table.dataTable thead td {
 }
 
 .submit-btn-area button:hover {
-    background: #2c71da;
+    background: #8a693d;
     color: #ffffff;
 }
 

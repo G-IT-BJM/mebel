@@ -1,9 +1,13 @@
-<?php
-$srvr="localhost";
-$db="db_mebel11";
-$usr="root";
-$pwd="";
+<?php 
+    // $host = "132.248.130.106";
+    // $username = "git";
+    // $password = "git";
+    // $database = "db_mebel";
 
-mysql_connect($srvr,$usr,$pwd);
-mysql_select_db($db);
+    $host = "localhost";
+    $username = "root";
+    $password = "";
+    $database = "db_mebel";
+
+    $conn = mysqli_connect($host, $username, $password, $database);
 ?>

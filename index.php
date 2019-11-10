@@ -1,94 +1,81 @@
-<?php
-include 'koneksi.php';
-include 'menu.php';
-?>
- <div class="row row-bg">
-             <div class="col-sm-6 col-md-3"> 
-             <div class="statbox widget box box-shadow">
-              <div class="widget-content"> 
-              <div class="visual cyan">  
-              <div class="statbox-sparkline">30,20,15,30,22,25,26,30,27</div>
-              </div> 
-              <div class="title">Pesanan Baru</div> 
-              <div class="value">2</div> <a class="more" href="javascript:void(0);">Lihat Detail <i class="pull-right icon-angle-right"></i></a> </div> </div> </div> <div class="col-sm-6 col-md-3"> <div class="statbox widget box box-shadow"> <div class="widget-content"> <div class="visual green"> <div class="statbox-sparkline">20,30,30,29,22,15,20,30,32</div> </div> <div class="title">Pesanan Belum Selesai</div> <div class="value">2</div> <a class="more" href="javascript:void(0);">Lihat Detail <i class="pull-right icon-angle-right"></i></a> </div> </div> </div> <div class="col-sm-6 col-md-3 hidden-xs"> <div class="statbox widget box box-shadow"> <div class="widget-content"> <div class="visual yellow"> <i class="icon-dollar"></i> </div> <div class="title">Produksi Belum Selesai</div> <div class="value">2</div> <a class="more" href="javascript:void(0);">Lihat Detail <i class="pull-right icon-angle-right"></i></a> </div> </div> </div> <div class="col-sm-6 col-md-3 hidden-xs"> <div class="statbox widget box box-shadow"> <div class="widget-content"> <div class="visual red"> <i class="icon-user"></i> </div> <div class="title">Pelanggan</div> <div class="value">30</div> <a class="more" href="javascript:void(0);">Lihat Detail <i class="pull-right icon-angle-right"></i></a> </div> </div> </div> </div>
-<!-- Modal Laporan Beli -->
-<div class="modal fade " id="pembelianbulan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                  <div class="modal-dialog">
-                                      <div class="modal-content">
-                                          <div class="modal-header">
-                                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                              <h4 class="modal-title">Cetak Pembelian Perbulan</h4>
-                                          </div>
-                                          <div class="modal-body">
 
-                                              <form action="halaman.php?go=LPBeliBulan" target="_blank" method="POST">
-                                              <div class="col-sm-6">
-                                                <select name="bulan" class="form-control">
-                                                  <option value="">Pilih Bulan</option>
-                                                  <option value="01">Januari</option>
-                                                  <option value="02">Februari</option>
-                                                  <option value="03">Maret</option>
-                                                  <option value="04">April</option>
-                                                  <option value="05">Mei</option>
-                                                  <option value="06">Juni</option>
-                                                  <option value="07">Juli</option>
-                                                  <option value="08">Agustus</option>
-                                                  <option value="09">September</option>
-                                                  <option value="10">Oktober</option>
-                                                  <option value="12">November</option>
-                                                  <option value="12">Desember</option>
-                                                </select>
-                                              </div>
-                                              <div class="col-sm-6">
-                                                <select name="tahun" class="form-control m-bot15">
-                                                <option value="">Pilih Tahun</option>
-<?php 
-$querybelibulan = "SELECT YEAR(tgl_beli) FROM tbelibahan GROUP BY YEAR(tgl_beli)";
-$sqlbelibulan = mysql_query($querybelibulan);
-while ($hasil = mysql_fetch_array($sqlbelibulan)) {
-  echo "<option value=". $hasil['YEAR(tgl_beli)']. ">". $hasil['YEAR(tgl_beli)']."</option>";
-}
-?> 
-                                                </select>
-                                              </div>
+<?php ob_start(); session_start(); if (!isset($_SESSION['user'])) { ?>
+<!doctype html>
+<html class="no-js" lang="en">
 
-                                                <input type="submit" class="btn btn-danger" name="beli_bulan" value="Cetak Laporan">
-                                              </form>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Login Administrator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="assets/images/icon/favicon.ico">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/themify-icons.css">
+    <link rel="stylesheet" href="assets/css/metisMenu.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/css/slicknav.min.css">
+    <!-- amchart css -->
+    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+    <!-- others css -->
+    <link rel="stylesheet" href="assets/css/typography.css">
+    <link rel="stylesheet" href="assets/css/default-css.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <!-- modernizr css -->
+    <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
 
-                                          </div>
-                                      </div>
-                                  </div>
-                            </div>
+<body>
+    
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+    <!-- preloader area end -->
+    <!-- login area start -->
+    <div class="login-area">
+        <div class="container">
+            <div class="login-box ptb--100">
+                <form action="proses.php" method="post">
+                    <div class="login-form-head">
+                        <h1 style="color:white;">LOGIN</h1>                        
+                    </div>
+                    <div class="login-form-body">
+                        <div class="form-gp">
+                            <label for="exampleInputEmail1">USERNAME</label>
+                            <input type="text" name="username" id="username">
+                            <i class="ti-user"></i>
+                        </div>
+                        <div class="form-gp">
+                            <label for="exampleInputPassword1">PASSWORD</label>
+                            <input type="password" name="password" id="password">
+                            <i class="ti-lock"></i>
+                        </div>                        
+                        <div class="submit-btn-area">
+                            <button id="login" name="login" type="submit">MASUK <i class="ti-arrow-right"></i></button>
+                        </div>                        
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- login area end -->
 
+    <!-- jquery latest version -->
+    <script src="assets/js/vendor/jquery-2.2.4.min.js"></script>
+    <!-- bootstrap 4 js -->
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <script src="assets/js/metisMenu.min.js"></script>
+    <script src="assets/js/jquery.slimscroll.min.js"></script>
+    <script src="assets/js/jquery.slicknav.min.js"></script>
+    
+    <!-- others plugins -->
+    <script src="assets/js/plugins.js"></script>
+    <script src="assets/js/scripts.js"></script>
+</body>
 
-<!-- end Modal -->
-<!-- Modal Laporan Beli Tahun -->
-                          <div class="modal fade " id="pembeliantahun" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                  <div class="modal-dialog">
-                                      <div class="modal-content">
-                                          <div class="modal-header">
-                                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                              <h4 class="modal-title">Cetak Pembelian Pertahun</h4>
-                                          </div>
-                                          <div class="modal-body">
+</html>
 
-                                              <form action="halaman.php?go=LPBeliTahun" target="_blank" method="POST">
-                                                <select class="form-control m-bot15" name="cetak_laporan">
-                                                  <option value="">Pilih Tahun</option>
-<?php 
-$querybelitahun = "SELECT YEAR(tgl_beli) FROM tbelibahan GROUP BY YEAR(tgl_beli)";
-$sqlbelitahun = mysql_query($querybelitahun);
-while ($hasil = mysql_fetch_array($sqlbelitahun)) {
-  echo "<option value=". $hasil['YEAR(tgl_beli)']. ">". $hasil['YEAR(tgl_beli)']."</option>";
-}
-?> 
-                                                </select>
-                                                <input type="submit" class="btn btn-danger" name="beli_tahun" value="Cetak Laporan">
-                                              </form>
-
-                                          </div>
-                                      </div>
-                                  </div>
-                            </div>
-
-<!-- End Modal -- >
+<?php } else { header('location: beranda.php'); } ob_end_flush();?>
