@@ -40,7 +40,7 @@
                                             <th scope="col">Aksi</th>
                                             <th scope="col">Kode Pemesanan</th>
                                             <th scope="col">Nama Pelanggan</th>
-                                            <th scope="col">Tgl Beli</th>
+                                            <th scope="col">Tanggal Beli</th>
                                             <th scope="col">Ukuran</th>
                                             <th scope="col">Jumlah</th>
                                         </tr>
