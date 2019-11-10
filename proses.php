@@ -367,20 +367,30 @@
         $kd_upah    = $_POST['kd_upah'];
         $tgl        = $_POST['tgl'];
         $kd_tukang  = $_POST['kd_tukang'];
-        // $saldo      = preg_replace("([.])", "", $_POST['saldo']);
+        $saldo      = preg_replace("([.])", "", $_POST['saldo']);
         $peng_upah  = preg_replace("([.])", "", $_POST['peng_upah']);
         
-        $simpan = mysqli_query($conn, "INSERT INTO tupah VALUES('$kd_upah','','$kd_tukang','$peng_upah','$tgl','')");
-
-        if($simpan) {
-            header("location: upah-tukang.php");
-        } else {
-            echo "
-                <script>
-                    alert('Data Gagal Di Simpan . . . ');
+        if ($peng_upah > $saldo) {
+            
+            echo "<script>
+                    alert('Saldo tidak cukup');
                     window.location = 't-upah-tukang.php';
-                </script>
-            ";
+                </script>";
+
+        } else {
+
+            $simpan = mysqli_query($conn, "INSERT INTO tupah VALUES('$kd_upah','','$kd_tukang','$peng_upah','$tgl','')");
+
+            if($simpan) {
+                header("location: upah-tukang.php");
+            } else {
+                echo "
+                    <script>
+                        alert('Data Gagal Di Simpan . . . ');
+                        window.location = 't-upah-tukang.php';
+                    </script>
+                ";
+            }
         }
     }
     elseif (isset($_GET['hapus']) && $_GET['hapus'] == 'dataupahtukang') {
