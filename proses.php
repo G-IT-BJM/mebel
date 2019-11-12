@@ -287,8 +287,9 @@
         $nm_barang  = ucwords($_POST['nm_barang']);
         $tgl_beli   = $_POST['tgl_beli'];
         $ukuran     = $_POST['ukuran'];
+        $ket        = $_POST['ket'];
         
-        $simpan = mysqli_query($conn, "INSERT INTO tpemesanan VALUES('$no_pesan','$nm_pel','$jenis','$nm_barang','$tgl_beli','','$ukuran','$jumlah','')");
+        $simpan = mysqli_query($conn, "INSERT INTO tpemesanan VALUES('$no_pesan','$nm_pel','$jenis','$nm_barang','$tgl_beli','','$ukuran','$jumlah','','$ket')");
 
         if($simpan) {
             header("location: pemesanan.php");
@@ -309,8 +310,9 @@
         $nm_barang  = ucwords($_POST['nm_barang']);
         $tgl_beli   = $_POST['tgl_beli'];
         $ukuran     = $_POST['ukuran'];
+        $ket        = $_POST['ket'];
 
-        $ubah = mysqli_query($conn,"UPDATE tpemesanan SET id_pelanggan = '$nm_pel', jenis = '$jenis', namabarang = '$nm_barang', tanggal = '$tgl_beli', jhitung = '$ukuran', jpesanan = '$jumlah' WHERE no_pesanan = '$no_pesan'");
+        $ubah = mysqli_query($conn,"UPDATE tpemesanan SET id_pelanggan = '$nm_pel', jenis = '$jenis', namabarang = '$nm_barang', tanggal = '$tgl_beli', jhitung = '$ukuran', jpesanan = '$jumlah', ket = '$ket' WHERE no_pesanan = '$no_pesan'");
 
         if ($ubah) { 
             header('location:pemesanan.php');

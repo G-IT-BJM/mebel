@@ -18,6 +18,7 @@ $nama_barang = @$r['namabarang'];
 $jumlah = @$r['jumlah'];
 $id_tukang = @$_GET['id_tukang'] == '' ? $r['id_tukang'] : $_GET['id_tukang'];
 $ukuran = @$r['jhitung'];
+$ket = @$r['ket'];
 
 ?>
 <!doctype html>
@@ -149,8 +150,16 @@ $ukuran = @$r['jhitung'];
                                                     ?>
                                                 </select>
                                             </div>
-                                        </div>                                        
+                                        </div>
                                     </div>                                    
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <div class="form-group">
+                                                <label class="col-form-label">Keterangan</label>
+                                                <textarea name="ket" id="ket" rows="2" class="form-control" disabled><?=$ket?></textarea>
+                                            </div>
+                                        </div> 
+                                    </div>
                                 </form>
                                 <hr>
                                 <form id="detailForm" method="POST">
@@ -239,7 +248,7 @@ $ukuran = @$r['jhitung'];
                                             </tbody>
                                             <?php 
 
-                                            $qq = mysqli_num_rows(mysqli_query($conn,"select * from tdetail_produksi inner join mbahan on tdetail_produksi.kd_bahan = mbahan.kd_bahan WHERE tdetail_produksi.no_produksi = '$no_trans' AND mbahan.nm_bahan like '%Kayu Ulin%'"));
+                                            $qq = mysqli_num_rows(mysqli_query($conn,"select * from tdetail_produksi inner join mbahan on tdetail_produksi.kd_bahan = mbahan.kd_bahan WHERE tdetail_produksi.no_produksi = '$no_trans' AND mbahan.nm_bahan like '%Ulin%'"));
                                             $ee = mysqli_num_rows(mysqli_query($conn,"select * from tdetail_produksi inner join mbahan on tdetail_produksi.kd_bahan = mbahan.kd_bahan WHERE tdetail_produksi.no_produksi = '$no_trans' AND mbahan.nm_bahan like '%Kayu%'"));
                                             
                                             if ($qq >= 1 && $ee >= 1) {

@@ -5,7 +5,7 @@ include "proses_produksi.php";
 
 $no_pesanan = @$_GET['no_pesanan'];
 
-$q = mysqli_query($conn,"SELECT no_pesanan,jhitung, namabarang,(jpesanan - IFNULL((select sum(jumlah) from tproduksi where tproduksi.no_pesanan = tpemesanan.no_pesanan GROUP by no_pesanan), 0)) as jumlah FROM tpemesanan WHERE (no_pesanan, jpesanan) NOT IN (SELECT no_pesanan, sum(jumlah) FROM tproduksi GROUP BY tproduksi.no_pesanan) AND tpemesanan.no_pesanan = '$no_pesanan'");
+$q = mysqli_query($conn,"SELECT ket,no_pesanan,jhitung, namabarang,(jpesanan - IFNULL((select sum(jumlah) from tproduksi where tproduksi.no_pesanan = tpemesanan.no_pesanan GROUP by no_pesanan), 0)) as jumlah FROM tpemesanan WHERE (no_pesanan, jpesanan) NOT IN (SELECT no_pesanan, sum(jumlah) FROM tproduksi GROUP BY tproduksi.no_pesanan) AND tpemesanan.no_pesanan = '$no_pesanan'");
 $r = mysqli_fetch_array($q);
 
 $jumlah_pesanan = @$r['jumlah'] == '' ? 0 : $r['jumlah'];
@@ -13,6 +13,7 @@ $nama_barang = @$r['namabarang'];
 $jumlah = @$_GET['jumlah'];
 $id_tukang = @$_GET['id_tukang'];
 $ukuran = @$r['jhitung'];
+$ket = @$r['ket'];
 
 ?>
 <!doctype html>
@@ -153,7 +154,15 @@ $ukuran = @$r['jhitung'];
                                                 </select>
                                             </div>
                                         </div>                                        
-                                    </div>                                    
+                                    </div> 
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <div class="form-group">
+                                                <label class="col-form-label">Keterangan</label>
+                                                <textarea name="ket" id="ket" rows="2" class="form-control" disabled><?=$ket?></textarea>
+                                            </div>
+                                        </div> 
+                                    </div>                                   
                                 </form>
                                 <hr>
                                 <form id="detailForm" method="POST">
@@ -242,7 +251,7 @@ $ukuran = @$r['jhitung'];
                                             </tbody>
                                             <?php 
 
-                                            $qq = mysqli_num_rows(mysqli_query($conn,"select * from tdetail_produksi inner join mbahan on tdetail_produksi.kd_bahan = mbahan.kd_bahan WHERE tdetail_produksi.no_produksi = '$no_trans' AND mbahan.nm_bahan like '%Kayu Ulin%'"));
+                                            $qq = mysqli_num_rows(mysqli_query($conn,"select * from tdetail_produksi inner join mbahan on tdetail_produksi.kd_bahan = mbahan.kd_bahan WHERE tdetail_produksi.no_produksi = '$no_trans' AND mbahan.nm_bahan like '%Ulin%'"));
                                             $ee = mysqli_num_rows(mysqli_query($conn,"select * from tdetail_produksi inner join mbahan on tdetail_produksi.kd_bahan = mbahan.kd_bahan WHERE tdetail_produksi.no_produksi = '$no_trans' AND mbahan.nm_bahan like '%Kayu%'"));
                                             
                                             if ($qq >= 1 && $ee >= 1) {

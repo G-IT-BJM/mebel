@@ -82,6 +82,14 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                            <div class="col-8">
+                                    <div class="form-group">
+                                        <label for="keterangan" class="col-form-label">Keterangan</label>
+                                        <textarea name="ket" id="ket" rows="2" class="form-control" required></textarea>                                        
+                                    </div>
+                                </div>
+                            </div>
                             <hr>
                             <div class="header-title">
                                 <a href="pemesanan.php"><button type="button" class="btn btn-danger">BATAL <span class="fa fa-close"></span></button></a>
