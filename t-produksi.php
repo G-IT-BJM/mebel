@@ -10,7 +10,7 @@ $r = mysqli_fetch_array($q);
 
 $jumlah_pesanan = @$r['jumlah'] == '' ? 0 : $r['jumlah'];
 $nama_barang = @$r['namabarang'];
-$jumlah = @$_GET['jumlah'];
+$jumlah = @$_GET['jumlah_pemesanan'];
 $id_tukang = @$_GET['id_tukang'];
 $ukuran = @$r['jhitung'];
 $ket = @$r['ket'];
@@ -42,6 +42,10 @@ $ket = @$r['ket'];
         .hidden {
             display:none;
         }
+        .readonly { 
+            pointer-events: none;  
+            background:#f2f2f2;
+        } 
     </style>
 </head>
 
@@ -104,19 +108,19 @@ $ket = @$r['ket'];
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-2">
+                                        <div class="col-4">
                                             <div class="form-group">
                                                 <label for="jumlah" class="col-form-label">Jumlah Pemesanan</label>
                                                 <input class="form-control" type="number" id="jumlah_pemesanan" name="jumlah_pemesanan" value='<?=$jumlah_pesanan?>' required readonly>
                                             </div>
                                         </div>
-                                        <div class="col-2">
+                                        <!-- <div class="col-2">
                                             <div class="form-group">
                                                 <label for="jumlah" class="col-form-label">Jumlah</label>
                                                 <input class="form-control" type="number" id="jumlah" name="jumlah" value="<?=$jumlah?>" required>
                                                 <p id="warning" class="hidden" style="font-size:12px;color:red;">Jumlah tidak sesuai</p>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="row">
                                         <div class="col-2">
@@ -194,12 +198,19 @@ $ket = @$r['ket'];
                                         <div class="col-2">
                                             <div class="form-group">
                                                 <label for="jumlah" class="col-form-label">Jumlah</label>
-                                                <input class="form-control" type="number" id="jumlah_pakai" name="jumlah_pakai" min="1" value="" required <?=($no_pesanan == '' OR $id_tukang == '') ? 'disabled' : '' ?>>
+                                                <input class="form-control" type="number" id="jumlah_pakai" name="jumlah_pakai" min="1" value="" required <?=($no_pesanan == '' OR $id_tukang == '') ? 'disabled' : '' ?>>                                                
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="form-group">
+                                                <label for="jumlah" class="col-form-label">Total Jumlah</label>
+                                                <input class="form-control" type="number" id="total_jumlah_pakai" name="total_jumlah_pakai" min="1" readonly required <?=($no_pesanan == '' OR $id_tukang == '') ? 'disabled' : '' ?>>
+                                                <p id="warning" class="hidden" style="font-size:11px;color:red;">Jumlah tidak sesuai</p>
                                                 <input type="hidden" name="harga" id="harga">
                                                 <input type="hidden" name="h_no_produksi" id="h_no_produksi" value="<?=$no_trans ?>">
                                             </div>
                                         </div>
-                                        <div class="col-4">
+                                        <div class="col-2">
                                             <div style="padding-top:36px;" class="form-group">                                                
                                                 <button type="submit" class="btn btn-sm btn-success" id="tambah_detail" name="tambah_detail" <?=($no_pesanan == '' OR $id_tukang == '') ? 'disabled' : '' ?>>Tambah <span class="fa fa-check-square-o"></span></button>
                                             </div>
@@ -323,6 +334,7 @@ $ket = @$r['ket'];
 
         $("#kd_bahan").change(function() {
             $("#jumlah_pakai").val('');
+            $("#total_jumlah_pakai").val('');
             var value = $("#kd_bahan").val();
             $.ajax({ 
                 type: 'GET', 
@@ -332,13 +344,14 @@ $ket = @$r['ket'];
                     if (data['stok'] <= 0) {
                         alert('Stok Sedang Kosong!');
                         $("#stok").val('');
+                        $("#total_jumlah_pakai").val('');
                         $('#jumlah_pakai').prop('disabled', true);
                         $('#tambah_detail').prop('disabled', true);
                     } else {
-                        $("#stok").val(data['stok']);
+                        $("#stok").val(data['stok']);                        
                         $("#harga").val(data['harga']);
                         $('#jumlah_pakai').prop('disabled', false);
-                        $('#jumlah_pakai').attr('max', data['stok']);
+                        $('#total_jumlah_pakai').attr('max', data['stok']);
                         $('#tambah_detail').prop('disabled', false);
                     }
                 }
@@ -360,25 +373,46 @@ $ket = @$r['ket'];
             }            
         }
 
-        $(document).on('keyup', 'input[name=jumlah]', function () {
-            var _this = $(this);
-            var min = parseInt(_this.attr('min')) || 1;
-            var max = parseInt(_this.attr('max')) || <?=$jumlah_pesanan ?>;
-            var val = parseInt(_this.val()) || (min - 1);
-            if(val < min)
-                _this.val( min );
-            if(val > max)
-                _this.val( max );
-        });
-
-        $("#simpan_produksi").click(function() {
-            
-            var jumlah = $("#jumlah").val();
-
-            if (jumlah > <?=$jumlah_pesanan?>) {
+        $('#jumlah_pakai').keyup(function(){
+            var jumlah_pakai = $('#jumlah_pakai').val() == '' ? 0 : $('#jumlah_pakai').val();
+            var stok = $('#stok').val();
+            var jumlah_pemesanan = $('#jumlah_pemesanan').val();
+            var total_jumlah = jumlah_pakai * jumlah_pemesanan;
+            if (total_jumlah <= stok) {
+                $('#total_jumlah_pakai').val(total_jumlah);
+                $('#warning').addClass('hidden');
+                $('#tambah_detail').removeAttr('disabled');
+            } else {
+                $('#total_jumlah_pakai').val(total_jumlah);
                 $('#warning').removeClass('hidden');
                 $('#jumlah').focus;
-            } else {
+                $('#tambah_detail').attr('disabled','disabled');
+            }
+            
+        })
+
+        // $(document).on('keyup', 'input[name=jumlah]', function () {
+        //     var _this = $(this);
+        //     var min = parseInt(_this.attr('min')) || 1;
+        //     var max = parseInt(_this.attr('max')) || <?=$jumlah_pesanan ?>;
+        //     var val = parseInt(_this.val()) || (min - 1);
+        //     if(val < min)
+        //         _this.val( min );
+        //     if(val > max)
+        //         _this.val( max );
+        // });
+
+        $("#simpan_produksi").click(function() {
+
+            var confrim = confirm("Ingin menyimpan produksi?");
+            
+            if (confrim) {
+                // var jumlah = $("#jumlah").val();
+
+            // if (jumlah > <?=$jumlah_pesanan?>) {
+            //     $('#warning').removeClass('hidden');
+            //     $('#jumlah').focus;
+            // } else {
                 var datax = 'simpan_produksi=true&'+$("#hargaForm").serialize()+'&'+$("#headerForm").serialize();            
                 $.ajax({ 
                     type: 'POST', 
@@ -388,7 +422,8 @@ $ket = @$r['ket'];
                         location.href = 'produksi.php';
                     }
                 });
-            }     
+            // }     
+            }
         }); 
 
     </script>

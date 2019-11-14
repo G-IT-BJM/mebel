@@ -1,5 +1,5 @@
 <?php 
-
+session_start();
 include "koneksi.php";
 include "proses_produksi.php";
 
@@ -67,7 +67,9 @@ $ket = @$r['ket'];
         <!-- end sidebar -->
         <!-- main content area start -->
         <div class="main-content">
+
             <?php include 'header-turunan.php'; ?>
+
             <div class="main-content-inner">
                 <div class="row">
                     <!-- Progress Table start -->

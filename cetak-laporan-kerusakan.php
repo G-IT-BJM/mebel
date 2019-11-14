@@ -55,7 +55,7 @@
                             <div class="row align-items-center">
                                 <div class="col-md-6">
                                     <div class="invoice-address">
-                                        <h5>Laporan Pembelian Bahan</h5>
+                                        <h5>Laporan Kerusakan</h5>
                                         <p><?= date("F", strtotime("2000-$bulan-01"))."/".$tahun ?></p>
                                     </div>
                                 </div>

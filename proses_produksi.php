@@ -7,7 +7,7 @@ if (isset($_POST['tambah_detail'])) {
     $no_produksi = $_POST['h_no_produksi'];
     $kd_bahan = $_POST['kd_bahan'];
     $harga_satuan = $_POST['harga'];
-    $jumlah = $_POST['jumlah_pakai'];
+    $jumlah = $_POST['total_jumlah_pakai'];
 
     $simpan = mysqli_query($conn, "INSERT INTO tdetail_produksi VALUES('','$no_produksi','$kd_bahan','$jumlah','$harga_satuan')");
 
@@ -27,7 +27,7 @@ if (isset($_POST['simpan_produksi'])) {
     $tanggalprod = $_POST['tanggalprod'];
     $harga_jual = $_POST['total_jual'];
     $upah_tukang = $_POST['upah_tukang'];
-    $jumlah = $_POST['jumlah'];
+    $jumlah = $_POST['jumlah_pemesanan'];
 
 
     $simpan = mysqli_query($conn, "INSERT INTO tproduksi VALUES('$no_produksi','$no_pesanan','$id_tukang','$tanggalprod','','$harga_jual','$upah_tukang','$jumlah','$upah_tukang')");
