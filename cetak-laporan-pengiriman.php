@@ -91,6 +91,11 @@
                                                             <td class="text-left"><?= $sql["namabarang"] ?></td>
                                                         </tr>
                                                         <tr>
+                                                            <td style="width: 30%" class="text-left">Jumlah Barang</td>
+                                                            <td style="width: 5%">:</td>
+                                                            <td class="text-left"><?= $sql["jumlah"] ?></td>
+                                                        </tr>
+                                                        <tr>
                                                             <td style="width: 30%" class="text-left">Tujuan</td>
                                                             <td style="width: 5%">:</td>
                                                             <td class="text-justify">
