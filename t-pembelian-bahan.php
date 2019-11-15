@@ -72,6 +72,16 @@
                                         <input class="form-control angka" type="text" id="jml_beli" name="jml_beli" min="1" value="1" required>
                                     </div>
                                 </div>
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <label for="jml_beli" class="col-form-label">Satuan</label>
+                                        <select class="custom-select" id="satuan" name="satuan" required>
+                                            <option value="">Pilih Bahan . . .</option>
+                                            <option value="Kg">Kg</option>
+                                            <option value="Batang">Batang</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="total" class="col-form-label">Total</label>
@@ -86,8 +96,7 @@
                             </div>
                             <hr>
                             <div class="header-title">
-                                <a href="pembelian-bahan.php"><button type="button" class="btn btn-danger">BATAL <span class="fa fa-close"></span></button></a>
-                            
+                                <a href="pembelian-bahan.php"><button type="button" class="btn btn-danger">BATAL <span class="fa fa-close"></span></button></a>                            
                                 <button type="submit" class="btn btn-success" id="simpan_beli_bahan" name="simpan_beli_bahan">SIMPAN <span class="fa fa-check-square-o"></span></button>
                             </div>
                         </form>

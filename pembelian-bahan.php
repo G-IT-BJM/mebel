@@ -66,7 +66,7 @@
                                                 <?php $join = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM mbahan WHERE kd_bahan = '$data[no_bahan]'")); ?>
                                                 <td><?= $join["nm_bahan"] ?></td>
                                                 <td class="uang"><?= $data["hbeli"] ?></td>
-                                                <td><?= $data["jumbeli"] ?></td>
+                                                <td><?php if ($join["nm_bahan"] == 'Paku') { echo $data["jumbeli"]/100 . " Kg"; } else { echo $data["jumbeli"]; } ?></td>
                                                 <td class="uang"><?= $data["total"] ?></td>
                                             </tr>
                                         <?php

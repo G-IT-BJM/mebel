@@ -218,10 +218,15 @@
     elseif (isset($_POST['simpan_beli_bahan'])) {
         $no_beli    = $_POST['no_beli'];
         $nm_bahan   = $_POST['nm_bahan'];
+        $satuan     = $_POST['satuan'];
         $tgl_beli   = $_POST['tgl_beli'];
         $harga_beli = preg_replace("([.])", "", $_POST['harga_beli']);
         $jml_beli   = $_POST['jml_beli'];
         $total      = preg_replace("([.])", "", $_POST['total']);
+
+        if ($satuan == 'Kg') {
+            $jml_beli = $jml_beli * 100;
+        }
         
         $simpan = mysqli_query($conn, "INSERT INTO tbelibahan VALUES('$no_beli','$nm_bahan','$harga_beli','$jml_beli','$tgl_beli','$total')");
 
