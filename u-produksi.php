@@ -51,6 +51,15 @@ $ket = @$r['ket'];
             color:#000;          
             opacity: 0.6;
         }
+        
+        .hidden {
+            display:none;
+        }
+        .readonly { 
+            pointer-events: none;  
+            background:#f2f2f2;
+        } 
+    
     </style>
 </head>
 
@@ -104,16 +113,10 @@ $ket = @$r['ket'];
                                                 </select> -->
                                             </div>
                                         </div>
-                                        <div class="col-2">
+                                        <div class="col-4">
                                             <div class="form-group">
                                                 <label for="jumlah" class="col-form-label">Jumlah Pemesanan</label>
                                                 <input class="form-control" type="number" id="jumlah_pemesanan" name="jumlah_pemesanan" value='<?=$jumlah_pesanan?>' required readonly>
-                                            </div>
-                                        </div>
-                                        <div class="col-2">
-                                            <div class="form-group">
-                                                <label for="jumlah" class="col-form-label">Jumlah</label>
-                                                <input class="form-control" type="number" id="jumlah" name="jumlah" value="<?=$jumlah?>" required readonly>
                                             </div>
                                         </div>
                                     </div>
@@ -193,12 +196,19 @@ $ket = @$r['ket'];
                                         <div class="col-2">
                                             <div class="form-group">
                                                 <label for="jumlah" class="col-form-label">Jumlah</label>
-                                                <input class="form-control" type="number" id="jumlah_pakai" name="jumlah_pakai" min="1" value="" required <?=($no_pesanan == '' OR $id_tukang == '') ? 'disabled' : '' ?>>
+                                                <input class="form-control" type="number" id="jumlah_pakai" name="jumlah_pakai" min="1" value="" required <?=($no_pesanan == '' OR $id_tukang == '') ? 'disabled' : '' ?>>                                                
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="form-group">
+                                                <label for="jumlah" class="col-form-label">Total Jumlah</label>
+                                                <input class="form-control" type="number" id="total_jumlah_pakai" name="total_jumlah_pakai" min="1" readonly required <?=($no_pesanan == '' OR $id_tukang == '') ? 'disabled' : '' ?>>
+                                                <p id="warning" class="hidden" style="font-size:11px;color:red;">Jumlah tidak sesuai</p>
                                                 <input type="hidden" name="harga" id="harga">
                                                 <input type="hidden" name="h_no_produksi" id="h_no_produksi" value="<?=$no_trans ?>">
                                             </div>
                                         </div>
-                                        <div class="col-4">
+                                        <div class="col-2">
                                             <div style="padding-top:36px;" class="form-group">                                                
                                                 <button type="submit" class="btn btn-sm btn-success" id="tambah_detail" name="tambah_detail" <?=($no_pesanan == '' OR $id_tukang == '') ? 'disabled' : '' ?>>Tambah <span class="fa fa-check-square-o"></span></button>
                                             </div>
@@ -262,8 +272,8 @@ $ket = @$r['ket'];
                                             }
 
                                             $u = explode('x',$ukuran);
-                                            $ukurannya = @$u['0'] * @$u['1'];
-                                            $upah_tukang = $ukurannya * $upah;
+                                            $ukurannya = (@$u['0']/100) * (@$u['1']/100);
+                                            $upah_tukang = $ukurannya * $upah * $jumlah;
 
                                             ?>
                                             <form id="hargaForm">
@@ -301,20 +311,7 @@ $ket = @$r['ket'];
         <!-- footer area start-->
         <?php include "footer.php"; ?>
 
-        <script>
-        $(document).ready(function(){
-            // Format mata uang.
-            $( '.uang' ).mask('0.000.000.000', {reverse: true});
-
-            // Format nomor HP.
-            $( '.no_hp' ).mask('0000−0000−0000');
-            
-            //angka
-            $( '.angka' ).mask('0');
-
-            // Format tahun pelajaran.
-            $( '.tapel' ).mask('0000/0000');
-        });
+        <script>    
 
         $("#headerForm .form-control, #headerForm .custom-select").click(function() {
             var id = this.id;            
@@ -329,8 +326,10 @@ $ket = @$r['ket'];
             $("#headerForm").submit();            
         });
 
+        
         $("#kd_bahan").change(function() {
             $("#jumlah_pakai").val('');
+            $("#total_jumlah_pakai").val('');
             var value = $("#kd_bahan").val();
             $.ajax({ 
                 type: 'GET', 
@@ -340,13 +339,14 @@ $ket = @$r['ket'];
                     if (data['stok'] <= 0) {
                         alert('Stok Sedang Kosong!');
                         $("#stok").val('');
+                        $("#total_jumlah_pakai").val('');
                         $('#jumlah_pakai').prop('disabled', true);
                         $('#tambah_detail').prop('disabled', true);
                     } else {
-                        $("#stok").val(data['stok']);
+                        $("#stok").val(data['stok']);                        
                         $("#harga").val(data['harga']);
                         $('#jumlah_pakai').prop('disabled', false);
-                        $('#jumlah_pakai').attr('max', data['stok']);
+                        $('#total_jumlah_pakai').attr('max', data['stok']);
                         $('#tambah_detail').prop('disabled', false);
                     }
                 }
@@ -367,6 +367,24 @@ $ket = @$r['ket'];
                 });
             }            
         }
+
+        $('#jumlah_pakai').keyup(function(){
+            var jumlah_pakai = $('#jumlah_pakai').val() == '' ? 0 : $('#jumlah_pakai').val();
+            var stok = $('#stok').val();
+            var jumlah_pemesanan = $('#jumlah_pemesanan').val();
+            var total_jumlah = jumlah_pakai * jumlah_pemesanan;
+            if (total_jumlah <= stok) {
+                $('#total_jumlah_pakai').val(total_jumlah);
+                $('#warning').addClass('hidden');
+                $('#tambah_detail').removeAttr('disabled');
+            } else {
+                $('#total_jumlah_pakai').val(total_jumlah);
+                $('#warning').removeClass('hidden');
+                $('#jumlah').focus;
+                $('#tambah_detail').attr('disabled','disabled');
+            }
+            
+        })
 
         $("#simpan_produksi").click(function() {
             var datax = 'ubah_produksi=true&'+$("#hargaForm").serialize()+'&'+$("#headerForm").serialize();             
