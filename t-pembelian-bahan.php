@@ -80,6 +80,7 @@
                                             <option value="Kg">Kg</option>
                                             <option value="Batang">Batang</option>
                                             <option value="Kaleng">Kaleng</option>
+                                            <option value="Bungkus">Bungkus</option>
                                         </select>
                                     </div>
                                 </div>

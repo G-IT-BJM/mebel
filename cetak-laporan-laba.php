@@ -4,7 +4,7 @@
     $bulan  = $_POST["bulan"];
     $tahun  = $_POST["tahun"];
 
-    $sql    = mysqli_query($conn, "SELECT *, SUM(a.harga_jual) AS h_jual, SUM(a.total_untung) AS t_untung, SUM(b.total_rusak) AS t_rusak FROM tproduksi AS a INNER JOIN trusak AS b ON a.no_produksi = b.no_produksi WHERE month(a.tanggalprod) = '$bulan' AND year(a.tanggalprod) = '$tahun' ");
+    $sql    = mysqli_query($conn, "SELECT *, a.jumlah, b.jumlah AS j_t_rusak, SUM(a.harga_jual) AS h_jual, SUM(a.total_untung) AS t_untung, SUM(b.total_rusak) AS t_rusak FROM tproduksi AS a LEFT JOIN trusak AS b ON a.no_produksi = b.no_produksi WHERE month(a.tanggalprod) = '$bulan' AND year(a.tanggalprod) = '$tahun' ");
 ?>
 
 <!doctype html>
@@ -81,14 +81,17 @@
                                             $no = 1;
                                             while($data = mysqli_fetch_array($sql)) {
                                                 // $sql2    = mysqli_fetch_array(mysqli_query($conn, "SELECT *,SUM(total_rusak) AS t_rusak FROM trusak WHERE no_produksi = '$data[no_produksi]' "));
+                                                $t_jual     = $data["h_jual"] * $data["jumlah"];
+                                                $t_untung   = $data["t_untung"] * $data["jumlah"];
+                                                $t_rusak    = $data["t_rusak"] * $data["j_t_rusak"];
                                         ?>
                                                 <tr>
                                                     <td class="text-center"><?= $no ?></td>
                                                     <td class="text-left"><?= date("F", strtotime("2000-$bulan-01")) ?></td>
                                                     <td class="text-left"><?= $tahun ?></td>
-                                                    <td><?= number_format($data["h_jual"],0) ?></td>
-                                                    <td><?= number_format($data["t_untung"],0) ?></td>
-                                                    <td><?= number_format($data["t_rusak"],0) ?></td>
+                                                    <td><?= number_format($t_jual,0) ?></td>
+                                                    <td><?= number_format($t_untung,0) ?></td>
+                                                    <td><?= number_format($t_rusak,0) ?></td>
                                                 </tr>
                                         <?php
                                                 $no++;

@@ -356,10 +356,10 @@
     {
         $idtukang = $_GET['id_tukang'];
 
-        $sum_saldo  = mysqli_fetch_array(mysqli_query($conn, "SELECT SUM(upah_tukang) AS saldo FROM tproduksi WHERE id_tukang = '$idtukang'"));
+        $sum_saldo  = mysqli_fetch_array(mysqli_query($conn, "SELECT jumlah, SUM(upah_tukang) AS saldo FROM tproduksi WHERE id_tukang = '$idtukang'"));
         $min_saldo  = mysqli_fetch_array(mysqli_query($conn, "SELECT SUM(upah) AS sisa FROM tupah WHERE id_tukang = '$idtukang'"));
 
-        $saldo      = $sum_saldo["saldo"] - $min_saldo["sisa"];
+        $saldo      = ($sum_saldo["saldo"] * $sum_saldo["jumlah"])  - $min_saldo["sisa"];
         $data = array('saldo'   	=>  $saldo,);
 
         echo json_encode($data);
