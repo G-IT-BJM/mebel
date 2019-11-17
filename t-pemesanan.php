@@ -77,7 +77,7 @@
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
-                                        <label for="ukuran" class="col-form-label">Jenis Perhitungan (Ukuran) / m</label>
+                                        <label for="ukuran" class="col-form-label">Jenis Perhitungan (Ukuran) / cm</label>
                                         <input class="form-control" type="text" id="ukuran" name="ukuran" required>
                                     </div>
                                 </div>
