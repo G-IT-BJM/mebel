@@ -225,7 +225,7 @@
         $total      = preg_replace("([.])", "", $_POST['total']);
 
         if ($satuan == 'Kg') {
-            $jml_beli = $jml_beli * 100;
+            $jml_beli = $jml_beli * 10;
         }
         
         $simpan = mysqli_query($conn, "INSERT INTO tbelibahan VALUES('$no_beli','$nm_bahan','$harga_beli','$jml_beli','$tgl_beli','$total')");
