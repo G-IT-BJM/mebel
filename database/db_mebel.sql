@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 16, 2019 at 03:54 PM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 5.6.40
+-- Generation Time: Nov 17, 2019 at 12:13 PM
+-- Server version: 10.1.19-MariaDB
+-- PHP Version: 5.6.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -45,8 +43,7 @@ INSERT INTO `mbahan` (`kd_bahan`, `nm_bahan`) VALUES
 ('BN-0005', 'Karet'),
 ('BN-0006', 'Kayu Sengon'),
 ('BN-0007', 'Paku'),
-('BN-0008', 'Kayu Ulin 1x1'),
-('BN-0009', 'Palu');
+('BN-0008', 'Kayu Ulin 1x1');
 
 -- --------------------------------------------------------
 
@@ -60,6 +57,14 @@ CREATE TABLE `mpelanggan` (
   `alamat_p` text NOT NULL,
   `telp_p` varchar(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `mpelanggan`
+--
+
+INSERT INTO `mpelanggan` (`id_pelanggan`, `nama_p`, `alamat_p`, `telp_p`) VALUES
+('PL-00001', 'Miko', 'Www', '081339674916'),
+('PL-00002', 'Rifki', 'Wwwdw', '081339222');
 
 -- --------------------------------------------------------
 
@@ -79,8 +84,8 @@ CREATE TABLE `mtukang` (
 --
 
 INSERT INTO `mtukang` (`id_tukang`, `nama`, `alamat`, `telp`) VALUES
-('TK-00003', 'Asdas', 'Asdasdasd', '123123123'),
-('TK-0001', 'Uji coba sistem mebel', 'Jln.Kemuning Raya No.389', '089822326786');
+('TK-00001', 'Habi', 'Aaa', '081339674916'),
+('TK-00002', 'Lalo', 'Qqq', '08133922226');
 
 -- --------------------------------------------------------
 
@@ -96,14 +101,6 @@ CREATE TABLE `tbelibahan` (
   `tgl_beli` date NOT NULL,
   `total` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tbelibahan`
---
-
-INSERT INTO `tbelibahan` (`no_beli`, `no_bahan`, `hbeli`, `jumbeli`, `tgl_beli`, `total`) VALUES
-('BB-00001', 'BN-0001', 150000, 30, '2019-11-14', 4500000),
-('BB-00002', 'BN-0007', 10000, 2000, '2019-11-15', 200000);
 
 -- --------------------------------------------------------
 
@@ -320,8 +317,6 @@ ALTER TABLE `tupah`
 --
 ALTER TABLE `tdetail_produksi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-COMMIT;
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

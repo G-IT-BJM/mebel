@@ -79,6 +79,7 @@
                                             <option value="">Pilih Bahan . . .</option>
                                             <option value="Kg">Kg</option>
                                             <option value="Batang">Batang</option>
+                                            <option value="Kaleng">Kaleng</option>
                                         </select>
                                     </div>
                                 </div>

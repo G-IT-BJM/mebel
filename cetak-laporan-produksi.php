@@ -82,6 +82,8 @@
                                         <?php 
                                             $no = 1;
                                             while($data = mysqli_fetch_array($sql)) {
+                                                $total_upah         = $data["jumlah"] * $data["upah_tukang"];
+                                                $total_harga_jual   = $data["jumlah"] * $data["harga_jual"];
                                         ?>
                                                 <tr>
                                                     <td class="text-center"><?= $no ?></td>
@@ -100,8 +102,8 @@
                                                         ?>
                                                     </td>                                                    
                                                     <td class="text-left"><?= $data["id_tukang"] ?></td>
-                                                    <td><?= number_format($data["upah_tukang"],0) ?></td>
-                                                    <td><?= number_format($data["harga_jual"],0) ?></td>
+                                                    <td><?= number_format($total_upah,0) ?></td>
+                                                    <td><?= number_format($total_harga_jual,0) ?></td>
                                                 </tr>
                                         <?php
                                                 $no++;
