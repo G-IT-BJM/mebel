@@ -56,6 +56,7 @@
                                                 <td><?= $no ?></td>
                                                 <td>
                                                     <ul class="d-flex justify-content">
+                                                        <li class="mr-3"><a href="cetak-kuitansi.php?kode_pemesanan=<?=$data["no_pesanan"]?>" style="color:black;" target="_BLANK"><span class="fa fa-print" style="color:red;"></span></a> </li>
                                                         <li class="mr-3"><a href="u-pemesanan.php?nopesan=<?= $data['no_pesanan'] ?>" class="text-secondary"><i class="fa fa-edit"></i></a></li>
                                                         <li><a href="proses.php?hapus=datapemesanan&nopesan=<?= $data['no_pesanan'] ?>" onclick="return confirm('Apakah anda ingin menghapus data ini?')" class="text-danger"><i class="ti-trash"></i></a></li>
                                                     </ul>

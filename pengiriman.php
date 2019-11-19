@@ -47,7 +47,7 @@
                                     <tbody id="myTable">
                                         <?php 
                                             $no = 1;
-                                            $sql = mysqli_query($conn, "SELECT * FROM tkirim ORDER BY tanggal DESC");
+                                            $sql = mysqli_query($conn, "SELECT * FROM tkirim ORDER BY no_kirim DESC");
 
                                             while($data = mysqli_fetch_array($sql)) {
                                         ?>
@@ -55,6 +55,7 @@
                                                 <td><?= $no ?></td>
                                                 <td>
                                                     <ul class="d-flex justify-content">
+                                                        <li class="mr-3"><a href="cetak-pengiriman.php?kode_pengiriman=<?=$data["no_kirim"]?>" style="color:black;" target="_BLANK"><span class="fa fa-print" style="color:red;"></span></a> </li>
                                                         <!-- <li class="mr-3"><a href="u-upah-tukang.php?noupahtukang=<?php //echo $data//['no_upah'] ?>" class="text-secondary"><i class="fa fa-edit"></i></a></li> -->
                                                         <li><a href="proses.php?hapus=datapengiriman&nopengiriman=<?= $data['no_kirim'] ?>" onclick="return confirm('Apakah anda ingin menghapus data ini?')" class="text-danger"><i class="ti-trash"></i></a></li>
                                                     </ul>

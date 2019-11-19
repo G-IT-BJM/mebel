@@ -163,17 +163,27 @@
         $kd_bb   = $_POST['kd_bb'];
         $nm_bb   = ucwords($_POST['nm_bb']);
         
-        $simpan = mysqli_query($conn, "INSERT INTO mbahan VALUES('$kd_bb','$nm_bb')");
-
-        if($simpan) {
-            header("location: m-bahan-baku.php");
-        } else {
+        $cek = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM mbahan WHERE nm_bahan = '$nm_bb'"));
+        if($cek > 0) {
             echo "
                 <script>
-                    alert('Data Gagal Di Simpan . . . ');
-                    window.location = 't-data-bahan-baku.php';
+                    alert('Data Sudah Ada . . . ');
+                    window.location = 'm-bahan-baku.php';
                 </script>
             ";
+        } else {
+            $simpan = mysqli_query($conn, "INSERT INTO mbahan VALUES('$kd_bb','$nm_bb')");
+
+            if($simpan) {
+                header("location: m-bahan-baku.php");
+            } else {
+                echo "
+                    <script>
+                        alert('Data Gagal Di Simpan . . . ');
+                        window.location = 't-data-bahan-baku.php';
+                    </script>
+                ";
+            }
         }
     }
     elseif (isset($_POST['ubah_bb'])) {

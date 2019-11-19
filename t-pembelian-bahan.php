@@ -81,6 +81,8 @@
                                             <option value="Batang">Batang</option>
                                             <option value="Kaleng">Kaleng</option>
                                             <option value="Bungkus">Bungkus</option>
+                                            <option value="Lembar">Lembar</option>
+                                            <option value="Buah">Buah</option>
                                         </select>
                                     </div>
                                 </div>

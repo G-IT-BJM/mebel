@@ -55,6 +55,7 @@
                                                 <td><?= $no ?></td>
                                                 <td>
                                                     <ul class="d-flex justify-content">
+                                                        <li class="mr-3"><a href="cetak-kuitansi-upah-tukang.php?no_upah=<?=$data["no_upah"]?>" style="color:black;" target="_BLANK"><span class="fa fa-print" style="color:red;"></span></a> </li>
                                                         <!-- <li class="mr-3"><a href="u-upah-tukang.php?noupahtukang=<?php //echo $data//['no_upah'] ?>" class="text-secondary"><i class="fa fa-edit"></i></a></li> -->
                                                         <li><a href="proses.php?hapus=dataupahtukang&noupahtukang=<?= $data['no_upah'] ?>" onclick="return confirm('Apakah anda ingin menghapus data ini?')" class="text-danger"><i class="ti-trash"></i></a></li>
                                                     </ul>
