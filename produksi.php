@@ -62,6 +62,7 @@
                                                     <th scope="col">No.</th>
                                                     <th scope="col">Aksi</th>
                                                     <th scope="col">Kode Produksi</th>
+                                                    <th scope="col">Nama</th>
                                                     <th scope="col">Kode Pemesanan</th>
                                                     <th scope="col">Nama Tukang</th>
                                                     <th scope="col">Tanggal Produksi</th>
@@ -71,7 +72,10 @@
                                             <tbody id="myTable">
                                                 <?php 
                                                     $no = 1;
-                                                    $sql = mysqli_query($conn, "SELECT * FROM tproduksi JOIN mtukang WHERE mtukang.id_tukang = tproduksi.id_tukang ORDER BY tanggalprod DESC");
+                                                    $sql = mysqli_query($conn, "SELECT * FROM tproduksi INNER JOIN mtukang ON mtukang.id_tukang = tproduksi.id_tukang
+                                                    INNER JOIN tpemesanan ON tpemesanan.no_pesanan = tproduksi.no_pesanan
+                                                    INNER JOIN mpelanggan ON mpelanggan.id_pelanggan = tpemesanan.id_pelanggan
+                                                    ORDER BY tanggalprod DESC");
 
                                                     while($data = mysqli_fetch_array($sql)) {
                                                 ?>
@@ -84,7 +88,8 @@
                                                             </ul>
                                                         </td>
                                                         <td><?= $data["no_produksi"] ?></td>
-                                                        <td><?= $data["no_pesanan"] ?></td>
+                                                        <td><?= $data["nama_p"] ?></td>
+                                                        <td><?= $data["no_pesanan"] ?></td>                                                                                                                
                                                         <td><?= $data["nama"] ?></td>
                                                         <td><?= date("d-m-Y", strtotime($data["tanggalprod"])) ?></td>
                                                         <td><?= number_format($data["harga_jual"],0) ?></td>                                                        

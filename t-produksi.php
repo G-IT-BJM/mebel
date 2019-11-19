@@ -97,11 +97,11 @@ $ket = @$r['ket'];
                                                 <select class="custom-select" id="no_pesanan" name="no_pesanan" required>
                                                     <option value="">Pilih No Pemesanan . . .</option>
                                                     <?php 
-                                                        $sql = mysqli_query($conn, "SELECT no_pesanan, (jpesanan - IFNULL((select sum(jumlah) from tproduksi where tproduksi.no_pesanan = tpemesanan.no_pesanan GROUP by no_pesanan), 0)) as jumlah FROM tpemesanan WHERE (no_pesanan, jpesanan) NOT IN (SELECT no_pesanan, sum(jumlah) FROM tproduksi GROUP BY tproduksi.no_pesanan)");
+                                                        $sql = mysqli_query($conn, "SELECT no_pesanan, (select nama_p from mpelanggan where mpelanggan.id_pelanggan = tpemesanan.id_pelanggan) as nm_pelanggan, (jpesanan - IFNULL((select sum(jumlah) from tproduksi where tproduksi.no_pesanan = tpemesanan.no_pesanan GROUP by no_pesanan), 0)) as jumlah FROM tpemesanan WHERE (no_pesanan, jpesanan) NOT IN (SELECT no_pesanan, sum(jumlah) FROM tproduksi GROUP BY tproduksi.no_pesanan)");
 
                                                         while($data = mysqli_fetch_array($sql)) {
                                                     ?>
-                                                            <option value="<?= $data["no_pesanan"] ?>" <?=$no_pesanan == $data["no_pesanan"] ? 'selected' : '' ?>><?= $data["no_pesanan"] ?></option>
+                                                            <option value="<?= $data["no_pesanan"] ?>" <?=$no_pesanan == $data["no_pesanan"] ? 'selected' : '' ?>><?= $data["no_pesanan"]." - ".$data["nm_pelanggan"] ?></option>
                                                     <?php
                                                         }
                                                     ?>

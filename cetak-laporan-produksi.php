@@ -6,6 +6,7 @@
 
     $sql    = mysqli_query($conn, "SELECT * FROM tproduksi 
                                     INNER JOIN tpemesanan ON tpemesanan.no_pesanan = tproduksi.no_pesanan
+                                    INNER JOIN mpelanggan ON tpemesanan.id_pelanggan = mpelanggan.id_pelanggan
                                     WHERE month(tanggalprod) = '$bulan' AND year(tanggalprod) = '$tahun' ");
 ?>
 
@@ -87,7 +88,7 @@
                                         ?>
                                                 <tr>
                                                     <td class="text-center"><?= $no ?></td>
-                                                    <td class="text-left"><?= $data["no_produksi"] ?></td>                                                
+                                                    <td class="text-left"><?= $data["no_produksi"]. " - ".$data["nama_p"] ?></td>                                                
                                                     <td class="text-left"><?= date("d-m-Y", strtotime($data["tanggalprod"])) ?></td>
                                                     <td class="text-left"><?= $data["namabarang"] ?></td>
                                                     <td class="text-left"><?= $data["jumlah"] ?></td>
