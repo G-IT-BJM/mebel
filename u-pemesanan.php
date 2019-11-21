@@ -24,12 +24,12 @@
                                         <input class="form-control" type="text" id="no_pesan" name="no_pesan" value="<?= $data["no_pesanan"] ?>" required readonly>
                                     </div>
                                 </div>
-                                <div class="col-4">
+                                <!-- <div class="col-4">
                                     <div class="form-group">
-                                        <label for="jenis" class="col-form-label">Jenis</label>
-                                        <input class="form-control" type="text" id="jenis" name="jenis" value="<?= $data["jenis"] ?>" required>
-                                    </div>
-                                </div>
+                                        <label for="jenis" class="col-form-label">Jenis</label> -->
+                                        <input class="form-control" type="hidden" id="jenis" name="jenis" value="<?= $data["jenis"] ?>" required>
+                                    <!-- </div>
+                                </div> -->
                                 <div class="col-2">
                                     <div class="form-group">
                                         <label for="jumlah" class="col-form-label">Jumlah Pemesanan</label>
@@ -73,7 +73,7 @@
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
-                                        <label for="ukuran" class="col-form-label">Jenis Perhitungan (Ukuran) / cm</label>
+                                        <label for="ukuran" class="col-form-label">Ukuran(P x L x T) / Cm</label>
                                         <input class="form-control" type="text" id="ukuran" name="ukuran" value="<?= $data["jhitung"] ?>" required>
                                     </div>
                                 </div>
