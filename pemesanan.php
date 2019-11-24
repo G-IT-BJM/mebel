@@ -42,7 +42,7 @@
                                             <th scope="col">Nama Pelanggan</th>
                                             <th scope="col">Tanggal Beli</th>
                                             <th scope="col">Ukuran</th>
-                                            <th scope="col">Jumlah</th>
+                                            <th scope="col">Jumlah Pemesanan</th>
                                         </tr>
                                     </thead>
                                     <tbody id="myTable">

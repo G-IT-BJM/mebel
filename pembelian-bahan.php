@@ -42,7 +42,7 @@
                                             <th scope="col">Tanggal Beli</th>
                                             <th scope="col">Nama Bahan</th>
                                             <th scope="col">Harga</th>
-                                            <th scope="col">Jumlah</th>
+                                            <th scope="col">Jumlah Beli (Qty)</th>
                                             <th scope="col">Total</th>
                                         </tr>
                                     </thead>

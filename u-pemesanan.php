@@ -73,7 +73,7 @@
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
-                                        <label for="ukuran" class="col-form-label">Ukuran(P x L x T) / Cm</label>
+                                        <label for="ukuran" class="col-form-label">Ukuran(P + L + T) / Cm</label>
                                         <input class="form-control" type="text" id="ukuran" name="ukuran" value="<?= $data["jhitung"] ?>" required>
                                     </div>
                                 </div>

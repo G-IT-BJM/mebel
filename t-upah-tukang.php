@@ -41,7 +41,7 @@
                             <div class="row">
                                 <div class="col-4">
                                     <div class="form-group">
-                                        <label class="col-form-label">Nama Tukang</label>
+                                        <label class="col-form-label">Kode Tukang</label>
                                         <select class="custom-select" id="kd_tukang" name="kd_tukang" onchange="cek_()" required>
                                             <option value="">Pilih . . .</option>
                                             <?php 
@@ -49,7 +49,7 @@
 
                                                 while($data1 = mysqli_fetch_array($sql1)) {
                                             ?>
-                                                    <option value="<?= $data1["id_tukang"] ?>"><?= $data1["nama"] ?></option>
+                                                    <option value="<?= $data1["id_tukang"] ?>"><?= $data1["id_tukang"] ?> - <?= $data1["nama"] ?></option>
                                             <?php
                                                 }
                                             ?>

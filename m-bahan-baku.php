@@ -39,7 +39,7 @@
                                             <th scope="col">No.</th>
                                             <th scope="col">Aksi</th>
                                             <th scope="col">Kode Bahan</th>
-                                            <th scope="col">Nama Bahan</th>
+                                            <th scope="col">Nama</th>
                                         </tr>
                                     </thead>
                                     <tbody id="myTable">

@@ -272,7 +272,7 @@ $ket = @$r['ket'];
                                             }
 
                                             $u = explode('x',$ukuran);
-                                            $ukurannya = (@$u['0']/100) * (@$u['1']/100);
+                                            $ukurannya = (@$u['0']/100) + (@$u['1']/100) + (@$u['2']/100);
                                             $upah_tukang = $ukurannya * $upah * $jumlah;
 
                                             ?>
