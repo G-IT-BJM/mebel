@@ -95,6 +95,7 @@
             ";
         } 
     } 
+
     if (isset($_GET['hapus']) && $_GET['hapus'] == 'datatukang') {
         $kd_tukang = $_GET['idtukang'];
         
@@ -107,6 +108,71 @@
                 <script>
                     alert('Gagal Di Hapus!');
                     window.location = 'm-tukang.php';
+                </script>
+            ";
+        } 
+    }
+
+    if (isset($_POST['simpan_pemesanan'])) {
+        $no_pesan   = $_POST['no_pesan'];
+        $jenis      = ucwords($_POST['jenis']);
+        $jumlah     = $_POST['jumlah'];
+        $nm_pel     = $_POST['nm_pel'];
+        $nm_barang  = ucwords($_POST['nm_barang']);
+        $tgl_beli   = $_POST['tgl_beli'];
+        $ukuran     = $_POST['ukuran'];
+        $ket        = $_POST['ket'];
+        
+        $simpan = mysqli_query($conn, "INSERT INTO tpemesanan VALUES('$no_pesan','$nm_pel','$jenis','$nm_barang','$tgl_beli','','$ukuran','$jumlah','','$ket')");
+
+        if($simpan) {
+            header("location: pemesanan.php");
+        } else {
+            echo "
+                <script>
+                    alert('Data Gagal Di Simpan . . . ');
+                    window.location = 't-pemesanan.php';
+                </script>
+            ";
+        }
+    }
+    
+    if (isset($_POST['ubah_pemesanan'])) {
+        $no_pesan   = $_POST['no_pesan'];
+        $jenis      = ucwords($_POST['jenis']);
+        $jumlah     = $_POST['jumlah'];
+        $nm_pel     = $_POST['nm_pel'];
+        $nm_barang  = ucwords($_POST['nm_barang']);
+        $tgl_beli   = $_POST['tgl_beli'];
+        $ukuran     = $_POST['ukuran'];
+        $ket        = $_POST['ket'];
+
+        $ubah = mysqli_query($conn,"UPDATE tpemesanan SET id_pelanggan = '$nm_pel', jenis = '$jenis', namabarang = '$nm_barang', tanggal = '$tgl_beli', jhitung = '$ukuran', jpesanan = '$jumlah', ket = '$ket' WHERE no_pesanan = '$no_pesan'");
+
+        if ($ubah) { 
+            header('location:pemesanan.php');
+        } else {
+            echo "
+                <script>
+                    alert('Gagal Di Ubah!');
+                    window.location = 'u-pemesanan.php?nopesan=$no_pesan';
+                </script>
+            ";
+        } 
+    } 
+    
+    if (isset($_GET['hapus']) && $_GET['hapus'] == 'datapemesanan') {
+        $no_pesan = $_GET['nopesan'];
+        
+        $hapus = mysqli_query($conn, "DELETE FROM tpemesanan WHERE no_pesanan = '$no_pesan'");
+
+        if ($hapus) {
+            header('location:pemesanan.php');
+        } else {
+            echo "
+                <script>
+                    alert('Gagal Di Hapus!');
+                    window.location = 'pemesanan.php';
                 </script>
             ";
         } 
