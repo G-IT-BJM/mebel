@@ -20,7 +20,7 @@
                             <div class="row">
                                 <div class="col-4">
                                     <div class="form-group">
-                                        <label for="no_beli" class="col-form-label">No. Pembelian</label>
+                                        <label for="no_beli" class="col-form-label">Kode Pembelian</label>
                                         <input class="form-control" type="text" id="no_beli" name="no_beli" value="<?= $data["no_beli"] ?>" required readonly>
                                     </div>
                                 </div>

@@ -67,7 +67,7 @@
                                         <tr class="text-capitalize">
                                             <th class="text-center" style="width: 5%;">No.</th>
                                             <th class="text-left" style="width: 20%;">Kode Pesanan</th>
-                                            <th class="text-left" style="width: 20%;">Pelanggan</th>
+                                            <th class="text-left" style="width: 20%;">Nama Pelanggan</th>
                                             <th class="text-left" style="width: 20%;">Nama Barang</th>
                                             <th class="text-left" style="width: 20%;">Tanggal</th>
                                             <th>Jumlah Pesanan</th>

@@ -38,7 +38,7 @@
                                         <tr>
                                             <th scope="col">No.</th>
                                             <th scope="col">Aksi</th>
-                                            <th scope="col">No. Pembelian</th>
+                                            <th scope="col">Kode Pembelian</th>
                                             <th scope="col">Tanggal Beli</th>
                                             <th scope="col">Nama Bahan</th>
                                             <th scope="col">Harga</th>

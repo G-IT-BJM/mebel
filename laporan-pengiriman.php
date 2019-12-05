@@ -70,7 +70,7 @@
                                         <th class="text-center" style="width: 5%;">No.</th>
                                         <th class="text-left" style="width: 10%;">Aksi</th>
                                         <th class="text-left" style="width: 10%;">Tanggal</th>
-                                        <th class="text-left" style="width: 20%;">Pelanggan</th>
+                                        <th class="text-left" style="width: 20%;">Nama Pelanggan</th>
                                         <th class="text-left" style="width: 30%;">Tujuan</th>
                                     </tr>
                                 </thead>

@@ -40,7 +40,7 @@
                                             <th scope="col">Aksi</th>
                                             <th scope="col">Tanggal</th>
                                             <th scope="col">Kode Upah</th>
-                                            <th scope="col">Tukang</th>
+                                            <th scope="col">Nama Tukang</th>
                                             <th scope="col">Jumlah Diambil</th>
                                         </tr>
                                     </thead>

@@ -21,7 +21,7 @@
                                 <label for="kd_pel" class="col-form-label">Kode Pelanggan</label>
                                 <input class="form-control" type="text" id="kd_pel" name="kd_pel" value="<?= $data["id_pelanggan"] ?>" required readonly style="width: 30%;">
                             
-                                <label for="nm_pel" class="col-form-label">Nama</label>
+                                <label for="nm_pel" class="col-form-label">Nama Pelanggan</label>
                                 <input class="form-control" type="text" id="nm_pel" name="nm_pel" value="<?= $data["nama_p"] ?>" required>
                             
                                 <label for="telp" class="col-form-label">Telp.</label>

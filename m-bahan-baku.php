@@ -11,7 +11,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="header-title">
-                            <h4>MASTER BAHAN BAKU</h4>
+                            <h4>MASTER BAHAN</h4>
                             <hr>
                         </div>
                         <div class="header-title">
@@ -39,7 +39,7 @@
                                             <th scope="col">No.</th>
                                             <th scope="col">Aksi</th>
                                             <th scope="col">Kode Bahan</th>
-                                            <th scope="col">Nama</th>
+                                            <th scope="col">Nama Bahan</th>
                                         </tr>
                                     </thead>
                                     <tbody id="myTable">

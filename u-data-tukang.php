@@ -21,7 +21,7 @@
                                 <label for="kd_tukang" class="col-form-label">Kode Tukang</label>
                                 <input class="form-control" type="text" id="kd_tukang" name="kd_tukang" value="<?= $data["id_tukang"] ?>" required readonly style="width: 30%;">
                             
-                                <label for="nm_tukang" class="col-form-label">Nama</label>
+                                <label for="nm_tukang" class="col-form-label">Nama Tukang</label>
                                 <input class="form-control" type="text" id="nm_tukang" name="nm_tukang" value="<?= $data["nama"] ?>" required>
                             
                                 <label for="telp" class="col-form-label">Telp.</label>

@@ -39,7 +39,7 @@
                                             <th scope="col">No.</th>
                                             <th scope="col">Aksi</th>
                                             <th scope="col">Kode Tukang</th>
-                                            <th scope="col">Nama</th>
+                                            <th scope="col">Nama Tukang</th>
                                             <th scope="col">Telp.</th>
                                             <th scope="col">Alamat</th>
                                         </tr>

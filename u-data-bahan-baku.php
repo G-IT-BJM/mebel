@@ -15,13 +15,13 @@
                 <div class="card">
                     <div class="card-body">
                         <form action="proses.php" method="post" enctype="multipart/form-data">
-                            <h4 class="header-title">UBAH DATA BAHAN BAKU</h4>
+                            <h4 class="header-title">UBAH DATA BAHAN</h4>
                             <hr>
                             <div class="form-group">
-                                <label for="kd_bb" class="col-form-label">Kode Bahan Baku</label>
+                                <label for="kd_bb" class="col-form-label">Kode Bahan</label>
                                 <input class="form-control" type="text" id="kd_bb" name="kd_bb" value="<?= $data["kd_bahan"] ?>" required readonly style="width: 30%;">
                             
-                                <label for="nm_bb" class="col-form-label">Nama</label>
+                                <label for="nm_bb" class="col-form-label">Nama Bahan</label>
                                 <input class="form-control" type="text" id="nm_bb" name="nm_bb" value="<?= $data["nm_bahan"] ?>" required>
                             </div>
                             <hr>

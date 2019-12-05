@@ -67,7 +67,7 @@
                                         <tr class="text-capitalize">
                                             <th class="text-center" style="width: 5%;">No.</th>
                                             <th class="text-left" style="width: 20%;">Kode Upah</th>
-                                            <th class="text-left" style="width: 20%;">Tukang</th>
+                                            <th class="text-left" style="width: 20%;">Nama Tukang</th>
                                             <th class="text-left" style="width: 20%;">Tanggal</th>
                                             <th>Jumlah Pengambilan</th>
                                         </tr>
