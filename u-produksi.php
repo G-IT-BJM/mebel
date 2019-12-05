@@ -264,15 +264,16 @@ $ket = @$r['ket'];
                                             $ee = mysqli_num_rows(mysqli_query($conn,"select * from tdetail_produksi inner join mbahan on tdetail_produksi.kd_bahan = mbahan.kd_bahan WHERE tdetail_produksi.no_produksi = '$no_trans' AND mbahan.nm_bahan like '%Kayu%'"));
                                             
                                             if ($qq >= 1 && $ee >= 1) {
-                                                $upah = 10000;
+                                                $upah = 12000;
                                             } elseif ($qq <= 0 && $ee >= 1) {
-                                                $upah = 5000;
+                                                $upah = 10000;
                                             } else {
                                                 $upah = 0;
                                             }
 
-                                            $u = explode('x',$ukuran);
+                                            $u = explode('+',$ukuran);
                                             $ukurannya = (@$u['0']/100) + (@$u['1']/100) + (@$u['2']/100);
+                                            print_r($ukurannya);
                                             $upah_tukang = $ukurannya * $upah * $jumlah;
 
                                             ?>
