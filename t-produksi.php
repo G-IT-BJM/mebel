@@ -4,15 +4,16 @@ include "koneksi.php";
 include "proses_produksi.php";
 
 $no_pesanan = @$_GET['no_pesanan'];
+$id_pesanan = @$_GET['id_pesanan'];
 
-$q = mysqli_query($conn,"SELECT ket,no_pesanan,jhitung, namabarang,(jpesanan - IFNULL((select sum(jumlah) from tproduksi where tproduksi.no_pesanan = tpemesanan.no_pesanan GROUP by no_pesanan), 0)) as jumlah FROM tpemesanan WHERE (no_pesanan, jpesanan) NOT IN (SELECT no_pesanan, sum(jumlah) FROM tproduksi GROUP BY tproduksi.no_pesanan) AND tpemesanan.no_pesanan = '$no_pesanan'");
+$q = mysqli_query($conn,"SELECT * FROM tdetail_pemesanan where id = '$id_pesanan'");
+
+// $q = mysqli_query($conn,"SELECT ket,no_pesanan,jhitung, namabarang,(jpesanan - IFNULL((select sum(jumlah) from tproduksi where tproduksi.no_pesanan = tpemesanan.no_pesanan GROUP by no_pesanan), 0)) as jumlah FROM tpemesanan WHERE (no_pesanan, jpesanan) NOT IN (SELECT no_pesanan, sum(jumlah) FROM tproduksi GROUP BY tproduksi.no_pesanan) AND tpemesanan.no_pesanan = '$no_pesanan'");
 $r = mysqli_fetch_array($q);
 
 $jumlah_pesanan = @$r['jumlah'] == '' ? 0 : $r['jumlah'];
-$nama_barang = @$r['namabarang'];
-$jumlah = @$_GET['jumlah_pemesanan'];
-$id_tukang = @$_GET['id_tukang'];
-$ukuran = @$r['jhitung'];
+$nama_barang = @$r['nama_barang'];
+$ukuran = @$r['ukuran'];
 $ket = @$r['ket'];
 
 ?>
@@ -85,7 +86,7 @@ $ket = @$r['ket'];
                                     <h4 class="header-title">TAMBAH DATA PRODUKSI</h4>
                                     <hr>
                                     <div class="row">
-                                        <div class="col-4">
+                                        <div class="col-2">
                                             <div class="form-group">
                                                 <label for="no_pesan" class="col-form-label">Kode Produksi</label>
                                                 <input class="form-control" type="text" id="no_produksi" name="no_produksi" value="<?= $no_trans ?>" required readonly>
@@ -97,11 +98,11 @@ $ket = @$r['ket'];
                                                 <select class="custom-select" id="no_pesanan" name="no_pesanan" required>
                                                     <option value="">Pilih No Pemesanan . . .</option>
                                                     <?php 
-                                                        $sql = mysqli_query($conn, "SELECT no_pesanan, (select nama_p from mpelanggan where mpelanggan.id_pelanggan = tpemesanan.id_pelanggan) as nm_pelanggan, (jpesanan - IFNULL((select sum(jumlah) from tproduksi where tproduksi.no_pesanan = tpemesanan.no_pesanan GROUP by no_pesanan), 0)) as jumlah FROM tpemesanan WHERE (no_pesanan, jpesanan) NOT IN (SELECT no_pesanan, sum(jumlah) FROM tproduksi GROUP BY tproduksi.no_pesanan)");
+                                                        $sql = mysqli_query($conn, "SELECT Y.no_pesanan, Y.jumlah, tpemesanan.id_pelanggan, nama_p FROM ( SELECT a.no_pesanan, SUM(a.jumlah) AS jumlah FROM tdetail_pemesanan a GROUP BY a.no_pesanan ) Y INNER JOIN tpemesanan ON tpemesanan.no_pesanan = Y.no_pesanan INNER JOIN mpelanggan ON tpemesanan.id_pelanggan = mpelanggan.id_pelanggan WHERE (Y.no_pesanan, Y.jumlah) NOT IN( SELECT b.no_pesanan, SUM(b.jumlah) AS jumlah FROM tproduksi b GROUP BY b.no_pesanan)");
 
                                                         while($data = mysqli_fetch_array($sql)) {
                                                     ?>
-                                                            <option value="<?= $data["no_pesanan"] ?>" <?=$no_pesanan == $data["no_pesanan"] ? 'selected' : '' ?>><?= $data["no_pesanan"]." - ".$data["nm_pelanggan"] ?></option>
+                                                            <option value="<?= $data["no_pesanan"] ?>" <?=$no_pesanan == $data["no_pesanan"] ? 'selected' : '' ?>><?= $data["no_pesanan"]." - ".$data["nama_p"] ?></option>
                                                     <?php
                                                         }
                                                     ?>
@@ -110,52 +111,45 @@ $ket = @$r['ket'];
                                         </div>
                                         <div class="col-4">
                                             <div class="form-group">
-                                                <label for="jumlah" class="col-form-label">Jumlah Pemesanan</label>
-                                                <input class="form-control" type="number" id="jumlah_pemesanan" name="jumlah_pemesanan" value='<?=$jumlah_pesanan?>' required readonly>
+                                                <label class="col-form-label">Pilih Pemesanan</label>
+                                                <select class="custom-select" id="id_pesanan" name="id_pesanan" required>
+                                                    <option value="">Pilih Pemesanan . . .</option>
+                                                    <?php 
+                                                        $sql = mysqli_query($conn, "SELECT * FROM tdetail_pemesanan where (no_pesanan, id) NOT IN (select no_pesanan, id_detail_pesanan from tproduksi) AND no_pesanan = '$no_pesanan'");
+
+                                                        while($data = mysqli_fetch_array($sql)) {
+                                                    ?>
+                                                            <option value="<?= $data["id"] ?>" <?=$id_pesanan == $data["id"] ? 'selected' : '' ?>><?= $data["nama_barang"]?></option>
+                                                    <?php
+                                                        }
+                                                    ?>
+                                                </select>
                                             </div>
                                         </div>
-                                        <!-- <div class="col-2">
-                                            <div class="form-group">
-                                                <label for="jumlah" class="col-form-label">Jumlah</label>
-                                                <input class="form-control" type="number" id="jumlah" name="jumlah" value="<?=$jumlah?>" required>
-                                                <p id="warning" class="hidden" style="font-size:12px;color:red;">Jumlah tidak sesuai</p>
-                                            </div>
-                                        </div> -->
-                                    </div>
-                                    <div class="row">
                                         <div class="col-2">
                                             <div class="form-group">
                                                 <label for="nm_barang" class="col-form-label">Tanggal Produksi</label>
                                                 <input class="form-control" type="text" id="tanggalprod" name="tanggalprod" required readonly value="<?php echo date('Y-m-d') ?>">
                                             </div>
-                                        </div>
-                                        <div class="col-4">
+                                        </div>                                        
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
                                             <div class="form-group">
                                                 <label for="nm_barang" class="col-form-label">Nama Barang</label>
                                                 <input class="form-control" type="text" id="nama_barang" name="nama_barang" required readonly value="<?=$nama_barang ?>">
                                             </div>
                                         </div>
-                                        <div class="col-2">
+                                        <div class="col-4">
                                             <div class="form-group">
                                                 <label for="nm_barang" class="col-form-label">Ukuran</label>
                                                 <input class="form-control" type="text" id="ukuran" name="ukuran" required readonly value="<?=$ukuran ?>">
                                             </div>
                                         </div>
-                                        <div class="col-4">
+                                        <div class="col-2">
                                             <div class="form-group">
-                                                <label class="col-form-label">Nama Tukang</label>
-                                                <select class="custom-select" id="id_tukang" name="id_tukang" required>
-                                                    <option value="">Pilih Tukang . . .</option>
-                                                    <?php 
-                                                        $sql = mysqli_query($conn, "SELECT * FROM mtukang ORDER BY id_tukang DESC");
-
-                                                        while($data = mysqli_fetch_array($sql)) {
-                                                    ?>
-                                                            <option value="<?= $data["id_tukang"] ?>" <?=$id_tukang == $data["id_tukang"] ? 'selected' : '' ?>><?= $data["nama"] ?></option>
-                                                    <?php
-                                                        }
-                                                    ?>
-                                                </select>
+                                                <label for="jumlah" class="col-form-label">Jumlah Pemesanan</label>
+                                                <input class="form-control" type="number" id="jumlah_pemesanan" name="jumlah_pemesanan" value='<?=$jumlah_pesanan?>' required readonly>
                                             </div>
                                         </div>                                        
                                     </div> 
@@ -168,6 +162,73 @@ $ket = @$r['ket'];
                                         </div> 
                                     </div>                                   
                                 </form>
+                                <hr>
+                                <form action="" method="POST">
+                                    <input type="hidden" name="id_pesanan" value="<?php echo $id_pesanan ?>">
+                                    <input type="hidden" name="no_pesanan" value="<?php echo $no_pesanan ?>">
+                                    <h4 class="header-title">TAMBAH TUKANG</h4>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label class="col-form-label">Nama Tukang</label>
+                                                <select class="custom-select" id="id_tukang" name="id_tukang" required <?=($no_pesanan == '' OR $id_pesanan == '') ? 'disabled' : '' ?>>
+                                                    <option value="">Pilih Tukang . . .</option>
+                                                    <?php 
+                                                        $sql = mysqli_query($conn, "SELECT * FROM mtukang ORDER BY id_tukang DESC");
+
+                                                        while($data = mysqli_fetch_array($sql)) {
+                                                    ?>
+                                                            <option value="<?= $data["id_tukang"] ?>"><?= $data["nama"] ?></option>
+                                                    <?php
+                                                        }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div style="padding-top:36px;" class="form-group">                                                
+                                                <button type="submit" class="btn btn-sm btn-success" id="tambah_tukang" name="tambah_tukang" <?=($no_pesanan == '' OR $id_pesanan == '') ? 'disabled' : '' ?>>Tambah <span class="fa fa-check-square-o"></span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <hr>
+                                <div class="single-table">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover progress-table">
+                                            <thead class="text-uppercase">
+                                                <tr>
+                                                    <th scope="col">No.</th>
+                                                    <th scope="col">Aksi</th>
+                                                    <th scope="col">Nama Tukang</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php 
+
+                                                $n = 1;
+
+                                                    $sql = mysqli_query($conn,"SELECT * FROM tdetail_tukang LEFT JOIN mtukang ON mtukang.id_tukang=tdetail_tukang.id_tukang WHERE no_pesanan = '$id_pesanan'");
+
+                                                    while ($data = mysqli_fetch_array($sql)) {
+                                                
+                                                ?>                                                    
+
+                                                    <tr>
+                                                        <td><?=$n; ?></td>
+                                                        <td>
+                                                            <ul class="d-flex justify-content">                        
+                                                                <li><span onclick="hapusDetails('<?=$data['id']?>');" class="text-danger"><i class="ti-trash"></i></span></li>
+                                                            </ul>
+                                                        </td>
+                                                        <td><?=$data['nama'] ?></td>
+                                                    </tr>                                                
+
+                                                <?php $n++; } ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                                 <hr>
                                 <form id="detailForm" method="POST">
                                     <h4 class="header-title">TAMBAH BAHAN YANG DIPERLUKAN</h4>
@@ -195,16 +256,17 @@ $ket = @$r['ket'];
                                                 <input class="form-control" type="number" id="stok" name="stok" value="" readonly>
                                             </div>
                                         </div>
+                                        <?php $tukang = mysqli_num_rows(mysqli_query($conn,"select * from tdetail_tukang where no_pesanan = '$id_pesanan'")); ?>
                                         <div class="col-2">
                                             <div class="form-group">
                                                 <label for="jumlah" class="col-form-label">Jumlah</label>
-                                                <input class="form-control" type="number" id="jumlah_pakai" name="jumlah_pakai" min="1" value="" required <?=($no_pesanan == '' OR $id_tukang == '') ? 'disabled' : '' ?>>                                                
+                                                <input class="form-control" type="number" id="jumlah_pakai" name="jumlah_pakai" min="1" value="" required <?=($no_pesanan == '' OR $tukang <= 0) ? 'disabled' : '' ?>>                                                
                                             </div>
-                                        </div>
+                                        </div>                                                                    
                                         <div class="col-2">
                                             <div class="form-group">
                                                 <label for="jumlah" class="col-form-label">Total Jumlah</label>
-                                                <input class="form-control" type="number" id="total_jumlah_pakai" name="total_jumlah_pakai" min="1" readonly required <?=($no_pesanan == '' OR $id_tukang == '') ? 'disabled' : '' ?>>
+                                                <input class="form-control" type="number" id="total_jumlah_pakai" name="total_jumlah_pakai" min="1" readonly required <?=($no_pesanan == '' OR $tukang <= 0) ? 'disabled' : '' ?>>
                                                 <p id="warning" class="hidden" style="font-size:11px;color:red;">Jumlah tidak sesuai</p>
                                                 <input type="hidden" name="harga" id="harga">
                                                 <input type="hidden" name="h_no_produksi" id="h_no_produksi" value="<?=$no_trans ?>">
@@ -212,7 +274,7 @@ $ket = @$r['ket'];
                                         </div>
                                         <div class="col-2">
                                             <div style="padding-top:36px;" class="form-group">                                                
-                                                <button type="submit" class="btn btn-sm btn-success" id="tambah_detail" name="tambah_detail" <?=($no_pesanan == '' OR $id_tukang == '') ? 'disabled' : '' ?>>Tambah <span class="fa fa-check-square-o"></span></button>
+                                                <button type="submit" class="btn btn-sm btn-success" id="tambah_detail" name="tambah_detail" <?=($no_pesanan == '' OR $tukang <= 0) ? 'disabled' : '' ?>>Tambah <span class="fa fa-check-square-o"></span></button>
                                             </div>
                                         </div>
                                     </div>
@@ -275,7 +337,7 @@ $ket = @$r['ket'];
 
                                             $u = explode('x',$ukuran);
                                             $ukurannya = (@$u['0']/100) + (@$u['1']/100) + (@$u['2']/100);
-                                            $upah_tukang = $ukurannya * $upah * $jumlah;
+                                            $upah_tukang = $ukurannya * $upah * $jumlah_pesanan;
 
                                             ?>
                                             <form id="hargaForm">
@@ -301,7 +363,7 @@ $ket = @$r['ket'];
                                 </div>
                                 <hr>
                                 <?php $s = mysqli_num_rows(mysqli_query($conn,"select * from tdetail_produksi inner join mbahan on tdetail_produksi.kd_bahan = mbahan.kd_bahan WHERE tdetail_produksi.no_produksi = '$no_trans'")); ?>
-                                <button type="submit" class="btn btn-sm btn-primary" id="simpan_produksi" name="simpan_produksi" <?=($s < 1 OR $no_pesanan == '' OR $id_tukang == '')  ? 'disabled' : '' ?>>Simpan Produksi <span class="fa fa-check-square-o"></span></button>
+                                <button type="submit" class="btn btn-sm btn-primary" id="simpan_produksi" name="simpan_produksi" <?=($s < 1 OR $no_pesanan == '' OR $tukang == '')  ? 'disabled' : '' ?>>Simpan Produksi <span class="fa fa-check-square-o"></span></button>
                             </div>
                         </div>
                     </div>
@@ -366,6 +428,21 @@ $ket = @$r['ket'];
                     type: 'POST', 
                     url: 'proses_produksi.php', 
                     data: { hapusData: value }, 
+                    success: function (data) { 
+                        location.reload();
+                    }
+                });
+            }            
+        }
+
+        function hapusDetails(id) {
+            var konfirmasi = confirm("ingin menghapus data ini?");
+            var value = id;
+            if (konfirmasi) {
+                $.ajax({ 
+                    type: 'POST', 
+                    url: 'proses_produksi.php', 
+                    data: { hapusDatas: value }, 
                     success: function (data) { 
                         location.reload();
                     }

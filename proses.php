@@ -344,6 +344,7 @@
         $no_pesan = $_GET['nopesan'];
         
         $hapus = mysqli_query($conn, "DELETE FROM tpemesanan WHERE no_pesanan = '$no_pesan'");
+        $hapus = mysqli_query($conn, "DELETE FROM tdetail_pemesanan WHERE no_pesanan = '$no_pesan'");
 
         if ($hapus) {
             header('location:pemesanan.php');
@@ -366,11 +367,18 @@
     {
         $idtukang = $_GET['id_tukang'];
 
-        $sum_saldo  = mysqli_fetch_array(mysqli_query($conn, "SELECT jumlah, SUM(upah_tukang) AS saldo FROM tproduksi WHERE id_tukang = '$idtukang'"));
+        $saldo = 0;
+
+        $sum_saldo  = (mysqli_query($conn, "SELECT (SELECT sum(upah_tukang) FROM tproduksi WHERE tproduksi.id_detail_pesanan = tdetail_tukang.no_pesanan) AS upah FROM tdetail_tukang WHERE id_tukang = '$idtukang'"));
+
+        while ($jum_saldo = mysqli_fetch_array($sum_saldo)) {
+            $saldo += $jum_saldo['upah'];
+        }
+
         $min_saldo  = mysqli_fetch_array(mysqli_query($conn, "SELECT SUM(upah) AS sisa FROM tupah WHERE id_tukang = '$idtukang'"));
 
-        $saldo      = ($sum_saldo["saldo"] * $sum_saldo["jumlah"])  - $min_saldo["sisa"];
-        $data = array('saldo'   	=>  $saldo,);
+        $sisa_saldo      = ($saldo - $min_saldo["sisa"]);
+        $data = array('saldo'   	=>  $sisa_saldo,);
 
         echo json_encode($data);
     }

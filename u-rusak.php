@@ -18,7 +18,7 @@ error_reporting(0);
 
 $u = mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM trusak WHERE no_kerusakan = '".$_GET['no_kerusakan']."'"));
 
-$q = mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM tproduksi JOIN tpemesanan WHERE tproduksi.no_pesanan = tpemesanan.no_pesanan AND no_produksi = '".$u['no_produksi']."'"));
+$q = mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM tproduksi INNER JOIN tpemesanan ON tproduksi.no_pesanan = tpemesanan.no_pesanan INNER JOIN tdetail_pemesanan ON tdetail_pemesanan.id = tproduksi.id_detail_pesanan WHERE no_produksi = '".$u['no_produksi']."'"));
 
 $tgl_rusak  = @$u['tgl_data'];
 $no_pesanan = @$_GET['no_pesanan'] == '' ? @$q['no_pesanan'] : $_GET['no_pesanan'];
@@ -27,7 +27,7 @@ $jumlah_rusak = @$_GET['jumlah_rusak'] == '' ? @$u['jumlah'] : @$_GET['jumlah_ru
 $jenis_rusak = @$_GET['jenis_rusak'] == '' ? @$u['jenis_rusak'] : @$_GET['jenis_rusak'];
 
 $total_rusak = round($jumlah_rusak * $jenis_rusak * (@$q['harga_jual']/$q['jumlah']));
-$namabarang = @$q['namabarang'];
+$namabarang = @$q['nama_barang'];
 $jumlah = @$q['jumlah'] == '' ? 0 : @$q['jumlah'];
 
 ?>

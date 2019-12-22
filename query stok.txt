@@ -9,3 +9,21 @@ SELECT no_bahan, hbeli, (select mbahan.nm_bahan FROM mbahan WHERE tbelibahan.no_
 
 // query stock salah with harga
 SELECT no_bahan, hbeli, (select mbahan.nm_bahan FROM mbahan WHERE tbelibahan.no_bahan = mbahan.kd_bahan) nm_bahan, (sum(jumbeli) - IFNULL((SELECT sum(jumlah) FROM tdetail_produksi WHERE tdetail_produksi.kd_bahan = tbelibahan.no_bahan GROUP BY tdetail_produksi.kd_bahan),0)) stok FROM tbelibahan WHERE (no_beli, no_bahan) in (select max(no_beli), no_bahan from tbelibahan group by no_bahan) GROUP BY no_bahan
+
+// new query pemesanan // 22-12-2019
+select y.no_pesanan, y.jumlah from (select a.no_pesanan, sum(a.jumlah) as jumlah from tdetail_pemesanan a group by a.no_pesanan) y where (y.no_pesanan, y.jumlah) NOT IN (select b.no_pesanan, sum(b.jumlah) as jumlah from tproduksi b group by b.no_pesanan)
+
+// new query pemesanan with join
+SELECT Y.no_pesanan, Y.jumlah, tpemesanan.id_pelanggan, nama_p FROM ( SELECT a.no_pesanan, SUM(a.jumlah) AS jumlah FROM tdetail_pemesanan a GROUP BY a.no_pesanan ) Y INNER JOIN tpemesanan ON tpemesanan.no_pesanan = Y.no_pesanan INNER JOIN mpelanggan ON tpemesanan.id_pelanggan = mpelanggan.id_pelanggan WHERE (Y.no_pesanan, Y.jumlah) NOT IN( SELECT b.no_pesanan, SUM(b.jumlah) AS jumlah FROM tproduksi b GROUP BY b.no_pesanan)
+
+// new query list produksi
+SELECT
+    j.no_produksi,
+    (SELECT nama_p FROM mpelanggan WHERE mpelanggan.id_pelanggan =( SELECT id_pelanggan FROM tpemesanan WHERE tpemesanan.no_pesanan = j.no_pesanan)) as nama_p,
+    concat(j.no_pesanan,' - ',(SELECT nama_barang from tdetail_pemesanan b WHERE b.id=j.id_detail_pesanan)) nama_barang,
+    j.tanggalprod,
+    j.harga_jual,
+    (SELECT GROUP_CONCAT((SELECT nama FROM mtukang WHERE mtukang.id_tukang = tdetail_tukang.id_tukang)) FROM tdetail_tukang WHERE tdetail_tukang.no_pesanan = j.id_detail_pesanan GROUP by no_pesanan) as nama
+FROM
+    tproduksi j  
+ORDER BY `j`.`tanggalprod` ASC

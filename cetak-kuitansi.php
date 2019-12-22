@@ -85,26 +85,32 @@
                                                             <td class="text-left"><?= $joinn["nama_p"] ?></td>
                                                         </tr>
                                                         <tr>
-                                                            <td style="width: 30%" class="text-left">Jumlah Pesanan</td>
-                                                            <td style="width: 5%">:</td>
-                                                            <td class="text-left"><?= $sql["jpesanan"] ?></td>
-                                                        </tr>
+                                                            <td colspan="3" style="width: 100%" class="text-left">Detail Pesanan :</td>
+                                                        </tr>                                                        
                                                         <tr>
-                                                            <td style="width: 30%" class="text-left">Nama Barang</td>
-                                                            <td style="width: 5%">:</td>
-                                                            <td class="text-justify">
-                                                                <?= $sql["namabarang"] ?>
+                                                            <td colspan="3" style="width: 100%" class="text-left">
+                                                                <table style="width:100%;">
+                                                                    <tr>
+                                                                        <td>Nama Barang</td>
+                                                                        <td>Ukuran</td>
+                                                                        <td>Jumlah</td>
+                                                                        <td>Keterangan</td>
+                                                                    </tr>
+                                                                    <?php                                                                     
+                                                                    $sql = mysqli_query($conn,"SELECT * FROM tdetail_pemesanan WHERE no_pesanan = '$id'");
+
+                                                                    while ($data = mysqli_fetch_array($sql)) {
+
+                                                                     ?>
+                                                                    <tr>
+                                                                        <td><?php echo $data['nama_barang']; ?></td>
+                                                                        <td><?php echo $data['ukuran']; ?></td>
+                                                                        <td><?php echo $data['jumlah']; ?></td>
+                                                                        <td><?php echo $data['ket']; ?></td>
+                                                                    </tr>   
+                                                                    <?php } ?>
+                                                                </table>
                                                             </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="width: 30%" class="text-left">Ukuran (Cm)</td>
-                                                            <td style="width: 5%">:</td>
-                                                            <td class="text-left"><?= $sql["jhitung"] ?></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="width: 30%" class="text-left">Keterangan</td>
-                                                            <td style="width: 5%">:</td>
-                                                            <td class="text-left"><?= $sql["ket"] ?></td>
                                                         </tr>
                                                     </table>
                                                </td>

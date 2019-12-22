@@ -7,6 +7,7 @@
     $sql    = mysqli_query($conn, "SELECT * FROM tproduksi 
                                     INNER JOIN tpemesanan ON tpemesanan.no_pesanan = tproduksi.no_pesanan
                                     INNER JOIN mpelanggan ON tpemesanan.id_pelanggan = mpelanggan.id_pelanggan
+                                    INNER JOIN tdetail_pemesanan ON tdetail_pemesanan.id = tproduksi.id_detail_pesanan
                                     WHERE month(tanggalprod) = '$bulan' AND year(tanggalprod) = '$tahun' ");
 ?>
 
@@ -90,7 +91,7 @@
                                                     <td class="text-center"><?= $no ?></td>
                                                     <td class="text-left"><?= $data["no_produksi"]. " - ".$data["nama_p"] ?></td>                                                
                                                     <td class="text-left"><?= date("d-m-Y", strtotime($data["tanggalprod"])) ?></td>
-                                                    <td class="text-left"><?= $data["namabarang"] ?></td>
+                                                    <td class="text-left"><?= $data["nama_barang"] ?></td>
                                                     <td class="text-left"><?= $data["jumlah"] ?></td>
                                                     <td class="text-left">
                                                         <?php 
@@ -102,7 +103,16 @@
                                                             }
                                                         ?>
                                                     </td>                                                    
-                                                    <td class="text-left"><?= $data["id_tukang"] ?></td>
+                                                    <td class="text-left">
+                                                        <?php 
+                                                            $tukang = '';
+                                                            $da = mysqli_query($conn,"SELECT * FROM tdetail_tukang INNER JOIN mtukang ON mtukang.id_tukang = tdetail_tukang.id_tukang WHERE no_pesanan = '".$data['id_detail_pesanan']."'");
+                                                            while ($ad = mysqli_fetch_array($da)) {
+                                                                $tukang .= $ad['nama'].',';
+                                                            }
+                                                            echo $tukang;
+                                                         ?>
+                                                    </td>
                                                     <td><?= number_format($total_upah,0) ?></td>
                                                     <td><?= number_format($total_harga_jual,0) ?></td>
                                                 </tr>
@@ -135,7 +145,7 @@
     <!-- others plugins -->
     <script src="assets/js/plugins.js"></script>
     <script src="assets/js/scripts.js"></script>
-    <script>window.print()</script>
+    <!-- <script>window.print()</script> -->
 </body>
 
 </html>

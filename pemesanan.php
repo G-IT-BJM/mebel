@@ -38,21 +38,20 @@
                                         <tr>
                                             <th scope="col">No.</th>
                                             <th scope="col">Aksi</th>
-                                            <th scope="col">Kode Pemesanan</th>
+                                            <th widht="10" scope="col">Kode Pemesanan</th>
                                             <th scope="col">Nama Pelanggan</th>
                                             <th scope="col">Tanggal Beli</th>
-                                            <th scope="col">Ukuran</th>
-                                            <th scope="col">Jumlah Pemesanan</th>
+                                            <!-- <th scope="col">Detail Pemesanan</th> -->
                                         </tr>
                                     </thead>
                                     <tbody id="myTable">
                                         <?php 
                                             $no = 1;
-                                            $sql = mysqli_query($conn, "SELECT * FROM tpemesanan ORDER BY tanggal DESC");
+                                            $sql = mysqli_query($conn, "SELECT * FROM tpemesanan LEFT JOIN mpelanggan ON mpelanggan.id_pelanggan = tpemesanan.id_pelanggan ORDER BY tanggal DESC");
 
                                             while($data = mysqli_fetch_array($sql)) {
                                         ?>
-                                            <tr>
+                                            <tr rowspan="2">
                                                 <td><?= $no ?></td>
                                                 <td>
                                                     <ul class="d-flex justify-content">
@@ -61,12 +60,39 @@
                                                         <li><a href="proses.php?hapus=datapemesanan&nopesan=<?= $data['no_pesanan'] ?>" onclick="return confirm('Apakah anda ingin menghapus data ini?')" class="text-danger"><i class="ti-trash"></i></a></li>
                                                     </ul>
                                                 </td>
-                                                <td><?= $data["no_pesanan"] ?></td>
-                                                <?php $join = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM mpelanggan WHERE id_pelanggan = '$data[id_pelanggan]'")); ?>
-                                                <td><?= $join["nama_p"] ?></td>
+                                                <td><?= $data["no_pesanan"] ?></td>                                                
+                                                <td><?= $data["nama_p"] ?></td>
                                                 <td><?= date("d-m-Y", strtotime($data["tanggal"])) ?></td>
-                                                <td><?= $data["jhitung"] ?></td>
-                                                <td><?= $data["jpesanan"] ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="6">
+                                                    <table class="table">
+                                                        <tr>
+                                                            <th colspan="4">Detail Pemesanan :</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Nama Barang</td>
+                                                            <td>Ukuran</td>
+                                                            <td>Jumlah</td>
+                                                            <td>Keterangan</td>
+                                                        </tr>
+                                                        <?php 
+
+                                                        $detail = mysqli_query($conn,"SELECT * FROM tdetail_pemesanan WHERE no_pesanan = '$data[no_pesanan]'");
+                                                        while ($d = mysqli_fetch_array($detail)) {
+
+                                                         ?>
+                                                        <tr>
+                                                            <td nowrap><?php echo $d['nama_barang']; ?></td>
+                                                            <td nowrap><?php echo $d['ukuran']; ?></td>            
+                                                            <td nowrap><?php echo $d['jumlah']; ?></td>
+                                                            <td nowrap><?php echo $d['ket']; ?></td>
+                                                        </tr>
+                                                        <?php 
+                                                        } 
+                                                        ?>                                                        
+                                                    </table>
+                                                </td>
                                             </tr>
                                         <?php
                                                 $no++;

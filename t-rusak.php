@@ -21,10 +21,10 @@ $no_produksi = @$_GET['no_produksi'];
 $jumlah_rusak = @$_GET['jumlah_rusak'];
 $jenis_rusak = @$_GET['jenis_rusak'];
 
-$q = mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM tproduksi JOIN tpemesanan WHERE tproduksi.no_pesanan = tpemesanan.no_pesanan AND no_produksi = '$no_produksi'"));
+$q = mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM tproduksi INNER JOIN tpemesanan ON tproduksi.no_pesanan = tpemesanan.no_pesanan INNER JOIN tdetail_pemesanan ON tdetail_pemesanan.id = tproduksi.id_detail_pesanan WHERE no_produksi = '$no_produksi'"));
 
 $total_rusak = round($jumlah_rusak * $jenis_rusak * (@$q['harga_jual']/$q['jumlah']));
-$namabarang = @$q['namabarang'];
+$namabarang = @$q['nama_barang'];
 $jumlah = @$q['jumlah'] == '' ? 0 : @$q['jumlah'];
 
 ?>
