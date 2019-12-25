@@ -444,11 +444,18 @@
     {
         $nopesan = $_GET['no_pesanan'];
 
-        $sql2 = mysqli_fetch_array(mysqli_query($conn, "SELECT *, SUM(jumlah) AS jml FROM tproduksi AS x INNER JOIN tpemesanan AS y ON x.no_pesanan=y.no_pesanan WHERE y.no_pesanan = '$nopesan'"));
+        $r = '';
 
-        $data = array('jumlah' => $sql2["jml"],
-                        'nm_brg' => $sql2["namabarang"],
-                        'id_pel' => $sql2["id_pelanggan"],);
+        $sql2 = mysqli_query($conn, "SELECT * FROM tdetail_pemesanan WHERE no_pesanan = '$nopesan'");
+        $sql3 = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM tpemesanan WHERE no_pesanan = '$nopesan'"));
+
+        while ($data = mysqli_fetch_array($sql2)) {
+            $r .= $data['nama_barang']." (".$data['ukuran'].") jumlah : ".$data['jumlah']."\n";
+        }        
+
+        $data = array('jumlah' => 0,
+                        'nm_brg' => $r,
+                        'id_pel' => $sql3["id_pelanggan"]);
         echo json_encode($data);
     }
 

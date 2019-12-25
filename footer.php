@@ -89,7 +89,7 @@
             }).success(function (data) {
                 var json = data,
                 obj = JSON.parse(json);
-                $('#jumlah').val(obj.jumlah);
+                // $('#jumlah').val(obj.jumlah);
                 $('#nm_brg').val(obj.nm_brg);
                 $('#id_pel').val(obj.id_pel);
             });

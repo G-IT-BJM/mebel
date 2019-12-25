@@ -47,7 +47,7 @@
                                         <select class="custom-select" id="no_pesan" name="no_pesan" onchange="datakirim_()" required <?= ($disabled["count1"] > 0) ? '' : 'disabled' ?>>
                                             <option value="">Pilih . . .</option>
                                             <?php 
-                                                $sql1 = mysqli_query($conn, "SELECT * FROM tpemesanan AS a INNER JOIN mpelanggan AS b ON a.id_pelanggan=b.id_pelanggan WHERE no_pesanan IN (SELECT no_pesanan FROM tproduksi) AND no_pesanan NOT IN (SELECT no_pesanan FROM tkirim)");
+                                                $sql1 = mysqli_query($conn, "SELECT * FROM tpemesanan AS a INNER JOIN mpelanggan AS b ON a.id_pelanggan=b.id_pelanggan WHERE no_pesanan NOT IN (SELECT no_pesanan FROM tkirim)");
 
                                                 while($data1 = mysqli_fetch_array($sql1)) {                                                    
                                             ?>
@@ -71,7 +71,8 @@
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="nm_brg" class="col-form-label">Nama Barang</label>
-                                        <input class="form-control" type="text" id="nm_brg" name="nm_brg" required readonly>
+                                        <textarea class="form-control" name="nm_brg" id="nm_brg" cols="30" rows="10" required readonly></textarea>
+                                        <!-- <input class="form-control" type="text" id="nm_brg" name="nm_brg" required readonly> -->
                                     </div>
                                 </div>
                                 <div class="col-2"></div>
@@ -89,9 +90,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-2">
-                                    <div class="form-group">
-                                        <label for="jumlah" class="col-form-label">Jumlah Barang</label>
-                                        <input class="form-control" type="text" id="jumlah" name="jumlah" required readonly>
+                                    <div class="form-group">                                        
+                                        <input class="form-control" type="hidden" id="jumlah" name="jumlah" required readonly>
                                     </div>
                                 </div>
                                 <div class="col-4"></div>

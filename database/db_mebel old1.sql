@@ -151,7 +151,7 @@ CREATE TABLE `tkirim` (
   `no_kirim` varchar(16) NOT NULL,
   `no_pesanan` varchar(16) NOT NULL,
   `id_pelanggan` varchar(16) NOT NULL,
-  `namabarang` text NOT NULL,
+  `namabarang` varchar(30) NOT NULL,
   `jumlah` int(11) NOT NULL,
   `tujuan` varchar(55) NOT NULL,
   `tanggal` date NOT NULL,
@@ -160,7 +160,7 @@ CREATE TABLE `tkirim` (
   PRIMARY KEY (`no_kirim`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO tkirim VALUES("KR-00002","PS-00003","PL-00001","Meja Kayu (100 X 200 X 300) Ju","0","Basirih","2019-12-25","200000","");
+INSERT INTO tkirim VALUES("KR-00001","PS-00001","PL-00001","Meja Makan","2","Komplek Beringin","2019-11-24","20000","");
 
 
 

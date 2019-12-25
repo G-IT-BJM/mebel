@@ -2,7 +2,7 @@
     include "koneksi.php";
 
     $id     = $_GET["kode_pengiriman"];
-    $sql    = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM tkirim AS a INNER JOIN mpelanggan AS b ON a.id_pelanggan = b.id_pelanggan WHERE a.no_kirim = '$id'"));
+    $sql    = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM tkirim AS a INNER JOIN mpelanggan AS b ON a.id_pelanggan = b.id_pelanggan WHERE a.no_kirim = '$id'"));    
 ?>
 
 <!doctype html>
@@ -82,17 +82,7 @@
                                                             <td style="width: 30%" class="text-left">Kode Pengiriman</td>
                                                             <td style="width: 5%">:</td>
                                                             <td class="text-left"><?= $sql["no_kirim"] ?></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="width: 30%" class="text-left">Nama Barang</td>
-                                                            <td style="width: 5%">:</td>
-                                                            <td class="text-left"><?= $sql["namabarang"] ?></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="width: 30%" class="text-left">Jumlah Barang</td>
-                                                            <td style="width: 5%">:</td>
-                                                            <td class="text-left"><?= $sql["jumlah"] ?></td>
-                                                        </tr>
+                                                        </tr>                                                        
                                                         <tr>
                                                             <td style="width: 30%" class="text-left">Tujuan</td>
                                                             <td style="width: 5%">:</td>
@@ -116,6 +106,34 @@
                                                         segera tanyakan kepada pengirim dan konfirmasikan kepada pemilik Mebel CV. Sumber Bahagia.</p>
                                                </td>
                                            </tr>
+                                        </table>
+                                        <table class="table table-bordered">
+                                            <tr>
+                                                <th>Detail Pemesanan</th>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <th>Nama Barang</th>
+                                                            <th>Ukuran</th>
+                                                            <th>Jumlah</th>
+                                                        </tr>
+                                                        <?php 
+                                                        $sqls = mysqli_query($conn,"SELECT * FROM tdetail_pemesanan WHERE no_pesanan = '".$sql['no_pesanan']."'");
+                                                        while ($row = mysqli_fetch_array($sqls)) {
+                                                        ?>
+                                                            <tr>
+                                                                <td><?php echo $row['nama_barang']; ?></td>
+                                                                <td><?php echo $row['ukuran']; ?></td>
+                                                                <td><?php echo $row['jumlah']; ?></td>
+                                                            </tr>
+                                                        <?php
+                                                        }
+                                                         ?>
+                                                    </table>
+                                                </td>
+                                            </tr>
                                         </table>
                                     </div>
                                 </div>
@@ -147,7 +165,7 @@
     <!-- others plugins -->
     <script src="assets/js/plugins.js"></script>
     <script src="assets/js/scripts.js"></script>
-    <script>window.print()</script>
+    <!-- <script>window.print()</script> -->
 </body>
 
 </html>
