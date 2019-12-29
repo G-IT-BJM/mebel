@@ -12,8 +12,9 @@ $s = mysqli_fetch_array(mysqli_query($conn, "SELECT no_bahan,hbeli FROM tbelibah
 if ($r['nm_bahan'] == 'Paku') {
     $convert = $r['stok'] / 10;
     $r['stok'] = $convert;
+    $r['harga'] = $s['hbeli'] / 10;
+} else {
+	$r['harga'] = $s['hbeli'];
 }
-
-$r['harga'] = $s['hbeli'];
 
 echo json_encode($r);
