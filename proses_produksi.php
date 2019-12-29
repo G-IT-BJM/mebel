@@ -22,10 +22,16 @@ if (isset($_POST['tambah_tukang'])) {
     $id_pesanan = $_POST['id_pesanan'];
     $no_pesanan = $_POST['no_pesanan'];
 
-    $simpan = mysqli_query($conn,"INSERT INTO tdetail_tukang VALUES('','$id_tukang','$id_pesanan','$no_pesanan')");
+    $cek = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM tdetail_tukang WHERE id_tukang='$id_tukang' AND no_pesanan='$id_pesanan' AND pesanan='$no_pesanan'"));    
 
-    if ($simpan) {
-        header("Refresh:0");
+    if ($cek < 1) {    
+
+        $simpan = mysqli_query($conn,"INSERT INTO tdetail_tukang VALUES('','$id_tukang','$id_pesanan','$no_pesanan')");
+
+        if ($simpan) {
+            header("Refresh:0");
+        }
+
     }
 }
 

@@ -86,8 +86,12 @@ CREATE TABLE `tdetail_pemesanan` (
   `jumlah` int(11) NOT NULL,
   `ket` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
+INSERT INTO tdetail_pemesanan VALUES("1","PS-00003","Meja Kayu","100 x 200 x 300","3","warna biru");
+INSERT INTO tdetail_pemesanan VALUES("5","PS-00003","Kursi Kayu","100 x 100 x 100","4","Warna putih");
+INSERT INTO tdetail_pemesanan VALUES("6","PS-00004","Pintu","100 x 100 x 100","1","warna kayu");
+INSERT INTO tdetail_pemesanan VALUES("7","PS-00004","Lemari","100 x 100 x 100","1","warna putih");
 
 
 
@@ -100,8 +104,13 @@ CREATE TABLE `tdetail_produksi` (
   `jumlah` int(11) NOT NULL,
   `harga_satuan` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
+INSERT INTO tdetail_produksi VALUES("21","PRD-00001","BN-0001","6","150000");
+INSERT INTO tdetail_produksi VALUES("22","PRD-00001","BN-0007","9","20000");
+INSERT INTO tdetail_produksi VALUES("23","PRD-00002","BN-0001","4","150000");
+INSERT INTO tdetail_produksi VALUES("24","PRD-00003","BN-0001","1","150000");
+INSERT INTO tdetail_produksi VALUES("25","PRD-00004","BN-0001","1","150000");
 
 
 
@@ -113,8 +122,13 @@ CREATE TABLE `tdetail_tukang` (
   `no_pesanan` varchar(10) NOT NULL,
   `pesanan` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
+INSERT INTO tdetail_tukang VALUES("9","TK-0001","1","PS-00003");
+INSERT INTO tdetail_tukang VALUES("10","TK-00003","1","PS-00003");
+INSERT INTO tdetail_tukang VALUES("11","TK-0001","5","PS-00003");
+INSERT INTO tdetail_tukang VALUES("12","TK-0001","6","PS-00004");
+INSERT INTO tdetail_tukang VALUES("13","TK-00003","7","PS-00004");
 
 
 
@@ -146,6 +160,7 @@ CREATE TABLE `tkirim` (
   PRIMARY KEY (`no_kirim`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+INSERT INTO tkirim VALUES("KR-00002","PS-00003","PL-00001","Meja Kayu (100 X 200 X 300) Ju","0","Basirih","2019-12-25","200000","");
 
 
 
@@ -158,6 +173,8 @@ CREATE TABLE `tpemesanan` (
   PRIMARY KEY (`no_pesanan`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+INSERT INTO tpemesanan VALUES("PS-00003","PL-00001","2019-12-20");
+INSERT INTO tpemesanan VALUES("PS-00004","PL-00001","2019-12-20");
 
 
 
@@ -176,6 +193,10 @@ CREATE TABLE `tproduksi` (
   PRIMARY KEY (`no_produksi`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+INSERT INTO tproduksi VALUES("PRD-00001","PS-00003","1","2019-12-22","","1800000","360000","3","360000");
+INSERT INTO tproduksi VALUES("PRD-00002","PS-00003","5","2019-12-22","","1080000","240000","4","240000");
+INSERT INTO tproduksi VALUES("PRD-00003","PS-00004","6","2019-12-22","","270000","60000","1","60000");
+INSERT INTO tproduksi VALUES("PRD-00004","PS-00004","7","2019-12-22","","270000","60000","1","60000");
 
 
 
@@ -191,6 +212,7 @@ CREATE TABLE `trusak` (
   PRIMARY KEY (`no_kerusakan`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+INSERT INTO trusak VALUES("RS-00001","PRD-00001","2019-12-22","1","0.25","150000");
 
 
 
@@ -206,6 +228,7 @@ CREATE TABLE `tupah` (
   PRIMARY KEY (`no_upah`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+INSERT INTO tupah VALUES("UP-00001","","TK-00003","60000","2019-12-22","");
 
 
 
