@@ -12,7 +12,7 @@ function backup($conn,$filename,$path)
     $result = mysqli_query($conn,"SELECT * FROM ".$table);
     $num_fields = mysqli_num_fields($result);
     
-    $return .= 'DROP TABLE '.$table.';';
+    $return .= 'DROP TABLE IF EXISTS '.$table.';';
     $row2 = mysqli_fetch_row(mysqli_query($conn,"SHOW CREATE TABLE ".$table));
     $return .= "\n\n".$row2[1].";\n\n";
     
