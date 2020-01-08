@@ -90,11 +90,11 @@
                                                                 <?= $sql["tujuan"] ?>
                                                             </td>
                                                         </tr>
-                                                        <tr>
+                                                        <!-- <tr>
                                                             <td style="width: 30%" class="text-left">Biaya Kirim</td>
                                                             <td style="width: 5%">:</td>
                                                             <td class="text-left"><?= number_format($sql["ongkir"],0) ?></td>
-                                                        </tr>
+                                                        </tr> -->
                                                     </table>
                                                </td>
                                                <td>
@@ -113,24 +113,38 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <table>
+                                                    <table class="table">
                                                         <tr>
                                                             <th>Nama Barang</th>
                                                             <th>Ukuran</th>
                                                             <th>Jumlah</th>
+                                                            <th>Harga Satuan</th>
+                                                            <th>Total Harga</th>
                                                         </tr>
                                                         <?php 
-                                                        $sqls = mysqli_query($conn,"SELECT * FROM tdetail_pemesanan WHERE no_pesanan = '".$sql['no_pesanan']."'");
+                                                        $total=0;
+                                                        $sqls = mysqli_query($conn,"SELECT * FROM tdetail_pemesanan LEFT JOIN tproduksi ON tproduksi.id_detail_pesanan = tdetail_pemesanan.id WHERE tdetail_pemesanan.no_pesanan = '".$sql['no_pesanan']."'");
                                                         while ($row = mysqli_fetch_array($sqls)) {
                                                         ?>
                                                             <tr>
                                                                 <td><?php echo $row['nama_barang']; ?></td>
                                                                 <td><?php echo $row['ukuran']; ?></td>
                                                                 <td><?php echo $row['jumlah']; ?></td>
+                                                                <td><?php echo number_format($row['harga_jual']/$row['jumlah'],0); ?></td>
+                                                                <td><?php echo number_format($row['harga_jual'],0); ?></td>
                                                             </tr>
                                                         <?php
+                                                        $total += $row['harga_jual'];
                                                         }
                                                          ?>
+                                                         <tr>
+                                                             <th style="text-align: right;" colspan="4">Biaya Kirim</th>
+                                                             <td><?= number_format($sql["ongkir"],0) ?></td>
+                                                         </tr>
+                                                         <tr>
+                                                             <th style="text-align: right;" colspan="4">Total Bayar</th>
+                                                             <td><?= number_format($total+$sql["ongkir"],0) ?></td>
+                                                         </tr>
                                                     </table>
                                                 </td>
                                             </tr>

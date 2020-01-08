@@ -19,6 +19,24 @@
                             <div class="form-row">
                                 <div class="col-sm-3">
                                     <div class="form-group">
+                                        <label for="bulan" class="col-form-label">Tukang</label>
+                                        <select class="custom-select" name="tukang">
+                                            <option selected="selected">Pilih . . .</option>
+                                            <?php 
+
+                                            $q = mysqli_query($conn,"SELECT * FROM mtukang");
+                                            while ($r = mysqli_fetch_array($q)) {
+                                            ?>
+                                                <option value="<?php echo $r['id_tukang'] ?>"><?php echo $r['id_tukang']; ?> - <?php echo $r['nama']; ?></option>
+                                            <?php
+                                            }
+
+                                             ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
                                         <label for="bulan" class="col-form-label">Bulan</label>
                                         <select class="custom-select" name="bulan">
                                             <option selected="selected">Pilih . . .</option>
@@ -37,7 +55,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-2">
                                     <div class="form-group">
                                         <label for="bulan" class="col-form-label">Tahun</label>
                                         <select class="custom-select" name="tahun">
@@ -50,8 +68,7 @@
                                             ?>
                                         </select>
                                     </div>
-                                </div>
-                                <div class="col-sm-3"></div>
+                                </div>                                
                                 <div class="col-sm-3 pull-right">
                                     <div class="form-group">
                                         <label for="bulan" class="col-form-label">.</label>

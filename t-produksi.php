@@ -338,6 +338,8 @@ $ket = @$r['ket'];
                                             $u = explode('x',$ukuran);
                                             $ukurannya = (@$u['0']/100) + (@$u['1']/100) + (@$u['2']/100);
                                             $upah_tukang = $ukurannya * $upah * $jumlah_pesanan;
+                                            $total_harga = ($upah_tukang + array_sum($total) + $upah_tukang) * $jumlah_pesanan;
+                                            $total_satuan = array_sum($total) + $upah_tukang + $upah_tukang;
 
                                             ?>
                                             <form id="hargaForm">
@@ -346,15 +348,15 @@ $ket = @$r['ket'];
                                                         <th colspan="2"></th>
                                                         <th>Upah Tukang</th>
                                                         <th><?=number_format($upah_tukang,0);?><input type="hidden" name="upah_tukang" value="<?=$upah_tukang;?>"></th>
-                                                        <th>Total</th>
-                                                        <th><?=number_format(array_sum($total),0)?></th>
+                                                        <th>Total Jual Satuan</th>
+                                                        <th><?=number_format($total_satuan,0)?></th>
                                                     </tr>
                                                     <tr>
                                                         <th colspan="2"></th>
                                                         <th>Total Untung</th>
                                                         <th><?=number_format($upah_tukang,0);?></th>
                                                         <th>Total Jual</th>
-                                                        <th><?=number_format(($upah_tukang + array_sum($total) + $upah_tukang),0);?><input type="hidden" name="total_jual" value="<?=($upah_tukang + array_sum($total) + $upah_tukang);?>"></th>
+                                                        <th><?=number_format($total_harga,0);?><input type="hidden" name="total_jual" value="<?=$total_harga;?>"></th>
                                                     </tr>                                                
                                                 </tfoot>
                                             </form>

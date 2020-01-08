@@ -3,8 +3,20 @@
 
     $bulan  = $_POST["bulan"];
     $tahun  = $_POST["tahun"];
+    $tukang = $_POST["tukang"];
+    $saldo = 0;
 
-    $sql    = mysqli_query($conn, "SELECT * FROM tupah WHERE month(tanggal) = '$bulan' AND year(tanggal) = '$tahun' ");
+    $sql    = mysqli_query($conn, "SELECT * FROM tupah WHERE id_tukang='$tukang' AND month(tanggal) = '$bulan' AND year(tanggal) = '$tahun' ");
+
+    $sum_saldo  = (mysqli_query($conn, "SELECT (SELECT sum(upah_tukang) FROM tproduksi WHERE tproduksi.id_detail_pesanan = tdetail_tukang.no_pesanan) AS upah FROM tdetail_tukang WHERE id_tukang = '$tukang'"));
+
+    while ($jum_saldo = mysqli_fetch_array($sum_saldo)) {
+        $saldo += $jum_saldo['upah'];
+    }
+
+    $min_saldo  = mysqli_fetch_array(mysqli_query($conn, "SELECT SUM(upah) AS sisa FROM tupah WHERE id_tukang = '$tukang'"));
+
+    $sisa_saldo      = ($saldo - $min_saldo["sisa"]);        
 ?>
 
 <!doctype html>
@@ -75,6 +87,7 @@
                                     <tbody>
                                         <?php 
                                             $no = 1;
+                                            $tot_peng = 0;
                                             while($data = mysqli_fetch_array($sql)) {
                                         ?>
                                                 <tr>
@@ -87,8 +100,21 @@
                                                 </tr>
                                         <?php
                                                 $no++;
+                                                $tot_peng += $data["upah"];
                                             }
                                         ?>
+                                        <tr>
+                                            <td colspan="4">Total Pengambilan</td>
+                                            <td><?php echo number_format($tot_peng,0); ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4">Sisa Saldo</td>
+                                            <td><?php echo number_format($sisa_saldo,0); ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4">Total Saldo Yang Didapatkan</td>
+                                            <td><?php echo number_format($sisa_saldo+$tot_peng,0); ?></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>

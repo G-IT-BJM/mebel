@@ -74,18 +74,19 @@
                                             <th class="text-left" style="width: 20%;">Tanggal</th>                                            
                                             <th class="text-left" style="width: 20%;">Nama Barang</th>
                                             <th class="text-left" style="width: 5%;">Jumlah</th>
-                                            <th class="text-left" style="width: 20%;">Nama Bahan</th>                                            
+                                            <th class="text-left" style="width: 20%;">Nama Bahan</th>
                                             <th class="text-left" style="width: 20%;">Kode Tukang</th>
                                             <th class="text-left" style="width: 20%;">Upah Tukang</th>
-                                            <th class="text-left" style="width: 20%;">Harga Jual</th>                                            
+                                            <th class="text-left" style="width: 20%;">Harga Jual</th>
+                                            <th class="text-left" style="width: 20%;">Harga Satuan</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php 
                                             $no = 1;
                                             while($data = mysqli_fetch_array($sql)) {
-                                                $total_upah         = $data["jumlah"] * $data["upah_tukang"];
-                                                $total_harga_jual   = $data["jumlah"] * $data["harga_jual"];
+                                                $total_upah         = $data["upah_tukang"];
+                                                $total_harga_jual   = $data["harga_jual"];
                                         ?>
                                                 <tr>
                                                     <td class="text-center"><?= $no ?></td>
@@ -115,6 +116,7 @@
                                                     </td>
                                                     <td><?= number_format($total_upah,0) ?></td>
                                                     <td><?= number_format($total_harga_jual,0) ?></td>
+                                                    <td><?= number_format($total_harga_jual/$data["jumlah"],0) ?></td>
                                                 </tr>
                                         <?php
                                                 $no++;
@@ -145,7 +147,7 @@
     <!-- others plugins -->
     <script src="assets/js/plugins.js"></script>
     <script src="assets/js/scripts.js"></script>
-    <!-- <script>window.print()</script> -->
+    <script>window.print()</script>
 </body>
 
 </html>

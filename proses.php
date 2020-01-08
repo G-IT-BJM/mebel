@@ -540,7 +540,7 @@
                 <tr>
                     <td class="text-center">'.$no.'</td>
                     <td class="text-left">
-                        <a href="cetak-laporan-pengiriman.php?id_pelanggan='.$data["id_pelanggan"].'&tanggal='.$data["tanggal"].'" style="color:black;" target="_BLANK"><span class="fa fa-print" style="color:red;"></span> Cetak</a> 
+                        <a href="cetak-pengiriman.php?kode_pengiriman='.$data["no_kirim"].'" style="color:black;" target="_BLANK"><span class="fa fa-print" style="color:red;"></span> Cetak</a> 
                     </td>
                     <td class="text-left">'.$data["tanggal"].'</td>
                     <td class="text-left">'.$join["nama_p"].'</td>

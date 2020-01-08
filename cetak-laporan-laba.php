@@ -81,9 +81,9 @@
                                             $no = 1;
                                             while($data = mysqli_fetch_array($sql)) {
                                                 // $sql2    = mysqli_fetch_array(mysqli_query($conn, "SELECT *,SUM(total_rusak) AS t_rusak FROM trusak WHERE no_produksi = '$data[no_produksi]' "));
-                                                $t_jual     = $data["h_jual"] * $data["jumlah"];
-                                                $t_untung   = $data["t_untung"] * $data["jumlah"];
-                                                $t_rusak    = $data["t_rusak"] * $data["j_t_rusak"];
+                                                $t_jual     = $data["h_jual"];
+                                                $t_untung   = $data["t_untung"];
+                                                $t_rusak    = $data["t_rusak"];
                                         ?>
                                                 <tr>
                                                     <td class="text-center"><?= $no ?></td>
@@ -124,7 +124,7 @@
     <!-- others plugins -->
     <script src="assets/js/plugins.js"></script>
     <script src="assets/js/scripts.js"></script>
-    <script>window.print()</script>
+    <!-- <script>window.print()</script> -->
 </body>
 
 </html>
