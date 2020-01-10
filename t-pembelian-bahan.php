@@ -50,7 +50,7 @@
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="tgl_beli" class="col-form-label">Tanggal Beli</label>
-                                        <input class="form-control" type="date" value="<?= date("Y-m-d"); ?>" id="tgl_beli" name="tgl_beli" required>
+                                        <input class="form-control" type="date" max='<?php echo date('Y-m-d')?>' value="<?= date("Y-m-d"); ?>" id="tgl_beli" name="tgl_beli" required>
                                     </div>
                                 </div>
                             </div>
